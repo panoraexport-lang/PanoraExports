@@ -1,10 +1,11 @@
 import { motion, useScroll, useTransform, useSpring, useInView } from "framer-motion";
-import { ArrowRight, Globe, MapPin, Shield, Clock, Star, Anchor, Plane, Box, CheckCircle2, Menu, X, BarChart3, Truck, Users, Leaf, ChevronDown, ChevronUp, Play } from "lucide-react";
+import { ArrowRight, Globe, MapPin, Shield, Clock, Star, Anchor, Plane, Box, CheckCircle2, Menu, X, BarChart3, Truck, Users, Leaf, ChevronDown, ChevronUp, Play, Sun, Moon } from "lucide-react";
 import { useRef, useState, useEffect, useLayoutEffect } from "react";
 import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
 import gsap from 'gsap';
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
+import { useTheme } from "next-themes";
 
 // Assets
 import marbleTexture from "@assets/stock_images/luxury_gold_and_whit_bd54d3a5.jpg";
@@ -118,8 +119,14 @@ const AccordionItem = ({ question, answer, isOpen, onClick }: any) => (
 export default function LuxuryLanding() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [openAccordion, setOpenAccordion] = useState(0);
+  const [mounted, setMounted] = useState(false);
+  const { theme, setTheme } = useTheme();
   const { scrollYProgress } = useScroll();
   const scaleX = useTransform(scrollYProgress, [0, 1], [0, 1]);
+  
+  useEffect(() => {
+    setMounted(true);
+  }, []);
   
   // --- GSAP ScrollTrigger Logic for Earth Zoom ---
   const containerRef = useRef(null);
@@ -180,7 +187,7 @@ export default function LuxuryLanding() {
   ];
 
   return (
-    <div className="font-luxury-body bg-[#fdfbf7] text-slate-900 overflow-x-hidden selection:bg-[#d4af37] selection:text-white antialiased">
+    <div className="font-luxury-body bg-[#fdfbf7] dark:bg-slate-950 text-slate-900 dark:text-white overflow-x-hidden selection:bg-[#d4af37] selection:text-white antialiased">
       <Grain />
       
       {/* Progress Bar */}
@@ -190,13 +197,13 @@ export default function LuxuryLanding() {
       />
 
       {/* Navigation */}
-      <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${isMenuOpen ? 'bg-[#fdfbf7]' : 'bg-[#fdfbf7]/90 backdrop-blur-md border-b border-[#d4af37]/20'}`}>
+      <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${isMenuOpen ? 'bg-[#fdfbf7] dark:bg-slate-950' : 'bg-[#fdfbf7]/90 dark:bg-slate-950/90 backdrop-blur-md border-b border-[#d4af37]/20'}`}>
         <div className="max-w-[1800px] mx-auto px-8 h-24 flex items-center justify-between">
-          <div className="font-luxury-heading text-3xl italic font-bold relative group cursor-pointer z-50">
+          <div className="font-luxury-heading text-3xl italic font-bold relative group cursor-pointer z-50 dark:text-white">
             Meridian<span className="text-[#d4af37]">.</span>
           </div>
 
-          <div className="hidden lg:flex gap-12 text-xs uppercase tracking-[0.2em] font-medium text-slate-500">
+          <div className="hidden lg:flex gap-12 text-xs uppercase tracking-[0.2em] font-medium text-slate-500 dark:text-slate-400">
             {["Heritage", "Concierge", "Fleet", "Network", "Insights", "Contact"].map((item) => (
               <a key={item} href={`#${item.toLowerCase()}`} className="hover:text-[#d4af37] transition-colors relative group py-2">
                 {item}
@@ -206,16 +213,25 @@ export default function LuxuryLanding() {
           </div>
 
           <div className="flex items-center gap-8">
-             <button className="hidden md:flex items-center gap-2 text-xs uppercase tracking-widest font-medium text-slate-900 hover:text-[#d4af37] transition-colors group">
+             <button className="hidden md:flex items-center gap-2 text-xs uppercase tracking-widest font-medium text-slate-900 dark:text-white hover:text-[#d4af37] transition-colors group">
                 <div className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
                 Live Network
              </button>
-             <div className="w-px h-8 bg-slate-200 hidden md:block" />
+             <div className="w-px h-8 bg-slate-200 dark:bg-slate-700 hidden md:block" />
+             {mounted && (
+               <button 
+                 onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+                 className="hidden md:flex items-center justify-center w-10 h-10 rounded-full border border-[#d4af37]/50 hover:border-[#d4af37] text-slate-900 dark:text-white hover:text-[#d4af37] transition-all duration-500"
+                 data-testid="theme-toggle"
+               >
+                 {theme === "dark" ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5" />}
+               </button>
+             )}
              <button className="hidden md:block border border-[#d4af37] text-[#d4af37] px-8 py-3 text-xs uppercase tracking-widest hover:bg-[#d4af37] hover:text-white transition-all duration-500 relative overflow-hidden group">
               <span className="relative z-10">Client Portal</span>
               <div className="absolute inset-0 bg-[#d4af37] translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-out" />
             </button>
-            <button className="lg:hidden text-slate-800 z-50" onClick={() => setIsMenuOpen(!isMenuOpen)}>
+            <button className="lg:hidden text-slate-800 dark:text-white z-50" onClick={() => setIsMenuOpen(!isMenuOpen)}>
               {isMenuOpen ? <X /> : <Menu />}
             </button>
           </div>
@@ -226,7 +242,7 @@ export default function LuxuryLanding() {
           initial={{ opacity: 0, y: "-100%" }}
           animate={{ opacity: isMenuOpen ? 1 : 0, y: isMenuOpen ? 0 : "-100%" }}
           transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
-          className="fixed inset-0 bg-[#fdfbf7] z-40 flex items-center justify-center lg:hidden"
+          className="fixed inset-0 bg-[#fdfbf7] dark:bg-slate-950 z-40 flex flex-col items-center justify-center lg:hidden gap-12 pt-24"
         >
           <div className="flex flex-col items-center gap-8">
             {["Heritage", "Concierge", "Fleet", "Network", "Insights", "Contact"].map((item) => (
@@ -234,22 +250,30 @@ export default function LuxuryLanding() {
                 key={item} 
                 href={`#${item.toLowerCase()}`}
                 onClick={() => setIsMenuOpen(false)}
-                className="font-luxury-heading text-4xl italic text-slate-900 hover:text-[#d4af37] transition-colors"
+                className="font-luxury-heading text-4xl italic text-slate-900 dark:text-white hover:text-[#d4af37] transition-colors"
               >
                 {item}
               </a>
             ))}
           </div>
+          {mounted && (
+            <button 
+              onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+              className="mt-8 flex items-center justify-center w-12 h-12 rounded-full border border-[#d4af37]/50 hover:border-[#d4af37] text-slate-900 dark:text-white hover:text-[#d4af37] transition-all duration-500"
+            >
+              {theme === "dark" ? <Sun className="w-6 h-6" /> : <Moon className="w-6 h-6" />}
+            </button>
+          )}
         </motion.div>
       </nav>
 
       {/* Hero Section */}
-      <section className="relative h-screen flex items-center justify-center overflow-hidden">
+      <section className="relative h-screen flex items-center justify-center overflow-hidden dark:bg-slate-900">
         <motion.div 
           initial={{ scale: 1.1 }}
           animate={{ scale: 1 }}
           transition={{ duration: 2.5, ease: "easeOut" }}
-          className="absolute inset-0 z-0"
+          className="absolute inset-0 z-0 dark:opacity-80"
         >
           <img src={jetInterior} alt="Hero" className="w-full h-full object-cover" />
           <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-black/20 to-black/60" />
