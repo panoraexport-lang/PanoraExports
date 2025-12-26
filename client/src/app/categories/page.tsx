@@ -138,7 +138,7 @@ export default function CategoriesPage() {
                                     src={category.image}
                                     alt={category.name}
                                     loading="lazy"
-                                    className="absolute inset-0 w-full h-full object-cover transition-all duration-700 blur-[4px] grayscale group-hover:blur-0 group-hover:grayscale-0 group-hover:scale-105"
+                                    className="absolute inset-0 w-full h-full object-cover transition-all duration-700 blur-md grayscale group-hover:filter-none group-hover:scale-105"
                                 />
                                 <div className="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-colors duration-500" />
                             </div>

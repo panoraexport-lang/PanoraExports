@@ -208,7 +208,7 @@ export default function ProductsPage() {
                                         src={product.image}
                                         alt={product.name}
                                         loading="lazy"
-                                        className="absolute inset-0 w-full h-full object-cover transition-all duration-700 md:group-hover:scale-105 blur-[4px] md:grayscale md:group-hover:grayscale-0 md:group-hover:blur-0 group-hover:blur-0 group-hover:grayscale-0"
+                                        className="absolute inset-0 w-full h-full object-cover transition-all duration-700 blur-md grayscale group-hover:filter-none group-hover:scale-105"
                                     />
                                     <div className="absolute inset-0 bg-black/10 group-hover:bg-transparent transition-colors duration-500" />
                                 </div>
