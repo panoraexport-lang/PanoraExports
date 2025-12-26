@@ -203,12 +203,12 @@ export default function ProductsPage() {
                                 className="group block bg-white dark:bg-slate-900 border border-slate-200/50 dark:border-slate-800/50 hover:border-slate-300 dark:hover:border-slate-700 transition-all hover:shadow-lg"
                             >
                                 {/* Product Image - Blur to Clear on Hover */}
-                                <div className="relative w-full h-full">
+                                <div className="relative aspect-[16/9] bg-slate-100 dark:bg-slate-900 overflow-hidden">
                                     <img
                                         src={product.image}
                                         alt={product.name}
                                         loading="lazy"
-                                        className="absolute inset-0 w-full h-full object-cover transition-all duration-700 md:group-hover:scale-105 blur-[2px] md:grayscale md:group-hover:grayscale-0 md:group-hover:blur-0 group-hover:blur-0"
+                                        className="absolute inset-0 w-full h-full object-cover transition-all duration-700 md:group-hover:scale-105 blur-[4px] md:grayscale md:group-hover:grayscale-0 md:group-hover:blur-0 group-hover:blur-0 group-hover:grayscale-0"
                                     />
                                     <div className="absolute inset-0 bg-black/10 group-hover:bg-transparent transition-colors duration-500" />
                                 </div>
