@@ -11,7 +11,7 @@ import { useTheme } from "next-themes";
 import jetInterior from "@assets/stock_images/private_jet_interior_81593a0e.jpg";
 import goldenGlobe from "@assets/stock_images/cinematic_golden_glo_6214e3e2.jpg";
 import luxuryShip from "@assets/stock_images/luxury_container_shi_990cf15c.jpg";
-import watchMech from "@assets/stock_images/close_up_of_expensiv_c5a5e676.jpg";
+import heritageImage from "@assets/c66e579febabb049654f11a4526769d1.jpg";
 import architecture from "@assets/stock_images/sleek_modern_archite_f51dbae2.jpg";
 import boardroom from "@assets/stock_images/luxury_executive_boa_09abd54e.jpg";
 import windTurbine from "@assets/stock_images/sustainable_energy_w_b9cc32ff.jpg";
@@ -38,17 +38,17 @@ const AnimatedCounter = ({ value, label, suffix = "" }: { value: string, label: 
         initial={{ opacity: 0, y: 20 }}
         animate={isInView ? { opacity: 1, y: 0 } : {}}
         transition={{ duration: 0.8, ease: "easeOut" }}
-        className="font-luxury-heading text-5xl md:text-7xl text-[#d4af37] mb-3 italic relative inline-block"
+        className="font-luxury-heading text-5xl md:text-7xl text-[#C05800] mb-3 italic relative inline-block"
       >
         {value}{suffix}
         <motion.div
           initial={{ scaleX: 0 }}
           animate={isInView ? { scaleX: 1 } : {}}
           transition={{ duration: 1, delay: 0.5 }}
-          className="absolute -bottom-2 left-0 w-full h-px bg-[#d4af37]/30 origin-left"
+          className="absolute -bottom-2 left-0 w-full h-px bg-[#C05800]/30 origin-left"
         />
       </motion.div>
-      <div className="text-xs uppercase tracking-[0.3em] text-slate-500 dark:text-slate-400 font-medium mt-2 group-hover:text-[#d4af37] transition-colors duration-500">{label}</div>
+      <div className="text-xs uppercase tracking-[0.3em] text-slate-500 dark:text-slate-400 font-medium mt-2 group-hover:text-[#C05800] transition-colors duration-500">{label}</div>
     </div>
   );
 };
@@ -59,14 +59,14 @@ const FeatureCard = ({ icon: Icon, title, desc, delay }: any) => (
     whileInView={{ opacity: 1, y: 0 }}
     viewport={{ once: true }}
     transition={{ duration: 0.8, delay }}
-    className="bg-white dark:bg-slate-800 p-10 border border-[#d4af37]/10 hover:border-[#d4af37] transition-all duration-700 group hover:-translate-y-2 shadow-sm hover:shadow-2xl hover:shadow-[#d4af37]/10"
+    className="bg-white dark:bg-slate-800 p-10 border border-[#C05800]/10 hover:border-[#C05800] transition-all duration-700 group hover:-translate-y-2 shadow-sm hover:shadow-2xl hover:shadow-[#C05800]/10"
   >
-    <div className="w-14 h-14 bg-[#fdfbf7] dark:bg-slate-700 border border-[#d4af37]/20 rounded-full flex items-center justify-center text-[#d4af37] mb-8 group-hover:bg-[#d4af37] group-hover:text-white transition-all duration-500">
+    <div className="w-14 h-14 bg-[#FDFBD4] dark:bg-slate-700 border border-[#C05800]/20 rounded-full flex items-center justify-center text-[#C05800] mb-8 group-hover:bg-[#C05800] group-hover:text-white transition-all duration-500">
       <Icon strokeWidth={1.2} className="w-6 h-6" />
     </div>
-    <h3 className="font-luxury-heading text-2xl mb-4 text-slate-900 dark:text-white group-hover:text-[#d4af37] transition-colors duration-500 italic">{title}</h3>
+    <h3 className="font-luxury-heading text-2xl mb-4 text-slate-900 dark:text-white group-hover:text-[#C05800] transition-colors duration-500 italic">{title}</h3>
     <p className="text-slate-500 dark:text-slate-400 leading-relaxed text-sm font-light">{desc}</p>
-    <div className="mt-8 flex items-center text-[#d4af37] text-xs uppercase tracking-widest opacity-0 group-hover:opacity-100 transition-all duration-500 -translate-x-4 group-hover:translate-x-0">
+    <div className="mt-8 flex items-center text-[#C05800] text-xs uppercase tracking-widest opacity-0 group-hover:opacity-100 transition-all duration-500 -translate-x-4 group-hover:translate-x-0">
       Learn More <ArrowRight className="w-3 h-3 ml-2" />
     </div>
   </motion.div>
@@ -93,13 +93,13 @@ const ParallaxSection = ({ children, bgImage, overlayOpacity = 0.4 }: { children
 };
 
 const AccordionItem = ({ question, answer, isOpen, onClick }: any) => (
-  <div className="border-b border-[#d4af37]/20 dark:border-[#d4af37]/30">
+  <div className="border-b border-[#C05800]/20 dark:border-[#C05800]/30">
     <button
       onClick={onClick}
-      className="w-full py-6 flex justify-between items-center text-left hover:text-[#d4af37] transition-colors group"
+      className="w-full py-6 flex justify-between items-center text-left hover:text-[#C05800] transition-colors group"
     >
-      <span className="font-luxury-heading text-xl md:text-2xl italic text-slate-800 dark:text-white group-hover:text-[#d4af37] transition-colors">{question}</span>
-      {isOpen ? <ChevronUp className="text-[#d4af37]" /> : <ChevronDown className="text-slate-400 dark:text-slate-500 group-hover:text-[#d4af37]" />}
+      <span className="font-luxury-heading text-xl md:text-2xl italic text-slate-800 dark:text-white group-hover:text-[#C05800] transition-colors">{question}</span>
+      {isOpen ? <ChevronUp className="text-[#C05800]" /> : <ChevronDown className="text-slate-400 dark:text-slate-500 group-hover:text-[#C05800]" />}
     </button>
     <motion.div
       initial={false}
@@ -183,12 +183,12 @@ export default function LuxuryLanding() {
   ];
 
   return (
-    <div className="font-luxury-body bg-[#fdfbf7] dark:bg-slate-950 text-slate-900 dark:text-white overflow-x-hidden selection:bg-[#d4af37] selection:text-white antialiased scroll-smooth">
+    <div className="font-luxury-body bg-[#FDFBD4] dark:bg-slate-950 text-slate-900 dark:text-white overflow-x-hidden selection:bg-[#C05800] selection:text-white antialiased scroll-smooth">
       <Grain />
 
       {/* Progress Bar */}
       <motion.div
-        className="fixed top-0 left-0 right-0 h-1 bg-gradient-to-r from-[#d4af37] via-[#fbf5e6] to-[#d4af37] z-[100] origin-left"
+        className="fixed top-0 left-0 right-0 h-1 bg-gradient-to-r from-[#C05800] via-[#fbf5e6] to-[#C05800] z-[100] origin-left"
         style={{ scaleX }}
       />
 
@@ -337,14 +337,14 @@ export default function LuxuryLanding() {
                 initial={{ width: 0 }}
                 animate={{ width: 40 }}
                 transition={{ duration: 1, delay: 0.8 }}
-                className="h-px bg-[#d4af37]"
+                className="h-px bg-[#C05800]"
               />
-              <span className="text-[#d4af37] text-xs font-bold tracking-[0.3em] uppercase">Est. 1985</span>
+              <span className="text-[#C05800] text-xs font-bold tracking-[0.3em] uppercase">Est. 1985</span>
               <motion.div
                 initial={{ width: 0 }}
                 animate={{ width: 40 }}
                 transition={{ duration: 1, delay: 0.8 }}
-                className="h-px bg-[#d4af37]"
+                className="h-px bg-[#C05800]"
               />
             </div>
             <h1 className="font-luxury-heading text-5xl md:text-7xl lg:text-8xl mb-5 leading-[0.95] italic drop-shadow-2xl">
@@ -356,7 +356,7 @@ export default function LuxuryLanding() {
             <div className="flex flex-col sm:flex-row justify-center gap-4">
               <a
                 href="/auth/register"
-                className="bg-[#d4af37] text-white px-8 py-3 text-xs uppercase tracking-widest hover:bg-white hover:text-[#d4af37] transition-all duration-500 shadow-[0_0_30px_rgba(212,175,55,0.3)] border border-[#d4af37] inline-flex items-center justify-center"
+                className="bg-[#C05800] text-white px-8 py-3 text-xs uppercase tracking-widest hover:bg-white hover:text-[#C05800] transition-all duration-500 shadow-[0_0_30px_rgba(212,175,55,0.3)] border border-[#C05800] inline-flex items-center justify-center"
               >
                 Get Verified Now
               </a>
@@ -384,24 +384,24 @@ export default function LuxuryLanding() {
       </section>
 
       {/* Heritage / Story Section */}
-      <section id="heritage" className="py-20 md:py-40 px-6 md:px-8 bg-[#fdfbf7] dark:bg-slate-900 relative overflow-hidden">
-        <div className="absolute top-0 right-0 w-1/2 h-full bg-[#d4af37]/5 dark:bg-[#d4af37]/10 skew-x-12 translate-x-40" />
+      <section id="heritage" className="py-20 md:py-40 px-6 md:px-8 bg-[#FDFBD4] dark:bg-slate-900 relative overflow-hidden">
+        <div className="absolute top-0 right-0 w-1/2 h-full bg-[#C05800]/5 dark:bg-[#C05800]/10 skew-x-12 translate-x-40" />
         <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-24 items-center relative z-10">
           <div className="relative group">
-            <div className="absolute -top-10 -left-10 w-60 h-60 border border-[#d4af37]/20 rounded-full animate-spin-slow opacity-50" />
+            <div className="absolute -top-10 -left-10 w-60 h-60 border border-[#C05800]/20 rounded-full animate-spin-slow opacity-50" />
             <div className="overflow-hidden">
-              <img src={watchMech} alt="Precision" className="relative z-10 shadow-2xl w-full grayscale group-hover:grayscale-0 transition-all duration-1000 scale-100 group-hover:scale-105" />
+              <img src={heritageImage} alt="Heritage" className="relative z-10 shadow-2xl w-full grayscale group-hover:grayscale-0 transition-all duration-1000 scale-100 group-hover:scale-105" />
             </div>
-            <div className="absolute -bottom-12 -right-12 bg-white dark:bg-slate-800 p-12 shadow-2xl border-t-4 border-[#d4af37] z-20 max-w-sm hidden md:block">
+            <div className="absolute -bottom-12 -right-12 bg-white dark:bg-slate-800 p-12 shadow-2xl border-t-4 border-[#C05800] z-20 max-w-sm hidden md:block">
               <p className="font-luxury-heading italic text-3xl mb-4 text-slate-800 dark:text-white">"Precision is not an act, it is a habit."</p>
               <p className="text-xs uppercase tracking-wider text-slate-400 dark:text-slate-500">— Founder, 1985</p>
             </div>
           </div>
           <div>
-            <span className="text-[#d4af37] text-xs font-bold tracking-[0.4em] uppercase block mb-6">Our Mission</span>
+            <span className="text-[#C05800] text-xs font-bold tracking-[0.4em] uppercase block mb-6">Our Mission</span>
             <h2 className="font-luxury-heading text-6xl md:text-7xl text-slate-900 dark:text-white mb-10 italic leading-tight">
               Connecting India <br />
-              <span className="text-[#d4af37]">to the World.</span>
+              <span className="text-[#C05800]">to the World.</span>
             </h2>
             <p className="text-slate-600 dark:text-slate-400 text-lg leading-relaxed mb-10 font-light">
               Panora Exports is India's premier B2B platform connecting verified buyers with trusted export categories including Textiles, Agriculture, Hardware, Handicrafts, and Spices. We ensure quality, authenticity, and seamless global trade.
@@ -413,7 +413,7 @@ export default function LuxuryLanding() {
                 "Private charter fleet access with < 4hr notice"
               ].map((item, i) => (
                 <div key={i} className="flex items-start gap-4 group">
-                  <div className="mt-1 w-6 h-6 rounded-full border border-[#d4af37]/30 flex items-center justify-center text-[#d4af37] group-hover:bg-[#d4af37] group-hover:text-white transition-all duration-300">
+                  <div className="mt-1 w-6 h-6 rounded-full border border-[#C05800]/30 flex items-center justify-center text-[#C05800] group-hover:bg-[#C05800] group-hover:text-white transition-all duration-300">
                     <CheckCircle2 className="w-3 h-3" />
                   </div>
                   <span className="text-sm uppercase tracking-wider text-slate-800 dark:text-slate-300 pt-1">{item}</span>
@@ -430,13 +430,13 @@ export default function LuxuryLanding() {
       </section>
 
       {/* The Process */}
-      <section className="py-20 md:py-40 bg-[#1a1a1a] text-white relative overflow-hidden">
+      <section className="py-20 md:py-40 bg-[#38240D] text-white relative overflow-hidden">
         <div className="absolute inset-0 opacity-5" style={{ backgroundImage: `url(${digitalNet})`, backgroundSize: 'cover' }} />
         <div className="max-w-7xl mx-auto px-8 relative z-10">
           <div className="text-center mb-24">
-            <span className="text-[#d4af37] text-xs font-bold tracking-[0.4em] uppercase block mb-6">How It Works</span>
+            <span className="text-[#C05800] text-xs font-bold tracking-[0.4em] uppercase block mb-6">How It Works</span>
             <h2 className="font-luxury-heading text-5xl md:text-7xl mb-6 italic">Your Export Journey</h2>
-            <div className="w-24 h-1 bg-[#d4af37] mx-auto" />
+            <div className="w-24 h-1 bg-[#C05800] mx-auto" />
           </div>
 
           <div className="grid md:grid-cols-4 gap-8">
@@ -446,8 +446,8 @@ export default function LuxuryLanding() {
               { step: "03", title: "Request Quotes", desc: "Submit RFQs with your requirements. Receive competitive quotes from multiple verified sellers." },
               { step: "04", title: "Trade Securely", desc: "Accept the best quote and complete your order with full tracking and documentation support." },
             ].map((item, i) => (
-              <div key={i} className="relative p-8 border-l border-[#d4af37]/20 hover:border-[#d4af37] transition-colors duration-500 group">
-                <div className="text-6xl font-luxury-heading text-[#d4af37]/20 mb-8 group-hover:text-[#d4af37] transition-colors duration-500">{item.step}</div>
+              <div key={i} className="relative p-8 border-l border-[#C05800]/20 hover:border-[#C05800] transition-colors duration-500 group">
+                <div className="text-6xl font-luxury-heading text-[#C05800]/20 mb-8 group-hover:text-[#C05800] transition-colors duration-500">{item.step}</div>
                 <h3 className="text-2xl font-luxury-heading italic mb-4">{item.title}</h3>
                 <p className="text-white/50 text-sm leading-relaxed">{item.desc}</p>
               </div>
@@ -465,7 +465,7 @@ export default function LuxuryLanding() {
 
         <div ref={textRef} className="absolute inset-0 flex items-center justify-center z-10 pointer-events-none">
           <div className="text-center max-w-5xl px-6">
-            <span className="text-[#d4af37] text-xs font-bold tracking-[0.4em] uppercase block mb-8 animate-pulse">Verified Network</span>
+            <span className="text-[#C05800] text-xs font-bold tracking-[0.4em] uppercase block mb-8 animate-pulse">Verified Network</span>
             <h2 className="font-luxury-heading text-7xl md:text-9xl text-white mb-8 italic drop-shadow-2xl">
               Global Reach
             </h2>
@@ -478,12 +478,12 @@ export default function LuxuryLanding() {
         {/* Simulated UI elements appearing on zoom */}
         <div ref={overlayRef} className="absolute inset-0 z-20 pointer-events-none p-12 flex flex-col justify-between opacity-0">
           <div className="flex justify-between items-start">
-            <div className="bg-black/50 backdrop-blur-md border border-[#d4af37]/30 p-4 font-mono text-xs text-[#d4af37]">
+            <div className="bg-black/50 backdrop-blur-md border border-[#C05800]/30 p-4 font-mono text-xs text-[#C05800]">
               <div>ACTIVE SELLERS: 500+</div>
               <div>BUYERS: 1,200+</div>
               <div className="mt-2 text-white">STATUS: VERIFIED</div>
             </div>
-            <div className="bg-black/50 backdrop-blur-md border border-[#d4af37]/30 p-4 font-mono text-xs text-[#d4af37] text-right">
+            <div className="bg-black/50 backdrop-blur-md border border-[#C05800]/30 p-4 font-mono text-xs text-[#C05800] text-right">
               <div>ACTIVE RFQS: 140</div>
               <div>CATEGORIES: 10+</div>
               <div className="mt-2 text-white">PLATFORM: LIVE</div>
@@ -493,16 +493,16 @@ export default function LuxuryLanding() {
       </div>
 
       {/* Services - Concierge */}
-      <section id="services" className="py-20 md:py-40 px-6 bg-[#fdfbf7] dark:bg-slate-900 text-slate-900 dark:text-white relative">
+      <section id="services" className="py-20 md:py-40 px-6 bg-[#FDFBD4] dark:bg-slate-900 text-slate-900 dark:text-white relative">
         <div className="max-w-[1800px] mx-auto">
           <div className="grid lg:grid-cols-12 gap-20">
             <div className="lg:col-span-4 sticky top-40 self-start">
-              <span className="text-[#d4af37] text-xs font-bold tracking-[0.4em] uppercase block mb-6">Capabilities</span>
-              <h2 className="font-luxury-heading text-6xl md:text-7xl mb-8 italic leading-none">The Panora Standard</h2>
+              <span className="text-[#C05800] text-xs font-bold tracking-[0.4em] uppercase block mb-6">Capabilities</span>
+              <h2 className="font-luxury-heading text-6xl md:text-7xl mb-8 italic leading-none">Premium Sourcing</h2>
               <p className="text-slate-500 dark:text-slate-400 text-lg leading-relaxed mb-12">
                 We do not simply move cargo; we engineer its journey. Every shipment is overseen by a dedicated export manager who ensures quality and timeline compliance.
               </p>
-              <button className="bg-[#0f172a] dark:bg-slate-800 text-white px-10 py-4 text-sm uppercase tracking-widest hover:bg-[#d4af37] transition-colors duration-500">
+              <button className="bg-[#0f172a] dark:bg-slate-800 text-white px-10 py-4 text-sm uppercase tracking-widest hover:bg-[#C05800] transition-colors duration-500">
                 Download Service Guide
               </button>
             </div>
@@ -553,7 +553,7 @@ export default function LuxuryLanding() {
       <ParallaxSection bgImage={windTurbine} overlayOpacity={0.6}>
         <div className="max-w-7xl mx-auto px-6 grid md:grid-cols-2 gap-24 items-center h-full py-20">
           <div className="text-white">
-            <span className="text-[#d4af37] text-xs font-bold tracking-[0.4em] uppercase block mb-6 flex items-center gap-2">
+            <span className="text-[#C05800] text-xs font-bold tracking-[0.4em] uppercase block mb-6 flex items-center gap-2">
               <Leaf className="w-4 h-4" /> Sustainability
             </span>
             <h2 className="font-luxury-heading text-6xl md:text-8xl mb-8 italic">Eco-Conscious <br />Logistics</h2>
@@ -562,11 +562,11 @@ export default function LuxuryLanding() {
             </p>
             <div className="flex gap-12">
               <div>
-                <div className="text-4xl font-luxury-heading text-[#d4af37] mb-2">100%</div>
+                <div className="text-4xl font-luxury-heading text-[#C05800] mb-2">100%</div>
                 <div className="text-xs uppercase tracking-widest text-white/60">Offset Available</div>
               </div>
               <div>
-                <div className="text-4xl font-luxury-heading text-[#d4af37] mb-2">2030</div>
+                <div className="text-4xl font-luxury-heading text-[#C05800] mb-2">2030</div>
                 <div className="text-xs uppercase tracking-widest text-white/60">Net Zero Goal</div>
               </div>
             </div>
@@ -575,7 +575,7 @@ export default function LuxuryLanding() {
             <div className="border border-white/20 p-12 backdrop-blur-md bg-white/5 rounded-full aspect-square flex items-center justify-center">
               <div className="text-center">
                 <div className="font-luxury-heading text-white text-3xl italic mb-4">Green Lane</div>
-                <div className="text-xs uppercase tracking-widest text-[#d4af37]">Certified Partner</div>
+                <div className="text-xs uppercase tracking-widest text-[#C05800]">Certified Partner</div>
               </div>
             </div>
           </div>
@@ -583,14 +583,14 @@ export default function LuxuryLanding() {
       </ParallaxSection>
 
       {/* Fleet Showcase */}
-      <section id="global-network" className="py-20 md:py-40 bg-[#fdfbf7] dark:bg-slate-900">
+      <section id="global-network" className="py-20 md:py-40 bg-[#FDFBD4] dark:bg-slate-900">
         <div className="max-w-[1800px] mx-auto px-8">
           <div className="flex flex-col md:flex-row justify-between items-end mb-24">
             <div>
-              <span className="text-[#d4af37] text-xs font-bold tracking-[0.4em] uppercase block mb-6">Our Assets</span>
+              <span className="text-[#C05800] text-xs font-bold tracking-[0.4em] uppercase block mb-6">Our Assets</span>
               <h2 className="font-luxury-heading text-6xl md:text-7xl text-slate-900 dark:text-white italic">The Panora Fleet</h2>
             </div>
-            <p className="max-w-md text-slate-500 dark:text-slate-400 text-sm leading-relaxed mt-8 md:mt-0 border-l border-[#d4af37] pl-6">
+            <p className="max-w-md text-slate-500 dark:text-slate-400 text-sm leading-relaxed mt-8 md:mt-0 border-l border-[#C05800] pl-6">
               From Boeing 747-8F freighters to Triple-E class container vessels, our access to capacity is unmatched in the industry.
             </p>
           </div>
@@ -600,7 +600,7 @@ export default function LuxuryLanding() {
               <img src={luxuryShip} alt="Ship" className="w-full h-full object-cover transition-transform duration-[1.5s] group-hover:scale-105" />
               <div className="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-colors" />
               <div className="absolute bottom-12 left-12 text-white z-10">
-                <div className="text-[#d4af37] text-xs uppercase tracking-widest mb-3">Maritime</div>
+                <div className="text-[#C05800] text-xs uppercase tracking-widest mb-3">Maritime</div>
                 <h3 className="font-luxury-heading text-5xl italic group-hover:translate-x-4 transition-transform duration-500">Ocean Freight</h3>
               </div>
             </div>
@@ -609,7 +609,7 @@ export default function LuxuryLanding() {
                 <img src={architecture} alt="Hub" className="w-full h-full object-cover transition-transform duration-[1.5s] group-hover:scale-105" />
                 <div className="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-colors" />
                 <div className="absolute bottom-8 left-8 text-white z-10">
-                  <div className="text-[#d4af37] text-xs uppercase tracking-widest mb-2">Infrastructure</div>
+                  <div className="text-[#C05800] text-xs uppercase tracking-widest mb-2">Infrastructure</div>
                   <h3 className="font-luxury-heading text-3xl italic">Global Hubs</h3>
                 </div>
               </div>
@@ -617,7 +617,7 @@ export default function LuxuryLanding() {
                 <img src={digitalNet} alt="Tech" className="w-full h-full object-cover transition-transform duration-[1.5s] group-hover:scale-105" />
                 <div className="absolute inset-0 bg-black/40 group-hover:bg-black/20 transition-colors" />
                 <div className="absolute bottom-8 left-8 text-white z-10">
-                  <div className="text-[#d4af37] text-xs uppercase tracking-widest mb-2">Technology</div>
+                  <div className="text-[#C05800] text-xs uppercase tracking-widest mb-2">Technology</div>
                   <h3 className="font-luxury-heading text-3xl italic">Command Center</h3>
                 </div>
               </div>
@@ -630,26 +630,26 @@ export default function LuxuryLanding() {
       <section className="py-20 md:py-40 bg-[#0f172a] text-white relative overflow-hidden">
         <div className="max-w-7xl mx-auto px-8 grid lg:grid-cols-2 gap-24 items-center relative z-10">
           <div>
-            <span className="text-[#d4af37] text-xs font-bold tracking-[0.4em] uppercase block mb-6">Metrics</span>
+            <span className="text-[#C05800] text-xs font-bold tracking-[0.4em] uppercase block mb-6">Metrics</span>
             <h2 className="font-luxury-heading text-5xl md:text-6xl mb-8 italic">Precision in <br />Numbers</h2>
             <p className="text-slate-400 text-lg leading-relaxed mb-12">
               We believe that true luxury is the absence of worry. Our performance metrics speak to a history of flawless execution.
             </p>
 
             <div className="grid grid-cols-2 gap-12">
-              <div className="border-t border-[#d4af37]/30 pt-6">
+              <div className="border-t border-[#C05800]/30 pt-6">
                 <div className="text-3xl font-luxury-heading mb-2">99.9%</div>
                 <div className="text-xs uppercase tracking-widest text-slate-500">On-Time Arrival</div>
               </div>
-              <div className="border-t border-[#d4af37]/30 pt-6">
+              <div className="border-t border-[#C05800]/30 pt-6">
                 <div className="text-3xl font-luxury-heading mb-2">0.01%</div>
                 <div className="text-xs uppercase tracking-widest text-slate-500">Claim Ratio</div>
               </div>
-              <div className="border-t border-[#d4af37]/30 pt-6">
+              <div className="border-t border-[#C05800]/30 pt-6">
                 <div className="text-3xl font-luxury-heading mb-2">24/7</div>
                 <div className="text-xs uppercase tracking-widest text-slate-500">Live Support</div>
               </div>
-              <div className="border-t border-[#d4af37]/30 pt-6">
+              <div className="border-t border-[#C05800]/30 pt-6">
                 <div className="text-3xl font-luxury-heading mb-2">ISO</div>
                 <div className="text-xs uppercase tracking-widest text-slate-500">9001 Certified</div>
               </div>
@@ -660,7 +660,7 @@ export default function LuxuryLanding() {
             <div className="flex justify-between items-center mb-8">
               <h3 className="font-luxury-heading text-2xl italic">Efficiency Index</h3>
               <div className="flex gap-2">
-                <div className="w-3 h-3 rounded-full bg-[#d4af37]" />
+                <div className="w-3 h-3 rounded-full bg-[#C05800]" />
                 <div className="w-3 h-3 rounded-full bg-slate-600" />
               </div>
             </div>
@@ -669,19 +669,19 @@ export default function LuxuryLanding() {
                 <AreaChart data={chartData}>
                   <defs>
                     <linearGradient id="colorValue" x1="0" y1="0" x2="0" y2="1">
-                      <stop offset="5%" stopColor="#d4af37" stopOpacity={0.3} />
-                      <stop offset="95%" stopColor="#d4af37" stopOpacity={0} />
+                      <stop offset="5%" stopColor="#C05800" stopOpacity={0.3} />
+                      <stop offset="95%" stopColor="#C05800" stopOpacity={0} />
                     </linearGradient>
                   </defs>
                   <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.05)" vertical={false} />
                   <XAxis dataKey="name" stroke="rgba(255,255,255,0.3)" tick={{ fontSize: 12 }} tickLine={false} axisLine={false} />
                   <YAxis stroke="rgba(255,255,255,0.3)" tick={{ fontSize: 12 }} tickLine={false} axisLine={false} />
                   <Tooltip
-                    contentStyle={{ backgroundColor: '#1a1a1a', border: '1px solid #d4af37', color: '#fff', fontFamily: 'Montserrat' }}
-                    itemStyle={{ color: '#d4af37' }}
-                    cursor={{ stroke: '#d4af37', strokeWidth: 1, strokeDasharray: '4 4' }}
+                    contentStyle={{ backgroundColor: '#38240D', border: '1px solid #C05800', color: '#fff', fontFamily: 'Montserrat' }}
+                    itemStyle={{ color: '#C05800' }}
+                    cursor={{ stroke: '#C05800', strokeWidth: 1, strokeDasharray: '4 4' }}
                   />
-                  <Area type="monotone" dataKey="value" stroke="#d4af37" strokeWidth={2} fillOpacity={1} fill="url(#colorValue)" />
+                  <Area type="monotone" dataKey="value" stroke="#C05800" strokeWidth={2} fillOpacity={1} fill="url(#colorValue)" />
                 </AreaChart>
               </ResponsiveContainer>
             </div>
@@ -693,9 +693,9 @@ export default function LuxuryLanding() {
       <section id="insights" className="py-20 md:py-40 bg-white dark:bg-slate-900">
         <div className="max-w-4xl mx-auto px-8">
           <div className="mb-20">
-            <span className="text-[#d4af37] text-xs font-bold tracking-[0.4em] uppercase block mb-6">Insights</span>
+            <span className="text-[#C05800] text-xs font-bold tracking-[0.4em] uppercase block mb-6">Insights</span>
             <h2 className="font-luxury-heading text-4xl md:text-5xl mb-6 italic text-slate-900 dark:text-white">Frequently Asked</h2>
-            <a href="/faq" className="text-sm text-[#d4af37] hover:underline underline-offset-4">View All FAQs →</a>
+            <a href="/faq" className="text-sm text-[#C05800] hover:underline underline-offset-4">View All FAQs →</a>
           </div>
 
           <div className="space-y-4">
@@ -721,40 +721,40 @@ export default function LuxuryLanding() {
       <section className="py-20 md:py-40 bg-[#1e1e1e] dark:bg-slate-950 text-white text-center px-6 relative overflow-hidden">
         <div className="absolute inset-0 opacity-20 bg-[url('https://www.transparenttextures.com/patterns/stardust.png')]" />
         <div className="max-w-5xl mx-auto relative z-10">
-          <div className="flex justify-center gap-2 text-[#d4af37] mb-12">
-            {[1, 2, 3, 4, 5].map(i => <Star key={i} fill="#d4af37" className="w-6 h-6" />)}
+          <div className="flex justify-center gap-2 text-[#C05800] mb-12">
+            {[1, 2, 3, 4, 5].map(i => <Star key={i} fill="#C05800" className="w-6 h-6" />)}
           </div>
           <h2 className="font-luxury-heading text-3xl md:text-5xl leading-tight mb-16 italic">
             "Panora Exports has transformed our sourcing strategy. Their commitment to quality and transparency is unmatched in the Indian export market."
           </h2>
           <div className="flex items-center justify-center gap-6">
-            <div className="w-16 h-16 border border-[#d4af37] rounded-full p-1">
+            <div className="w-16 h-16 border border-[#C05800] rounded-full p-1">
               <img src={boardroom} className="w-full h-full rounded-full object-cover grayscale" alt="CEO" />
             </div>
             <div className="text-left">
               <div className="font-bold text-xl font-luxury-heading italic">Alexander V.</div>
-              <div className="text-[#d4af37] text-xs uppercase tracking-widest mt-1">CEO, Luxury Goods Conglomerate</div>
+              <div className="text-[#C05800] text-xs uppercase tracking-widest mt-1">CEO, Global Export Network</div>
             </div>
           </div>
         </div>
       </section>
 
       {/* Contact Form */}
-      <section id="contact" className="py-20 md:py-40 px-6 bg-[#fdfbf7] dark:bg-slate-900 relative">
-        <div className="max-w-7xl mx-auto bg-white dark:bg-slate-800 shadow-[0_20px_50px_rgba(0,0,0,0.05)] border border-[#d4af37]/10 p-12 md:p-24 relative overflow-hidden">
-          <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-[#d4af37] to-transparent" />
+      <section id="contact" className="py-20 md:py-40 px-6 bg-[#FDFBD4] dark:bg-slate-900 relative">
+        <div className="max-w-7xl mx-auto bg-white dark:bg-slate-800 shadow-[0_20px_50px_rgba(0,0,0,0.05)] border border-[#C05800]/10 p-12 md:p-24 relative overflow-hidden">
+          <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-[#C05800] to-transparent" />
 
           <div className="grid lg:grid-cols-2 gap-20">
             <div>
-              <span className="text-[#d4af37] text-xs font-bold tracking-[0.4em] uppercase block mb-6">Inquiries</span>
-              <h2 className="font-luxury-heading text-6xl mb-8 text-slate-900 dark:text-white italic">Request Concierge</h2>
+              <span className="text-[#C05800] text-xs font-bold tracking-[0.4em] uppercase block mb-6">Inquiries</span>
+              <h2 className="font-luxury-heading text-6xl mb-8 text-slate-900 dark:text-white italic">Request Quotation</h2>
               <p className="text-slate-500 dark:text-slate-400 mb-16 leading-relaxed font-light text-lg">
                 Please provide details about your shipment requirements. Our dedicated team reviews all requests within 2 hours.
               </p>
 
               <div className="space-y-10">
                 <div className="flex gap-6">
-                  <div className="w-12 h-12 bg-[#fdfbf7] dark:bg-slate-700 flex items-center justify-center text-[#d4af37]">
+                  <div className="w-12 h-12 bg-[#FDFBD4] dark:bg-slate-700 flex items-center justify-center text-[#C05800]">
                     <MapPin strokeWidth={1} />
                   </div>
                   <div>
@@ -763,7 +763,7 @@ export default function LuxuryLanding() {
                   </div>
                 </div>
                 <div className="flex gap-6">
-                  <div className="w-12 h-12 bg-[#fdfbf7] dark:bg-slate-700 flex items-center justify-center text-[#d4af37]">
+                  <div className="w-12 h-12 bg-[#FDFBD4] dark:bg-slate-700 flex items-center justify-center text-[#C05800]">
                     <Globe strokeWidth={1} />
                   </div>
                   <div>
@@ -774,11 +774,11 @@ export default function LuxuryLanding() {
               </div>
             </div>
 
-            <div className="bg-[#fdfbf7]/50 dark:bg-slate-700/30 p-10 border border-[#d4af37]/5 flex flex-col justify-center items-center text-center">
+            <div className="bg-[#FDFBD4]/50 dark:bg-slate-700/30 p-10 border border-[#C05800]/5 flex flex-col justify-center items-center text-center">
               <h3 className="font-luxury-heading text-3xl text-slate-900 dark:text-white mb-4 italic">Ready to get started?</h3>
               <p className="text-slate-500 dark:text-slate-400 mb-8 max-w-sm">Use our dedicated contact form or email us directly for the fastest response.</p>
-              <a href="/contact" className="bg-[#0f172a] dark:bg-slate-700 text-white px-10 py-4 text-sm uppercase tracking-widest hover:bg-[#d4af37] transition-colors duration-500 shadow-xl inline-block">
-                Go to Contact Page
+              <a href="/contact" className="bg-[#0f172a] dark:bg-slate-700 text-white px-10 py-4 text-sm uppercase tracking-widest hover:bg-[#C05800] transition-colors duration-500 shadow-xl inline-block">
+                Go to Quotation Page
               </a>
             </div>
           </div>
@@ -786,29 +786,29 @@ export default function LuxuryLanding() {
       </section>
 
       {/* Footer */}
-      <footer className="bg-[#0f172a] dark:bg-slate-950 text-white pt-32 pb-12 px-8 border-t border-[#d4af37]/30">
+      <footer className="bg-[#0f172a] dark:bg-slate-950 text-white pt-32 pb-12 px-8 border-t border-[#C05800]/30">
         <div className="max-w-[1800px] mx-auto grid md:grid-cols-4 gap-16 mb-24">
           <div className="col-span-2">
-            <div className="font-luxury-heading text-5xl italic font-bold mb-10">PanoraExports.</div>
+            <div className="font-luxury-heading text-5xl italic font-bold mb-10">Panora Exports.</div>
             <p className="text-white/40 dark:text-white/50 max-w-md leading-relaxed font-light text-lg">
               India's premier B2B export platform. Connecting verified buyers with authentic Indian products across Textiles, Agriculture, Hardware, Handicrafts, and Spices. Trade with confidence.
             </p>
           </div>
           <div>
-            <h4 className="font-bold mb-8 text-xs uppercase tracking-[0.2em] text-[#d4af37]">Sitemap</h4>
+            <h4 className="font-bold mb-8 text-xs uppercase tracking-[0.2em] text-[#C05800]">Sitemap</h4>
             <ul className="space-y-6 text-white/60 dark:text-white/50 text-sm font-light">
-              <li className="hover:text-[#d4af37] transition-colors cursor-pointer hover:translate-x-2 duration-300 flex items-center gap-2"><ArrowRight className="w-3 h-3 opacity-0 hover:opacity-100" />Heritage</li>
-              <li className="hover:text-[#d4af37] transition-colors cursor-pointer hover:translate-x-2 duration-300 flex items-center gap-2"><ArrowRight className="w-3 h-3 opacity-0 hover:opacity-100" />Services</li>
-              <li className="hover:text-[#d4af37] transition-colors cursor-pointer hover:translate-x-2 duration-300 flex items-center gap-2"><ArrowRight className="w-3 h-3 opacity-0 hover:opacity-100" />Global Network</li>
-              <li className="hover:text-[#d4af37] transition-colors cursor-pointer hover:translate-x-2 duration-300 flex items-center gap-2"><ArrowRight className="w-3 h-3 opacity-0 hover:opacity-100" />Careers</li>
+              <li className="hover:text-[#C05800] transition-colors cursor-pointer hover:translate-x-2 duration-300 flex items-center gap-2"><ArrowRight className="w-3 h-3 opacity-0 hover:opacity-100" />Heritage</li>
+              <li className="hover:text-[#C05800] transition-colors cursor-pointer hover:translate-x-2 duration-300 flex items-center gap-2"><ArrowRight className="w-3 h-3 opacity-0 hover:opacity-100" />Services</li>
+              <li className="hover:text-[#C05800] transition-colors cursor-pointer hover:translate-x-2 duration-300 flex items-center gap-2"><ArrowRight className="w-3 h-3 opacity-0 hover:opacity-100" />Global Network</li>
+              <li className="hover:text-[#C05800] transition-colors cursor-pointer hover:translate-x-2 duration-300 flex items-center gap-2"><ArrowRight className="w-3 h-3 opacity-0 hover:opacity-100" />Careers</li>
             </ul>
           </div>
           <div>
-            <h4 className="font-bold mb-8 text-xs uppercase tracking-[0.2em] text-[#d4af37]">Legal</h4>
+            <h4 className="font-bold mb-8 text-xs uppercase tracking-[0.2em] text-[#C05800]">Legal</h4>
             <ul className="space-y-6 text-white/60 dark:text-white/50 text-sm font-light">
-              <li className="hover:text-[#d4af37] transition-colors cursor-pointer">Privacy Policy</li>
-              <li className="hover:text-[#d4af37] transition-colors cursor-pointer">Terms of Service</li>
-              <li className="hover:text-[#d4af37] transition-colors cursor-pointer">Cookie Policy</li>
+              <li className="hover:text-[#C05800] transition-colors cursor-pointer">Privacy Policy</li>
+              <li className="hover:text-[#C05800] transition-colors cursor-pointer">Terms of Service</li>
+              <li className="hover:text-[#C05800] transition-colors cursor-pointer">Cookie Policy</li>
             </ul>
           </div>
         </div>

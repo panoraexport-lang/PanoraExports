@@ -61,17 +61,17 @@ export default function FAQPage() {
     };
 
     return (
-        <div className="min-h-screen bg-[#fdfbf7] dark:bg-slate-950 pt-20">
+        <div className="min-h-screen bg-[#FDFBD4] dark:bg-[#38240D] pt-20">
             <Navigation />
 
             {/* Hero Section */}
             <section className="relative overflow-hidden py-16 md:py-24 border-b border-slate-200/50 dark:border-slate-800/50">
-                <div className="absolute inset-0 bg-slate-50 dark:bg-slate-900/50 -z-10" />
+                <div className="absolute inset-0 bg-[#FDFBD4]/50 dark:bg-[#38240D]/50 -z-10" />
                 <div className="max-w-4xl mx-auto px-6 text-center">
                     <motion.div
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
-                        className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#d4af37]/10 text-[#d4af37] text-xs font-medium uppercase tracking-wider mb-6"
+                        className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#C05800]/10 text-[#C05800] text-xs font-medium uppercase tracking-wider mb-6"
                     >
                         <HelpCircle className="w-4 h-4" />
                         Help Center
@@ -82,7 +82,7 @@ export default function FAQPage() {
                         transition={{ delay: 0.1 }}
                         className="text-4xl md:text-5xl font-bold text-slate-900 dark:text-white mb-6 font-luxury-heading"
                     >
-                        Frequently Asked <span className="text-[#d4af37] italic">Questions</span>
+                        Frequently Asked <span className="text-[#C05800] italic">Questions</span>
                     </motion.h1>
                     <motion.p
                         initial={{ opacity: 0, y: 20 }}
@@ -101,7 +101,7 @@ export default function FAQPage() {
                     {faqs.map((section, sIndex) => (
                         <div key={section.category}>
                             <h3 className="text-xl font-bold text-slate-900 dark:text-white mb-6 flex items-center gap-3">
-                                <span className="w-8 h-[1px] bg-[#d4af37]" />
+                                <span className="w-8 h-[1px] bg-[#C05800]" />
                                 {section.category}
                             </h3>
                             <div className="space-y-4">
@@ -116,16 +116,16 @@ export default function FAQPage() {
                                             whileInView={{ opacity: 1, y: 0 }}
                                             viewport={{ once: true }}
                                             transition={{ delay: qIndex * 0.1 }}
-                                            className="group bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-lg overflow-hidden hover:border-[#d4af37]/30 transition-colors"
+                                            className="group bg-white dark:bg-[#38240D] border border-slate-200 dark:border-[#C05800]/20 rounded-lg overflow-hidden hover:border-[#C05800]/30 transition-colors"
                                         >
                                             <button
                                                 onClick={() => toggleAccordion(id)}
                                                 className="w-full flex items-center justify-between p-6 text-left"
                                             >
-                                                <span className={`font-medium text-lg transition-colors ${isOpen ? 'text-[#d4af37]' : 'text-slate-900 dark:text-white'}`}>
+                                                <span className={`font-medium text-lg transition-colors ${isOpen ? 'text-[#C05800]' : 'text-slate-900 dark:text-white'}`}>
                                                     {item.q}
                                                 </span>
-                                                <span className={`flex-shrink-0 ml-4 p-1 rounded-full border transition-all duration-300 ${isOpen ? 'rotate-180 border-[#d4af37] text-[#d4af37]' : 'border-slate-200 dark:border-slate-700 text-slate-400'}`}>
+                                                <span className={`flex-shrink-0 ml-4 p-1 rounded-full border transition-all duration-300 ${isOpen ? 'rotate-180 border-[#C05800] text-[#C05800]' : 'border-slate-200 dark:border-slate-700 text-slate-400'}`}>
                                                     <ChevronDown className="w-5 h-5" />
                                                 </span>
                                             </button>
@@ -153,13 +153,13 @@ export default function FAQPage() {
             </section>
 
             {/* Contact CTA */}
-            <section className="bg-slate-900 dark:bg-slate-950 py-16 px-6">
+            <section className="bg-[#38240D] dark:bg-[#38240D]/80 py-16 px-6">
                 <div className="max-w-4xl mx-auto text-center">
                     <h2 className="text-2xl md:text-3xl font-bold text-white mb-4">Still have questions?</h2>
                     <p className="text-slate-400 mb-8">Can't find the answer you're looking for? Please write to our support team.</p>
                     <a
                         href="/contact"
-                        className="inline-flex items-center gap-2 px-8 py-3 bg-[#d4af37] text-white hover:bg-[#b09130] transition-colors rounded-sm font-medium uppercase tracking-wider"
+                        className="inline-flex items-center gap-2 px-8 py-3 bg-[#C05800] text-white hover:bg-[#b09130] transition-colors rounded-sm font-medium uppercase tracking-wider"
                     >
                         <Mail className="w-5 h-5" />
                         Contact Support

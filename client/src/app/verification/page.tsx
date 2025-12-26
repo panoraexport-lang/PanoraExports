@@ -156,7 +156,7 @@ export default function VerificationPage() {
     // Verified User Dashboard
     if (showVerifiedDashboard && verificationResult?.verified) {
         return (
-            <div className="min-h-screen bg-white dark:bg-slate-950 pt-20">
+            <div className="min-h-screen bg-[#FDFBD4] dark:bg-[#38240D] pt-20">
                 <Navigation />
 
                 {/* Success Header */}
@@ -256,7 +256,7 @@ export default function VerificationPage() {
                 </section>
 
                 {/* Platform Features */}
-                <section className="border-t border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-900/50">
+                <section className="border-t border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-[#C05800]/50">
                     <div className="max-w-[1600px] mx-auto px-8 md:px-12 py-16">
                         <h2 className="text-2xl font-bold text-slate-900 dark:text-white mb-8">
                             Your Verified Benefits
@@ -362,13 +362,13 @@ export default function VerificationPage() {
                         <div className="flex gap-4 justify-center">
                             <a
                                 href="/products"
-                                className="px-8 py-4 bg-slate-900 dark:bg-white text-white dark:text-slate-900 font-semibold hover:opacity-90 transition-opacity"
+                                className="px-8 py-4 bg-[#C05800] dark:bg-[#FDFBD4] text-white dark:text-slate-900 font-semibold hover:opacity-90 transition-opacity"
                             >
                                 Browse Products
                             </a>
                             <a
                                 href="/products/add"
-                                className="px-8 py-4 border border-slate-300 dark:border-slate-700 text-slate-900 dark:text-white font-semibold hover:bg-slate-50 dark:hover:bg-slate-900 transition-colors"
+                                className="px-8 py-4 border border-slate-300 dark:border-slate-700 text-slate-900 dark:text-white font-semibold hover:bg-slate-50 dark:hover:bg-[#C05800] transition-colors"
                             >
                                 List Your Products
                             </a>
@@ -380,11 +380,11 @@ export default function VerificationPage() {
     }
 
     return (
-        <div className="min-h-screen bg-white dark:bg-slate-950 pt-20">
+        <div className="min-h-screen bg-[#FDFBD4] dark:bg-[#38240D] pt-20">
             <Navigation />
 
             {/* Hero Section */}
-            <section className="border-b border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-900/50">
+            <section className="border-b border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-[#C05800]/50">
                 <div className="max-w-[1600px] mx-auto px-8 md:px-12 py-20">
                     <div className="max-w-3xl">
                         <div className="inline-flex items-center gap-2 mb-6 px-4 py-2 bg-green-50 dark:bg-green-900/20 text-green-700 dark:text-green-400 text-sm">
@@ -436,7 +436,7 @@ export default function VerificationPage() {
                     </p>
                 </div>
 
-                <form onSubmit={handleVerify} className="border border-slate-200 dark:border-slate-800 p-8 md:p-12 bg-slate-50 dark:bg-slate-900/50">
+                <form onSubmit={handleVerify} className="border border-slate-200 dark:border-slate-800 p-8 md:p-12 bg-slate-50 dark:bg-[#C05800]/50">
                     {/* Business Information */}
                     <div className="mb-8">
                         <h3 className="text-xl font-bold text-slate-900 dark:text-white mb-6">Business Information</h3>
@@ -453,7 +453,7 @@ export default function VerificationPage() {
                                         required
                                         value={formData.businessName}
                                         onChange={(e) => setFormData({ ...formData, businessName: e.target.value })}
-                                        className="w-full pl-11 pr-4 py-3 border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-900 text-slate-900 dark:text-white focus:outline-none focus:border-slate-500"
+                                        className="w-full pl-11 pr-4 py-3 border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#C05800] text-slate-900 dark:text-white focus:outline-none focus:border-slate-500"
                                         placeholder="Your Company Pvt Ltd"
                                     />
                                 </div>
@@ -467,7 +467,7 @@ export default function VerificationPage() {
                                     required
                                     value={formData.businessType}
                                     onChange={(e) => setFormData({ ...formData, businessType: e.target.value })}
-                                    className="w-full px-4 py-3 border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-900 text-slate-900 dark:text-white focus:outline-none focus:border-slate-500"
+                                    className="w-full px-4 py-3 border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#C05800] text-slate-900 dark:text-white focus:outline-none focus:border-slate-500"
                                 >
                                     <option value="SELLER">Seller/Exporter</option>
                                     <option value="BUYER">Buyer/Importer</option>
@@ -492,7 +492,7 @@ export default function VerificationPage() {
                                         required
                                         value={formData.contactName}
                                         onChange={(e) => setFormData({ ...formData, contactName: e.target.value })}
-                                        className="w-full pl-11 pr-4 py-3 border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-900 text-slate-900 dark:text-white focus:outline-none focus:border-slate-500"
+                                        className="w-full pl-11 pr-4 py-3 border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#C05800] text-slate-900 dark:text-white focus:outline-none focus:border-slate-500"
                                         placeholder="John Doe"
                                     />
                                 </div>
@@ -509,7 +509,7 @@ export default function VerificationPage() {
                                         required
                                         value={formData.email}
                                         onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                                        className="w-full pl-11 pr-4 py-3 border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-900 text-slate-900 dark:text-white focus:outline-none focus:border-slate-500"
+                                        className="w-full pl-11 pr-4 py-3 border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#C05800] text-slate-900 dark:text-white focus:outline-none focus:border-slate-500"
                                         placeholder="contact@company.com"
                                     />
                                 </div>
@@ -526,7 +526,7 @@ export default function VerificationPage() {
                                         required
                                         value={formData.phone}
                                         onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                                        className="w-full pl-11 pr-4 py-3 border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-900 text-slate-900 dark:text-white focus:outline-none focus:border-slate-500"
+                                        className="w-full pl-11 pr-4 py-3 border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#C05800] text-slate-900 dark:text-white focus:outline-none focus:border-slate-500"
                                         placeholder="+91 98765 43210"
                                     />
                                 </div>
@@ -542,7 +542,7 @@ export default function VerificationPage() {
                                         required
                                         value={formData.country}
                                         onChange={(e) => setFormData({ ...formData, country: e.target.value })}
-                                        className="w-full pl-11 pr-4 py-3 border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-900 text-slate-900 dark:text-white focus:outline-none focus:border-slate-500"
+                                        className="w-full pl-11 pr-4 py-3 border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#C05800] text-slate-900 dark:text-white focus:outline-none focus:border-slate-500"
                                     >
                                         <option value="INDIA">India (GST)</option>
                                         <option value="USA">United States (EIN)</option>
@@ -574,7 +574,7 @@ export default function VerificationPage() {
                                 required
                                 value={formData.businessId}
                                 onChange={(e) => setFormData({ ...formData, businessId: e.target.value })}
-                                className="w-full px-4 py-3 border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-900 text-slate-900 dark:text-white focus:outline-none focus:border-slate-500"
+                                className="w-full px-4 py-3 border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#C05800] text-slate-900 dark:text-white focus:outline-none focus:border-slate-500"
                                 placeholder={
                                     formData.country === 'INDIA' ? '22AAAAA0000A1Z5' :
                                         formData.country === 'USA' ? '12-3456789' :
@@ -640,7 +640,7 @@ export default function VerificationPage() {
                     <button
                         type="submit"
                         disabled={isVerifying}
-                        className="w-full bg-slate-900 dark:bg-white text-white dark:text-slate-900 py-4 text-sm font-medium hover:opacity-90 transition-opacity disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+                        className="w-full bg-[#C05800] dark:bg-[#FDFBD4] text-white dark:text-slate-900 py-4 text-sm font-medium hover:opacity-90 transition-opacity disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
                     >
                         {isVerifying ? (
                             <>
@@ -662,7 +662,7 @@ export default function VerificationPage() {
             </section>
 
             {/* Verification Steps */}
-            <section className="border-t border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-900/50">
+            <section className="border-t border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-[#C05800]/50">
                 <div className="max-w-[1600px] mx-auto px-8 md:px-12 py-20">
                     <div className="text-center mb-16">
                         <h2 className="text-3xl md:text-4xl font-bold text-slate-900 dark:text-white mb-4">
@@ -677,14 +677,14 @@ export default function VerificationPage() {
                         {verificationSteps.map((step) => (
                             <div
                                 key={step.step}
-                                className="relative border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-950 p-8 hover:border-slate-400 dark:hover:border-slate-600 transition-colors"
+                                className="relative border border-slate-200 dark:border-slate-800 bg-[#FDFBD4] dark:bg-[#38240D] p-8 hover:border-slate-400 dark:hover:border-slate-600 transition-colors"
                             >
-                                <div className="absolute -top-4 left-8 bg-white dark:bg-slate-950 px-3">
+                                <div className="absolute -top-4 left-8 bg-[#FDFBD4] dark:bg-[#38240D] px-3">
                                     <span className="text-2xl font-bold text-slate-300 dark:text-slate-700">
                                         {step.step}
                                     </span>
                                 </div>
-                                <div className="w-12 h-12 bg-slate-100 dark:bg-slate-900 flex items-center justify-center mb-6">
+                                <div className="w-12 h-12 bg-slate-100 dark:bg-[#C05800] flex items-center justify-center mb-6">
                                     <step.icon className="w-6 h-6 text-slate-900 dark:text-white" />
                                 </div>
                                 <h3 className="text-xl font-bold text-slate-900 dark:text-white mb-3">
@@ -728,7 +728,7 @@ export default function VerificationPage() {
             </section>
 
             {/* FAQ Section */}
-            <section className="border-t border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-900/50">
+            <section className="border-t border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-[#C05800]/50">
                 <div className="max-w-3xl mx-auto px-8 py-20">
                     <h2 className="text-3xl md:text-4xl font-bold text-slate-900 dark:text-white mb-12">
                         Frequently Asked Questions
@@ -738,11 +738,11 @@ export default function VerificationPage() {
                         {faqs.map((faq, index) => (
                             <div
                                 key={index}
-                                className="border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-950"
+                                className="border border-slate-200 dark:border-slate-800 bg-[#FDFBD4] dark:bg-[#38240D]"
                             >
                                 <button
                                     onClick={() => setOpenFaq(openFaq === index ? null : index)}
-                                    className="w-full px-6 py-4 text-left flex items-center justify-between hover:bg-slate-50 dark:hover:bg-slate-900/50 transition-colors"
+                                    className="w-full px-6 py-4 text-left flex items-center justify-between hover:bg-slate-50 dark:hover:bg-[#C05800]/50 transition-colors"
                                 >
                                     <span className="font-semibold text-slate-900 dark:text-white">
                                         {faq.question}

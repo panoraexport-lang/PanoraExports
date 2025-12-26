@@ -18,14 +18,14 @@ export default function Navigation() {
     }, []);
 
     return (
-        <nav className="fixed top-0 left-0 right-0 z-50 bg-white/80 dark:bg-slate-900/80 backdrop-blur-lg border-b border-slate-200/50 dark:border-slate-700/50">
+        <nav className="fixed top-0 left-0 right-0 z-50 bg-[#FDFBD4]/80 dark:bg-[#38240D]/80 backdrop-blur-lg border-b border-[#C05800]/20">
             <div className="max-w-[1600px] mx-auto px-8 md:px-12 h-20 flex items-center justify-between">
                 {/* Logo - Left */}
                 <a href="/" className="flex items-center gap-2 group">
-                    <div className="w-8 h-8 bg-slate-900 dark:bg-white rounded-sm flex items-center justify-center">
-                        <span className="text-white dark:text-slate-900 font-bold text-xs">PE</span>
+                    <div className="w-8 h-8 bg-[#713600] dark:bg-[#FDFBD4] rounded-sm flex items-center justify-center">
+                        <span className="text-white dark:text-[#38240D] font-bold text-xs">PE</span>
                     </div>
-                    <span className="font-bold text-lg tracking-tight text-slate-900 dark:text-white">PANORA</span>
+                    <span className="font-bold text-lg tracking-tight text-[#38240D] dark:text-[#FDFBD4]">PANORA</span>
                 </a>
 
                 {/* Center Navigation */}
@@ -143,7 +143,7 @@ export default function Navigation() {
                     ) : (
                         <a
                             href="/auth/login"
-                            className="hidden md:block text-sm font-medium text-slate-900 dark:text-white border-b-2 border-slate-900 dark:border-white pb-0.5 hover:opacity-70 transition-opacity"
+                            className="hidden md:block text-sm font-medium text-[#38240D] dark:text-[#FDFBD4] border-b-2 border-[#C05800] pb-0.5 hover:opacity-70 transition-opacity"
                         >
                             SIGN IN
                         </a>

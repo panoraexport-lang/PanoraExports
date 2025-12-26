@@ -81,11 +81,11 @@ const categories = [
 
 export default function CategoriesPage() {
     return (
-        <div className="min-h-screen bg-[#fdfbf7] dark:bg-slate-950 pt-20">
+        <div className="min-h-screen bg-[#FDFBD4] dark:bg-[#38240D] pt-20">
             <Navigation />
 
             {/* Compact Hero Section */}
-            <section className="border-b border-slate-200/50 dark:border-slate-800/50 bg-gradient-to-b from-slate-50/50 to-transparent dark:from-slate-900/30">
+            <section className="border-b border-[#C05800]/20 bg-gradient-to-b from-[#FDFBD4]/50 to-transparent dark:from-[#38240D]/30">
                 <div className="max-w-[1400px] mx-auto px-6 md:px-8 py-8">
                     <h1 className="text-3xl md:text-4xl font-bold text-slate-900 dark:text-white mb-2">
                         Categories
@@ -97,7 +97,7 @@ export default function CategoriesPage() {
             </section>
 
             {/* Compact Stats Bar */}
-            <section className="border-b border-slate-200/50 dark:border-slate-800/50 bg-white/50 dark:bg-slate-900/20">
+            <section className="border-b border-[#C05800]/20 bg-[#FDFBD4]/50 dark:bg-[#38240D]/20">
                 <div className="max-w-[1400px] mx-auto px-6 md:px-8 py-6">
                     <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
                         <div>
@@ -147,14 +147,14 @@ export default function CategoriesPage() {
                             <div className="p-4">
                                 <div className="flex items-start justify-between mb-2">
                                     <div className="flex-1">
-                                        <h2 className="text-lg font-bold text-slate-900 dark:text-white mb-1 group-hover:text-[#d4af37] transition-colors">
+                                        <h2 className="text-lg font-bold text-slate-900 dark:text-white mb-1 group-hover:text-[#C05800] transition-colors">
                                             {category.name}
                                         </h2>
                                         <p className="text-xs text-slate-600 dark:text-slate-400 line-clamp-2">
                                             {category.description}
                                         </p>
                                     </div>
-                                    <ArrowRight className="w-4 h-4 text-slate-400 group-hover:text-[#d4af37] group-hover:translate-x-1 transition-all flex-shrink-0 ml-2 mt-1" />
+                                    <ArrowRight className="w-4 h-4 text-slate-400 group-hover:text-[#C05800] group-hover:translate-x-1 transition-all flex-shrink-0 ml-2 mt-1" />
                                 </div>
 
                                 {/* Subcategories */}

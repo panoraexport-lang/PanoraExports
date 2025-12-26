@@ -63,7 +63,7 @@ export default function LoginPage() {
     };
 
     return (
-        <div className="min-h-screen bg-[#fdfbf7] dark:bg-slate-950 flex items-center justify-center px-6 py-12">
+        <div className="min-h-screen bg-[#FDFBD4] dark:bg-slate-950 flex items-center justify-center px-6 py-12">
             {/* Background Pattern */}
             <div className="fixed inset-0 opacity-[0.03] pointer-events-none"
                 style={{ backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")` }}
@@ -79,7 +79,7 @@ export default function LoginPage() {
                 >
                     <a href="/" className="inline-block">
                         <h1 className="font-luxury-heading text-5xl italic font-bold text-slate-900 dark:text-white">
-                            Panora<span className="text-[#d4af37]">Exports</span>
+                            Panora<span className="text-[#C05800]">Exports</span>
                         </h1>
                     </a>
                     <p className="text-slate-500 dark:text-slate-400 mt-4 text-sm uppercase tracking-[0.3em]">
@@ -92,7 +92,7 @@ export default function LoginPage() {
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.6, delay: 0.2 }}
-                    className="bg-white dark:bg-slate-900 border border-[#d4af37]/20 shadow-2xl p-10 md:p-12"
+                    className="bg-white dark:bg-slate-900 border border-[#C05800]/20 shadow-2xl p-10 md:p-12"
                 >
                     <div className="mb-8">
                         <h2 className="font-luxury-heading text-3xl md:text-4xl italic text-slate-900 dark:text-white mb-3">
@@ -106,17 +106,17 @@ export default function LoginPage() {
                     <form onSubmit={handleSubmit} className="space-y-6">
                         {/* Email Field */}
                         <div className="space-y-2 group">
-                            <label className="text-xs uppercase tracking-widest text-slate-500 dark:text-slate-400 font-medium group-focus-within:text-[#d4af37] transition-colors">
+                            <label className="text-xs uppercase tracking-widest text-slate-500 dark:text-slate-400 font-medium group-focus-within:text-[#C05800] transition-colors">
                                 Email Address
                             </label>
                             <div className="relative">
-                                <Mail className="absolute left-0 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400 group-focus-within:text-[#d4af37] transition-colors" />
+                                <Mail className="absolute left-0 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400 group-focus-within:text-[#C05800] transition-colors" />
                                 <input
                                     type="email"
                                     required
                                     value={formData.email}
                                     onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                                    className="w-full pl-8 pr-4 py-3 border-b border-slate-200 dark:border-slate-700 bg-transparent focus:outline-none focus:border-[#d4af37] transition-colors text-slate-900 dark:text-white"
+                                    className="w-full pl-8 pr-4 py-3 border-b border-slate-200 dark:border-slate-700 bg-transparent focus:outline-none focus:border-[#C05800] transition-colors text-slate-900 dark:text-white"
                                     placeholder="buyer@company.com"
                                 />
                             </div>
@@ -124,23 +124,23 @@ export default function LoginPage() {
 
                         {/* Password Field */}
                         <div className="space-y-2 group">
-                            <label className="text-xs uppercase tracking-widest text-slate-500 dark:text-slate-400 font-medium group-focus-within:text-[#d4af37] transition-colors">
+                            <label className="text-xs uppercase tracking-widest text-slate-500 dark:text-slate-400 font-medium group-focus-within:text-[#C05800] transition-colors">
                                 Password
                             </label>
                             <div className="relative">
-                                <Lock className="absolute left-0 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400 group-focus-within:text-[#d4af37] transition-colors" />
+                                <Lock className="absolute left-0 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400 group-focus-within:text-[#C05800] transition-colors" />
                                 <input
                                     type={showPassword ? 'text' : 'password'}
                                     required
                                     value={formData.password}
                                     onChange={(e) => setFormData({ ...formData, password: e.target.value })}
-                                    className="w-full pl-8 pr-12 py-3 border-b border-slate-200 dark:border-slate-700 bg-transparent focus:outline-none focus:border-[#d4af37] transition-colors text-slate-900 dark:text-white"
+                                    className="w-full pl-8 pr-12 py-3 border-b border-slate-200 dark:border-slate-700 bg-transparent focus:outline-none focus:border-[#C05800] transition-colors text-slate-900 dark:text-white"
                                     placeholder="••••••••"
                                 />
                                 <button
                                     type="button"
                                     onClick={() => setShowPassword(!showPassword)}
-                                    className="absolute right-0 top-1/2 -translate-y-1/2 text-slate-400 hover:text-[#d4af37] transition-colors"
+                                    className="absolute right-0 top-1/2 -translate-y-1/2 text-slate-400 hover:text-[#C05800] transition-colors"
                                 >
                                     {showPassword ? <EyeOff className="w-5 h-5" /> : <Eye className="w-5 h-5" />}
                                 </button>
@@ -152,15 +152,15 @@ export default function LoginPage() {
                             <label className="flex items-center gap-2 cursor-pointer group">
                                 <input
                                     type="checkbox"
-                                    className="w-4 h-4 border border-slate-300 dark:border-slate-600 rounded accent-[#d4af37]"
+                                    className="w-4 h-4 border border-slate-300 dark:border-slate-600 rounded accent-[#C05800]"
                                 />
-                                <span className="text-slate-600 dark:text-slate-400 group-hover:text-[#d4af37] transition-colors">
+                                <span className="text-slate-600 dark:text-slate-400 group-hover:text-[#C05800] transition-colors">
                                     Remember me
                                 </span>
                             </label>
                             <a
                                 href="/auth/forgot-password"
-                                className="text-[#d4af37] hover:underline"
+                                className="text-[#C05800] hover:underline"
                             >
                                 Forgot password?
                             </a>
@@ -170,7 +170,7 @@ export default function LoginPage() {
                         <button
                             type="submit"
                             disabled={isLoading}
-                            className="w-full bg-[#d4af37] text-white py-4 text-sm uppercase tracking-widest font-medium hover:bg-[#c19b2f] transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2 group shadow-lg hover:shadow-xl"
+                            className="w-full bg-[#C05800] text-white py-4 text-sm uppercase tracking-widest font-medium hover:bg-[#c19b2f] transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2 group shadow-lg hover:shadow-xl"
                         >
                             {isLoading ? (
                                 <>
@@ -201,7 +201,7 @@ export default function LoginPage() {
                     {/* Register Link */}
                     <a
                         href="/auth/register"
-                        className="block w-full text-center border border-[#d4af37] text-[#d4af37] py-4 text-sm uppercase tracking-widest font-medium hover:bg-[#d4af37] hover:text-white transition-all duration-300"
+                        className="block w-full text-center border border-[#C05800] text-[#C05800] py-4 text-sm uppercase tracking-widest font-medium hover:bg-[#C05800] hover:text-white transition-all duration-300"
                     >
                         Create Account
                     </a>
@@ -216,7 +216,7 @@ export default function LoginPage() {
                 >
                     <a
                         href="/"
-                        className="text-sm text-slate-500 dark:text-slate-400 hover:text-[#d4af37] transition-colors inline-flex items-center gap-2"
+                        className="text-sm text-slate-500 dark:text-slate-400 hover:text-[#C05800] transition-colors inline-flex items-center gap-2"
                     >
                         ← Back to Home
                     </a>

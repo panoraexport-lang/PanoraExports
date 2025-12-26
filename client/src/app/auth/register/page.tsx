@@ -97,7 +97,7 @@ export default function RegisterPage() {
     };
 
     return (
-        <div className="min-h-screen bg-[#fdfbf7] dark:bg-slate-950 flex items-center justify-center px-6 py-12">
+        <div className="min-h-screen bg-[#FDFBD4] dark:bg-slate-950 flex items-center justify-center px-6 py-12">
             {/* Background Pattern */}
             <div className="fixed inset-0 opacity-[0.03] pointer-events-none"
                 style={{ backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")` }}
@@ -113,7 +113,7 @@ export default function RegisterPage() {
                 >
                     <a href="/" className="inline-block">
                         <h1 className="font-luxury-heading text-5xl italic font-bold text-slate-900 dark:text-white">
-                            Panora<span className="text-[#d4af37]">Exports</span>
+                            Panora<span className="text-[#C05800]">Exports</span>
                         </h1>
                     </a>
                     <p className="text-slate-500 dark:text-slate-400 mt-4 text-sm uppercase tracking-[0.3em]">
@@ -123,9 +123,9 @@ export default function RegisterPage() {
 
                 {/* Progress Indicator */}
                 <div className="flex items-center justify-center gap-4 mb-8">
-                    <div className={`w-3 h-3 rounded-full transition-all duration-300 ${step >= 1 ? 'bg-[#d4af37] scale-125' : 'bg-slate-300 dark:bg-slate-700'}`} />
-                    <div className={`w-16 h-px ${step >= 2 ? 'bg-[#d4af37]' : 'bg-slate-300 dark:bg-slate-700'} transition-all duration-300`} />
-                    <div className={`w-3 h-3 rounded-full transition-all duration-300 ${step >= 2 ? 'bg-[#d4af37] scale-125' : 'bg-slate-300 dark:bg-slate-700'}`} />
+                    <div className={`w-3 h-3 rounded-full transition-all duration-300 ${step >= 1 ? 'bg-[#C05800] scale-125' : 'bg-slate-300 dark:bg-slate-700'}`} />
+                    <div className={`w-16 h-px ${step >= 2 ? 'bg-[#C05800]' : 'bg-slate-300 dark:bg-slate-700'} transition-all duration-300`} />
+                    <div className={`w-3 h-3 rounded-full transition-all duration-300 ${step >= 2 ? 'bg-[#C05800] scale-125' : 'bg-slate-300 dark:bg-slate-700'}`} />
                 </div>
 
                 <AnimatePresence mode="wait">
@@ -138,14 +138,14 @@ export default function RegisterPage() {
                             animate={{ opacity: 1, x: 0 }}
                             exit={{ opacity: 0, x: -50 }}
                             transition={{ duration: 0.4 }}
-                            className="bg-white dark:bg-slate-900 border border-[#d4af37]/20 shadow-2xl p-10 md:p-12"
+                            className="bg-white dark:bg-slate-900 border border-[#C05800]/20 shadow-2xl p-10 md:p-12"
                         >
                             <div className="mb-8">
                                 <h2 className="font-luxury-heading text-3xl md:text-4xl italic text-slate-900 dark:text-white mb-3">
                                     Create Account
                                 </h2>
                                 <p className="text-slate-500 dark:text-slate-400 text-sm">
-                                    Register for a <span className="text-[#d4af37] font-medium italic">Customer</span> account
+                                    Register for a <span className="text-[#C05800] font-medium italic">Customer</span> account
                                 </p>
                             </div>
 
@@ -153,17 +153,17 @@ export default function RegisterPage() {
                                 <div className="grid md:grid-cols-2 gap-6">
                                     {/* Name */}
                                     <div className="space-y-2 group">
-                                        <label className="text-xs uppercase tracking-widest text-slate-500 dark:text-slate-400 font-medium group-focus-within:text-[#d4af37] transition-colors">
+                                        <label className="text-xs uppercase tracking-widest text-slate-500 dark:text-slate-400 font-medium group-focus-within:text-[#C05800] transition-colors">
                                             Full Name *
                                         </label>
                                         <div className="relative">
-                                            <User className="absolute left-0 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400 group-focus-within:text-[#d4af37] transition-colors" />
+                                            <User className="absolute left-0 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400 group-focus-within:text-[#C05800] transition-colors" />
                                             <input
                                                 type="text"
                                                 required
                                                 value={formData.name}
                                                 onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                                                className="w-full pl-8 pr-4 py-3 border-b border-slate-200 dark:border-slate-700 bg-transparent focus:outline-none focus:border-[#d4af37] transition-colors text-slate-900 dark:text-white"
+                                                className="w-full pl-8 pr-4 py-3 border-b border-slate-200 dark:border-slate-700 bg-transparent focus:outline-none focus:border-[#C05800] transition-colors text-slate-900 dark:text-white"
                                                 placeholder="John Doe"
                                             />
                                         </div>
@@ -171,17 +171,17 @@ export default function RegisterPage() {
 
                                     {/* Email */}
                                     <div className="space-y-2 group">
-                                        <label className="text-xs uppercase tracking-widest text-slate-500 dark:text-slate-400 font-medium group-focus-within:text-[#d4af37] transition-colors">
+                                        <label className="text-xs uppercase tracking-widest text-slate-500 dark:text-slate-400 font-medium group-focus-within:text-[#C05800] transition-colors">
                                             Email Address *
                                         </label>
                                         <div className="relative">
-                                            <Mail className="absolute left-0 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400 group-focus-within:text-[#d4af37] transition-colors" />
+                                            <Mail className="absolute left-0 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400 group-focus-within:text-[#C05800] transition-colors" />
                                             <input
                                                 type="email"
                                                 required
                                                 value={formData.email}
                                                 onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                                                className="w-full pl-8 pr-4 py-3 border-b border-slate-200 dark:border-slate-700 bg-transparent focus:outline-none focus:border-[#d4af37] transition-colors text-slate-900 dark:text-white"
+                                                className="w-full pl-8 pr-4 py-3 border-b border-slate-200 dark:border-slate-700 bg-transparent focus:outline-none focus:border-[#C05800] transition-colors text-slate-900 dark:text-white"
                                                 placeholder="john@company.com"
                                             />
                                         </div>
@@ -191,17 +191,17 @@ export default function RegisterPage() {
                                 <div className="grid md:grid-cols-2 gap-6">
                                     {/* Phone */}
                                     <div className="space-y-2 group">
-                                        <label className="text-xs uppercase tracking-widest text-slate-500 dark:text-slate-400 font-medium group-focus-within:text-[#d4af37] transition-colors">
+                                        <label className="text-xs uppercase tracking-widest text-slate-500 dark:text-slate-400 font-medium group-focus-within:text-[#C05800] transition-colors">
                                             Phone Number *
                                         </label>
                                         <div className="relative">
-                                            <Phone className="absolute left-0 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400 group-focus-within:text-[#d4af37] transition-colors" />
+                                            <Phone className="absolute left-0 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400 group-focus-within:text-[#C05800] transition-colors" />
                                             <input
                                                 type="tel"
                                                 required
                                                 value={formData.phone}
                                                 onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                                                className="w-full pl-8 pr-4 py-3 border-b border-slate-200 dark:border-slate-700 bg-transparent focus:outline-none focus:border-[#d4af37] transition-colors text-slate-900 dark:text-white"
+                                                className="w-full pl-8 pr-4 py-3 border-b border-slate-200 dark:border-slate-700 bg-transparent focus:outline-none focus:border-[#C05800] transition-colors text-slate-900 dark:text-white"
                                                 placeholder="+91 98765 43210"
                                             />
                                         </div>
@@ -209,16 +209,16 @@ export default function RegisterPage() {
 
                                     {/* Country */}
                                     <div className="space-y-2 group">
-                                        <label className="text-xs uppercase tracking-widest text-slate-500 dark:text-slate-400 font-medium group-focus-within:text-[#d4af37] transition-colors">
+                                        <label className="text-xs uppercase tracking-widest text-slate-500 dark:text-slate-400 font-medium group-focus-within:text-[#C05800] transition-colors">
                                             Country *
                                         </label>
                                         <div className="relative">
-                                            <Globe className="absolute left-0 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400 group-focus-within:text-[#d4af37] transition-colors" />
+                                            <Globe className="absolute left-0 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400 group-focus-within:text-[#C05800] transition-colors" />
                                             <select
                                                 required
                                                 value={formData.country}
                                                 onChange={(e) => setFormData({ ...formData, country: e.target.value })}
-                                                className="w-full pl-8 pr-4 py-3 border-b border-slate-200 dark:border-slate-700 bg-transparent focus:outline-none focus:border-[#d4af37] transition-colors text-slate-900 dark:text-white appearance-none"
+                                                className="w-full pl-8 pr-4 py-3 border-b border-slate-200 dark:border-slate-700 bg-transparent focus:outline-none focus:border-[#C05800] transition-colors text-slate-900 dark:text-white appearance-none"
                                             >
                                                 <option value="India">India</option>
                                                 <option value="USA">United States</option>
@@ -235,17 +235,17 @@ export default function RegisterPage() {
                                 {/* Company Name (for sellers mainly) */}
                                 {selectedRole === 'SELLER' && (
                                     <div className="space-y-2 group">
-                                        <label className="text-xs uppercase tracking-widest text-slate-500 dark:text-slate-400 font-medium group-focus-within:text-[#d4af37] transition-colors">
+                                        <label className="text-xs uppercase tracking-widest text-slate-500 dark:text-slate-400 font-medium group-focus-within:text-[#C05800] transition-colors">
                                             Company Name *
                                         </label>
                                         <div className="relative">
-                                            <Building2 className="absolute left-0 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400 group-focus-within:text-[#d4af37] transition-colors" />
+                                            <Building2 className="absolute left-0 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400 group-focus-within:text-[#C05800] transition-colors" />
                                             <input
                                                 type="text"
                                                 required={selectedRole === 'SELLER'}
                                                 value={formData.companyName}
                                                 onChange={(e) => setFormData({ ...formData, companyName: e.target.value })}
-                                                className="w-full pl-8 pr-4 py-3 border-b border-slate-200 dark:border-slate-700 bg-transparent focus:outline-none focus:border-[#d4af37] transition-colors text-slate-900 dark:text-white"
+                                                className="w-full pl-8 pr-4 py-3 border-b border-slate-200 dark:border-slate-700 bg-transparent focus:outline-none focus:border-[#C05800] transition-colors text-slate-900 dark:text-white"
                                                 placeholder="Your Company Pvt Ltd"
                                             />
                                         </div>
@@ -255,24 +255,24 @@ export default function RegisterPage() {
                                 <div className="grid md:grid-cols-2 gap-6">
                                     {/* Password */}
                                     <div className="space-y-2 group">
-                                        <label className="text-xs uppercase tracking-widest text-slate-500 dark:text-slate-400 font-medium group-focus-within:text-[#d4af37] transition-colors">
+                                        <label className="text-xs uppercase tracking-widest text-slate-500 dark:text-slate-400 font-medium group-focus-within:text-[#C05800] transition-colors">
                                             Password *
                                         </label>
                                         <div className="relative">
-                                            <Lock className="absolute left-0 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400 group-focus-within:text-[#d4af37] transition-colors" />
+                                            <Lock className="absolute left-0 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400 group-focus-within:text-[#C05800] transition-colors" />
                                             <input
                                                 type={showPassword ? 'text' : 'password'}
                                                 required
                                                 value={formData.password}
                                                 onChange={(e) => setFormData({ ...formData, password: e.target.value })}
-                                                className="w-full pl-8 pr-12 py-3 border-b border-slate-200 dark:border-slate-700 bg-transparent focus:outline-none focus:border-[#d4af37] transition-colors text-slate-900 dark:text-white"
+                                                className="w-full pl-8 pr-12 py-3 border-b border-slate-200 dark:border-slate-700 bg-transparent focus:outline-none focus:border-[#C05800] transition-colors text-slate-900 dark:text-white"
                                                 placeholder="••••••••"
                                                 minLength={8}
                                             />
                                             <button
                                                 type="button"
                                                 onClick={() => setShowPassword(!showPassword)}
-                                                className="absolute right-0 top-1/2 -translate-y-1/2 text-slate-400 hover:text-[#d4af37] transition-colors"
+                                                className="absolute right-0 top-1/2 -translate-y-1/2 text-slate-400 hover:text-[#C05800] transition-colors"
                                             >
                                                 {showPassword ? <EyeOff className="w-5 h-5" /> : <Eye className="w-5 h-5" />}
                                             </button>
@@ -281,24 +281,24 @@ export default function RegisterPage() {
 
                                     {/* Confirm Password */}
                                     <div className="space-y-2 group">
-                                        <label className="text-xs uppercase tracking-widest text-slate-500 dark:text-slate-400 font-medium group-focus-within:text-[#d4af37] transition-colors">
+                                        <label className="text-xs uppercase tracking-widest text-slate-500 dark:text-slate-400 font-medium group-focus-within:text-[#C05800] transition-colors">
                                             Confirm Password *
                                         </label>
                                         <div className="relative">
-                                            <Lock className="absolute left-0 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400 group-focus-within:text-[#d4af37] transition-colors" />
+                                            <Lock className="absolute left-0 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400 group-focus-within:text-[#C05800] transition-colors" />
                                             <input
                                                 type={showConfirmPassword ? 'text' : 'password'}
                                                 required
                                                 value={formData.confirmPassword}
                                                 onChange={(e) => setFormData({ ...formData, confirmPassword: e.target.value })}
-                                                className="w-full pl-8 pr-12 py-3 border-b border-slate-200 dark:border-slate-700 bg-transparent focus:outline-none focus:border-[#d4af37] transition-colors text-slate-900 dark:text-white"
+                                                className="w-full pl-8 pr-12 py-3 border-b border-slate-200 dark:border-slate-700 bg-transparent focus:outline-none focus:border-[#C05800] transition-colors text-slate-900 dark:text-white"
                                                 placeholder="••••••••"
                                                 minLength={8}
                                             />
                                             <button
                                                 type="button"
                                                 onClick={() => setShowConfirmPassword(!showConfirmPassword)}
-                                                className="absolute right-0 top-1/2 -translate-y-1/2 text-slate-400 hover:text-[#d4af37] transition-colors"
+                                                className="absolute right-0 top-1/2 -translate-y-1/2 text-slate-400 hover:text-[#C05800] transition-colors"
                                             >
                                                 {showConfirmPassword ? <EyeOff className="w-5 h-5" /> : <Eye className="w-5 h-5" />}
                                             </button>
@@ -313,15 +313,15 @@ export default function RegisterPage() {
                                         required
                                         checked={formData.agreedToTerms}
                                         onChange={(e) => setFormData({ ...formData, agreedToTerms: e.target.checked })}
-                                        className="mt-1 w-4 h-4 border border-slate-300 dark:border-slate-600 rounded accent-[#d4af37]"
+                                        className="mt-1 w-4 h-4 border border-slate-300 dark:border-slate-600 rounded accent-[#C05800]"
                                     />
                                     <label className="text-sm text-slate-600 dark:text-slate-400 leading-relaxed">
                                         I agree to Panora Exports{' '}
-                                        <a href="/terms" className="text-[#d4af37] hover:underline">
+                                        <a href="/terms" className="text-[#C05800] hover:underline">
                                             Terms of Service
                                         </a>{' '}
                                         and{' '}
-                                        <a href="/privacy" className="text-[#d4af37] hover:underline">
+                                        <a href="/privacy" className="text-[#C05800] hover:underline">
                                             Privacy Policy
                                         </a>
                                     </label>
@@ -331,7 +331,7 @@ export default function RegisterPage() {
                                 <button
                                     type="submit"
                                     disabled={isLoading}
-                                    className="w-full bg-[#d4af37] text-white py-4 text-sm uppercase tracking-widest font-medium hover:bg-[#c19b2f] transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2 group shadow-lg hover:shadow-xl mt-8"
+                                    className="w-full bg-[#C05800] text-white py-4 text-sm uppercase tracking-widest font-medium hover:bg-[#c19b2f] transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2 group shadow-lg hover:shadow-xl mt-8"
                                 >
                                     {isLoading ? (
                                         <>
@@ -359,7 +359,7 @@ export default function RegisterPage() {
                 >
                     <a
                         href="/"
-                        className="text-sm text-slate-500 dark:text-slate-400 hover:text-[#d4af37] transition-colors inline-flex items-center gap-2"
+                        className="text-sm text-slate-500 dark:text-slate-400 hover:text-[#C05800] transition-colors inline-flex items-center gap-2"
                     >
                         ← Back to Home
                     </a>

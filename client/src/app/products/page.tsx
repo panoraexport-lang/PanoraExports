@@ -111,7 +111,7 @@ export default function ProductsPage() {
     });
 
     return (
-        <div className="min-h-screen bg-[#fdfbf7] dark:bg-slate-950 pt-20">
+        <div className="min-h-screen bg-[#FDFBD4] dark:bg-[#38240D] pt-20 font-sans">
             <Navigation />
 
             {/* Compact Hero Section */}
@@ -127,7 +127,7 @@ export default function ProductsPage() {
             </section>
 
             {/* Compact Filters */}
-            <section className="border-b border-slate-200/50 dark:border-slate-800/50 sticky top-20 bg-white/80 dark:bg-slate-950/80 backdrop-blur-md z-40">
+            <section className="border-b border-[#C05800]/20 sticky top-20 bg-[#FDFBD4]/80 dark:bg-[#38240D]/80 backdrop-blur-md z-40">
                 <div className="max-w-[1400px] mx-auto px-6 md:px-8 py-4">
                     <div className="flex flex-col md:flex-row gap-3 md:items-center md:justify-between">
                         {/* Search */}
@@ -138,7 +138,7 @@ export default function ProductsPage() {
                                 placeholder="Search products..."
                                 value={searchTerm}
                                 onChange={(e) => setSearchTerm(e.target.value)}
-                                className="w-full pl-9 pr-3 py-2 border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 text-slate-900 dark:text-white text-sm focus:outline-none focus:border-slate-400 dark:focus:border-slate-500 rounded-sm"
+                                className="w-full pl-9 pr-3 py-2 border border-[#C05800]/20 bg-white dark:bg-[#38240D] text-slate-900 dark:text-white text-sm focus:outline-none focus:border-[#C05800] rounded-sm"
                             />
                         </div>
 
@@ -225,7 +225,7 @@ export default function ProductsPage() {
                                             </span>
                                         )}
                                     </div>
-                                    <h3 className="text-sm font-semibold text-slate-900 dark:text-white mb-1 line-clamp-2 group-hover:text-[#d4af37] transition-colors">
+                                    <h3 className="text-sm font-semibold text-slate-900 dark:text-white mb-1 line-clamp-2 group-hover:text-[#C05800] transition-colors">
                                         {product.name}
                                     </h3>
                                     <p className="text-[11px] text-slate-500 dark:text-slate-400 mb-2 truncate">{product.supplier}</p>
@@ -267,7 +267,7 @@ export default function ProductsPage() {
                                             </span>
                                         )}
                                     </div>
-                                    <h3 className="text-base font-semibold text-slate-900 dark:text-white mb-1 group-hover:text-[#d4af37] transition-colors">
+                                    <h3 className="text-base font-semibold text-slate-900 dark:text-white mb-1 group-hover:text-[#C05800] transition-colors">
                                         {product.name}
                                     </h3>
                                     <p className="text-xs text-slate-500 dark:text-slate-400 mb-2">{product.supplier}</p>
