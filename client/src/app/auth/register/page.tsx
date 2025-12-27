@@ -35,8 +35,27 @@ export default function RegisterPage() {
         setTimeout(() => setStep(2), 300);
     };
 
+    const isBusinessEmail = (email: string) => {
+        const publicDomains = [
+            'gmail.com', 'yahoo.com', 'hotmail.com', 'outlook.com',
+            'icloud.com', 'aol.com', 'zoho.com', 'protonmail.com',
+            'mail.com', 'yandex.com', 'live.com'
+        ];
+        const domain = email.split('@')[1]?.toLowerCase();
+        return domain && !publicDomains.includes(domain);
+    };
+
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
+
+        if (!isBusinessEmail(formData.email)) {
+            toast({
+                title: 'Business Email Required',
+                description: 'Please use your professional business email address to register.',
+                variant: 'destructive',
+            });
+            return;
+        }
 
         if (formData.password !== formData.confirmPassword) {
             toast({
@@ -171,8 +190,9 @@ export default function RegisterPage() {
 
                                     {/* Email */}
                                     <div className="space-y-2 group">
-                                        <label className="text-xs uppercase tracking-widest text-slate-500 dark:text-slate-400 font-medium group-focus-within:text-[#C05800] transition-colors">
-                                            Email Address *
+                                        <label className="text-xs uppercase tracking-widest text-slate-500 dark:text-slate-400 font-medium group-focus-within:text-[#C05800] transition-colors flex justify-between">
+                                            <span>Email Address *</span>
+                                            <span className="text-[10px] text-[#C05800] lowercase italic tracking-normal">Business emails only</span>
                                         </label>
                                         <div className="relative">
                                             <Mail className="absolute left-0 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400 group-focus-within:text-[#C05800] transition-colors" />

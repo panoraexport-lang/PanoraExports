@@ -340,4 +340,25 @@
   .scrollbar-hide::-webkit-scrollbar {
     display: none;
   }
+
+  /* Mobile Image Reveal Animation */
+  @keyframes mobileImageReveal {
+    0% {
+      filter: blur(12px) grayscale(100%);
+      transform: scale(1);
+    }
+
+    100% {
+      filter: blur(0) grayscale(0);
+      transform: scale(1.05);
+    }
+  }
+
+  @media (max-width: 768px) {
+    .animate-mobile-reveal {
+      /* This will be triggered when the element is visible */
+      animation: mobileImageReveal 1.5s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+      animation-delay: 0.2s;
+    }
+  }
 }

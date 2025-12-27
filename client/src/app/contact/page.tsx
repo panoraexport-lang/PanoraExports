@@ -15,8 +15,28 @@ export default function ContactPage() {
         message: ''
     });
 
+    const isBusinessEmail = (email: string) => {
+        const publicDomains = [
+            'gmail.com', 'yahoo.com', 'hotmail.com', 'outlook.com',
+            'icloud.com', 'aol.com', 'zoho.com', 'protonmail.com',
+            'mail.com', 'yandex.com', 'live.com'
+        ];
+        const domain = email.split('@')[1]?.toLowerCase();
+        return domain && !publicDomains.includes(domain);
+    };
+
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
+
+        if (!isBusinessEmail(formData.email)) {
+            toast({
+                title: 'Business Email Required',
+                description: 'Please provide a professional business email address (e.g., name@yourcompany.com).',
+                variant: 'destructive',
+            });
+            return;
+        }
+
         setIsLoading(true);
 
         try {
@@ -154,8 +174,9 @@ export default function ContactPage() {
                             </div>
 
                             <div className="space-y-2">
-                                <label className="text-xs uppercase tracking-widest text-slate-500 dark:text-slate-400 font-medium">
-                                    Email Address *
+                                <label className="text-xs uppercase tracking-widest text-slate-500 dark:text-slate-400 font-medium flex justify-between">
+                                    <span>Email Address *</span>
+                                    <span className="text-[10px] text-[#C05800] lowercase italic tracking-normal">Business emails only</span>
                                 </label>
                                 <input
                                     type="email"
@@ -163,7 +184,7 @@ export default function ContactPage() {
                                     value={formData.email}
                                     onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                                     className="w-full px-4 py-3 border-b border-slate-200 dark:border-slate-700 bg-transparent focus:outline-none focus:border-[#C05800] transition-colors text-slate-900 dark:text-white placeholder:text-slate-300"
-                                    placeholder="john@example.com"
+                                    placeholder="name@yourcompany.com"
                                 />
                             </div>
 

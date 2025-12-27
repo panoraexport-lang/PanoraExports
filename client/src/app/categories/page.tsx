@@ -134,11 +134,18 @@ export default function CategoriesPage() {
                         >
                             {/* Image Container */}
                             <div className="relative aspect-[16/10] bg-slate-100 dark:bg-slate-900 overflow-hidden">
-                                <img
+                                <motion.img
                                     src={category.image}
                                     alt={category.name}
                                     loading="lazy"
-                                    className="absolute inset-0 w-full h-full object-cover transition-all duration-700 blur-md grayscale group-hover:filter-none group-hover:scale-105"
+                                    whileInView={{ filter: "blur(0px) grayscale(0%)", scale: 1.05 }}
+                                    viewport={{ once: true, amount: 0.3 }}
+                                    transition={{
+                                        duration: 1.5,
+                                        ease: "easeOut",
+                                        delay: typeof window !== 'undefined' && window.innerWidth <= 768 ? 0.2 : 0
+                                    }}
+                                    className="absolute inset-0 w-full h-full object-cover blur-md grayscale md:group-hover:filter-none md:group-hover:scale-105 transition-all duration-700"
                                 />
                                 <div className="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-colors duration-500" />
                             </div>

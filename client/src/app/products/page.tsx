@@ -202,13 +202,21 @@ export default function ProductsPage() {
                                 transition={{ duration: 0.3, delay: index * 0.05 }}
                                 className="group block bg-white dark:bg-slate-900 border border-slate-200/50 dark:border-slate-800/50 hover:border-slate-300 dark:hover:border-slate-700 transition-all hover:shadow-lg"
                             >
-                                {/* Product Image - Blur to Clear on Hover */}
+                                {/* Product Image - Blur to Clear on Hover (Desktop) / Auto-reveal (Mobile) */}
                                 <div className="relative aspect-[16/9] bg-slate-100 dark:bg-slate-900 overflow-hidden">
-                                    <img
+                                    <motion.img
                                         src={product.image}
                                         alt={product.name}
                                         loading="lazy"
-                                        className="absolute inset-0 w-full h-full object-cover transition-all duration-700 blur-md grayscale group-hover:filter-none group-hover:scale-105"
+                                        whileInView={{ filter: "blur(0px) grayscale(0%)", scale: 1.05 }}
+                                        viewport={{ once: true, amount: 0.3 }}
+                                        transition={{
+                                            duration: 1.5,
+                                            ease: "easeOut",
+                                            // Only run whileInView animation on mobile
+                                            delay: window.innerWidth <= 768 ? 0.2 : 0
+                                        }}
+                                        className="absolute inset-0 w-full h-full object-cover blur-md grayscale md:group-hover:filter-none md:group-hover:scale-105 transition-all duration-700"
                                     />
                                     <div className="absolute inset-0 bg-black/10 group-hover:bg-transparent transition-colors duration-500" />
                                 </div>
@@ -247,11 +255,18 @@ export default function ProductsPage() {
                             >
                                 {/* Image Container */}
                                 <div className="relative w-24 h-24 md:w-32 md:h-24 bg-slate-100 dark:bg-slate-900 flex-shrink-0 overflow-hidden rounded-md">
-                                    <img
+                                    <motion.img
                                         src={product.image}
                                         alt={product.name}
                                         loading="lazy"
-                                        className="absolute inset-0 w-full h-full object-cover transition-all duration-500 blur-[1px] group-hover:blur-0 md:group-hover:scale-105"
+                                        whileInView={{ filter: "blur(0px) grayscale(0%)", scale: 1.05 }}
+                                        viewport={{ once: true, amount: 0.5 }}
+                                        transition={{
+                                            duration: 1.2,
+                                            ease: "easeOut",
+                                            delay: window.innerWidth <= 768 ? 0.1 : 0
+                                        }}
+                                        className="absolute inset-0 w-full h-full object-cover blur-[1px] md:group-hover:blur-0 md:group-hover:scale-105 transition-all duration-500"
                                     />
                                 </div>
 

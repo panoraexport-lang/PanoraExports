@@ -9,12 +9,32 @@ export default function ProductsComingSoon() {
     const [isSubscribed, setIsSubscribed] = useState(false);
     const { toast } = useToast();
 
+    const isBusinessEmail = (email: string) => {
+        const publicDomains = [
+            'gmail.com', 'yahoo.com', 'hotmail.com', 'outlook.com',
+            'icloud.com', 'aol.com', 'zoho.com', 'protonmail.com',
+            'mail.com', 'yandex.com', 'live.com'
+        ];
+        const domain = email.split('@')[1]?.toLowerCase();
+        return domain && !publicDomains.includes(domain);
+    };
+
     const handleNotifyMe = (e: React.FormEvent) => {
         e.preventDefault();
+
         if (!email) {
             toast({
                 title: "Email Required",
                 description: "Please enter your email address",
+                variant: "destructive"
+            });
+            return;
+        }
+
+        if (!isBusinessEmail(email)) {
+            toast({
+                title: "Business Email Required",
+                description: "Please provide a professional business email address.",
                 variant: "destructive"
             });
             return;
@@ -170,7 +190,7 @@ export default function ProductsComingSoon() {
                                         type="email"
                                         value={email}
                                         onChange={(e) => setEmail(e.target.value)}
-                                        placeholder="Enter your email"
+                                        placeholder="business@company.com"
                                         className="w-full pl-12 pr-4 py-3 bg-transparent text-white placeholder:text-slate-500 focus:outline-none"
                                     />
                                 </div>
