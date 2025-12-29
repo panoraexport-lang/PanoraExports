@@ -150,7 +150,7 @@ export default function AdminDashboard() {
                         </div>
 
                         <div className="flex flex-wrap gap-4">
-                            <button className="flex items-center gap-2 px-6 py-4 bg-secondary border border-border text-primary font-bold text-[10px] uppercase tracking-widest hover:border-primary/20 transition-all rounded-sm">
+                            <button className="flex items-center gap-2 px-6 py-4 bg-secondary border border-border text-secondary-foreground font-bold text-[10px] uppercase tracking-widest hover:border-primary/20 transition-all rounded-sm">
                                 <BarChart3 className="w-3.5 h-3.5" />
                                 Analytics
                             </button>
@@ -317,13 +317,13 @@ export default function AdminDashboard() {
                                                             setCurrentProduct(product);
                                                             setIsEditModalOpen(true);
                                                         }}
-                                                        className="p-2.5 bg-secondary text-primary hover:bg-primary hover:text-secondary transition-all border border-transparent rounded-sm"
+                                                        className="p-2.5 bg-secondary text-secondary-foreground hover:bg-primary hover:text-primary-foreground transition-all border border-transparent rounded-sm"
                                                     >
                                                         <Edit className="w-3.5 h-3.5" strokeWidth={2} />
                                                     </button>
                                                     <button
                                                         onClick={() => handleDeleteProduct(product.id)}
-                                                        className="p-2.5 bg-secondary text-primary hover:bg-primary hover:text-white transition-all border border-transparent rounded-sm"
+                                                        className="p-2.5 bg-secondary text-secondary-foreground hover:bg-primary hover:text-primary-foreground transition-all border border-transparent rounded-sm"
                                                         title="Delete Asset"
                                                     >
                                                         <Trash2 className="w-4 h-4" />
@@ -386,7 +386,7 @@ function StatCard({ icon: Icon, label, value, subValue }: {
             className="bg-background border border-border p-8 rounded-sm hover:border-primary/20 transition-all shadow-sm"
         >
             <div className="flex items-start justify-between mb-8">
-                <div className="w-10 h-10 bg-secondary text-primary border border-border flex items-center justify-center rounded-sm">
+                <div className="w-10 h-10 bg-secondary text-secondary-foreground border border-border flex items-center justify-center rounded-sm">
                     <Icon className="w-5 h-5" strokeWidth={1.5} />
                 </div>
             </div>

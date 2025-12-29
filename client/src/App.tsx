@@ -17,7 +17,7 @@ import LoginPage from "@/app/auth/login/page";
 import RegisterPage from "@/app/auth/register/page";
 import AdminDashboard from "@/app/admin/page";
 import FAQPage from "@/app/faq/page";
-import ContactPage from "./app/contact/page";
+import ContactPage from "@/app/contact/page";
 
 import { useEffect } from "react";
 

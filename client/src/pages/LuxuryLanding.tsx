@@ -18,7 +18,7 @@ import { Link } from "wouter";
 import Navigation from "@/components/Navigation";
 
 // Assets
-const containerShip = "https://images.unsplash.com/photo-1609143739217-01b60dad1c67?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D";
+import containerShip from "@assets/stock_images/luxury_container_shi_990cf15c.jpg";
 import logisticsImage from "@assets/stock_images/modern_automated_log_e4071bac.jpg";
 import heroImage from "/hero-plane.png";
 
@@ -96,7 +96,7 @@ export default function LuxuryLanding() {
                 href="https://wa.me/919876543210"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-full sm:w-auto px-10 py-4 bg-background text-primary text-[10px] font-bold uppercase tracking-[0.2em] hover:bg-secondary transition-all border border-border flex items-center justify-center gap-2"
+                className="w-full sm:w-auto px-10 py-4 bg-background text-primary text-[10px] font-bold uppercase tracking-[0.2em] hover:bg-green-600 hover:border-radius-[80px] hover:text-white transition-all border border-border flex items-center justify-center gap-2 "
               >
                 <MessageCircle className="w-3.5 h-3.5" />
                 WhatsApp
@@ -172,7 +172,7 @@ export default function LuxuryLanding() {
           </div>
           <div className="relative">
             <div className="aspect-[4/3] overflow-hidden rounded-sm grayscale-[0.5] contrast-110">
-              <img src={containerShip} alt="Global Logistics" className="w-full h-full object-cover" />
+              <img src="https://images.unsplash.com/photo-1609143739217-01b60dad1c67?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Global Logistics" className="w-full h-full object-cover" />
             </div>
             <div className="absolute inset-0 border-[16px] border-background/40 pointer-events-none" />
           </div>
@@ -196,10 +196,10 @@ export default function LuxuryLanding() {
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
           {[
-            { title: "Cotton Textiles", img: logisticsImage },
-            { title: "Towels & Fabrics", img: containerShip },
-            { title: "Agro Commodities", img: heroImage },
-            { title: "Industrial Goods", img: logisticsImage }
+            { title: "Cotton Textiles", img: "https://plus.unsplash.com/premium_photo-1673125287363-b4e837f1215f?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" },
+            { title: "Towels & Fabrics", img: "https://images.unsplash.com/photo-1617811449482-31093c8cee16?q=80&w=735&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" },
+            { title: "Agro Commodities", img: "https://plus.unsplash.com/premium_photo-1674624682288-085eff4f98da?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" },
+            { title: "Industrial Goods", img: "https://images.unsplash.com/photo-1623610590744-fce60d8dd48c?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" }
           ].map((item, i) => (
             <Link key={i} href="/products" className="group block">
               <div className="aspect-[1/1] overflow-hidden bg-card mb-4 border border-border">

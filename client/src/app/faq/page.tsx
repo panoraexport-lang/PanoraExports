@@ -154,11 +154,11 @@ export default function FAQPage() {
             {/* Contact CTA */}
             <section className="bg-primary py-20 px-8 relative overflow-hidden">
                 <div className="max-w-4xl mx-auto text-center relative z-10">
-                    <h2 className="text-3xl md:text-5xl font-bold text-secondary mb-6 tracking-tight">Need more help?</h2>
-                    <p className="text-secondary/60 mb-10 text-lg font-medium">Our export specialists are ready to assist with your specific requirements.</p>
+                    <h2 className="text-3xl md:text-5xl font-bold text-primary-foreground mb-6 tracking-tight">Need more help?</h2>
+                    <p className="text-primary-foreground/80 mb-10 text-lg font-medium">Our export specialists are ready to assist with your specific requirements.</p>
                     <Link
                         href="/contact"
-                        className="inline-flex items-center gap-3 px-10 py-4 bg-secondary text-primary hover:opacity-90 transition-all rounded-sm font-bold text-[10px] uppercase tracking-widest"
+                        className="inline-flex items-center gap-3 px-10 py-4 bg-primary-foreground text-primary hover:opacity-90 transition-all rounded-sm font-bold text-[10px] uppercase tracking-widest"
                     >
                         <Mail className="w-3.5 h-3.5" />
                         Contact Us

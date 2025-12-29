@@ -78,15 +78,15 @@ export default function AboutPage() {
                     <h2 className="text-3xl md:text-4xl font-serif italic mb-10 font-light">Our Commitment</h2>
                     <div className="space-y-8">
                         <div className="w-12 h-[1px] bg-secondary/30 mx-auto" />
-                        <p className="text-secondary/80 leading-relaxed font-serif italic text-xl md:text-2xl">
+                        <p className="text-primary-foreground/80 leading-relaxed font-serif italic text-xl md:text-2xl">
                             "Our goal is to simplify global procurement. We believe that professional trade is built on the strength of promises kept and the consistency of quality delivered."
                         </p>
                         <div className="flex flex-col items-center">
-                            <div className="w-10 h-10 bg-secondary/10 rounded-full flex items-center justify-center mb-4 border border-secondary/20">
-                                <User className="w-4 h-4 text-secondary" strokeWidth={1.5} />
+                            <div className="w-10 h-10 bg-primary-foreground/10 rounded-full flex items-center justify-center mb-4 border border-primary-foreground/20">
+                                <User className="w-4 h-4 text-primary-foreground" strokeWidth={1.5} />
                             </div>
                             <h3 className="text-xs font-bold tracking-[0.2em] uppercase">Founder Statement</h3>
-                            <p className="text-secondary/40 text-[9px] uppercase tracking-widest mt-1">Panora Exports</p>
+                            <p className="text-primary-foreground/40 text-[9px] uppercase tracking-widest mt-1">Panora Exports</p>
                         </div>
                     </div>
                 </div>

@@ -79,8 +79,8 @@ export default function Navigation() {
                             href="/admin"
                             className="hidden md:flex items-center gap-2 px-4 py-2 bg-secondary border border-transparent hover:border-border transition-all rounded-sm group"
                         >
-                            <ShieldCheck className="w-3 h-3 text-primary opacity-70 group-hover:opacity-100" />
-                            <span className="text-[9px] text-primary uppercase tracking-[0.2em] font-bold transition-colors">Dashboard</span>
+                            <ShieldCheck className="w-3 h-3 text-secondary-foreground opacity-70 group-hover:opacity-100" />
+                            <span className="text-[9px] text-secondary-foreground uppercase tracking-[0.2em] font-bold transition-colors">Dashboard</span>
                         </Link>
                     )}
 
@@ -103,7 +103,7 @@ export default function Navigation() {
                                     <UserIcon className="w-3 h-3 text-muted-foreground" />
                                 </div>
                                 <div className="flex items-center gap-2">
-                                    <span className="text-[10px] font-bold text-primary tracking-tight">{user.name}</span>
+                                    <span className="text-[10px] font-bold text-secondary-foreground tracking-tight">{user.name}</span>
                                     {user.verification_status === 'VERIFIED' && (
                                         <div className="bg-primary/10 px-1.5 py-0.5 rounded-sm border border-primary/20">
                                             <span className="text-[7px] font-black text-primary uppercase tracking-widest leading-none">Verified</span>
