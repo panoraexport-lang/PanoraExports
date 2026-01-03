@@ -32,8 +32,8 @@ const productsList = [
   { title: "Agro Commodities", img: "https://plus.unsplash.com/premium_photo-1674624682288-085eff4f98da?q=80&w=687&auto=format&fit=crop" },
   { title: "Industrial Goods", img: "https://images.unsplash.com/photo-1623610590744-fce60d8dd48c?q=80&w=687&auto=format&fit=crop" },
   { title: "Organic Spices", img: "https://images.unsplash.com/photo-1596040033229-a9821ebd058d?q=80&w=800&auto=format&fit=crop" },
-  { title: "Leather Goods", img: "https://images.unsplash.com/photo-1524333865981-3a33a08c07c8?q=80&w=800&auto=format&fit=crop" },
-  { title: "Handicrafts", img: "https://images.unsplash.com/photo-1513519245088-0e12902e35a6?q=80&w=800&auto=format&fit=crop" }
+  { title: "Leather Goods", img: "https://images.unsplash.com/photo-1547949003-9792a18a2601?q=80&w=2070&auto=format&fit=crop" },
+  { title: "Handicrafts", img: "https://images.unsplash.com/photo-1582555172866-f73bb12a2ab3?q=80&w=2070&auto=format&fit=crop" }
 ];
 
 const Grain = () => (
@@ -192,94 +192,64 @@ export default function LuxuryLanding() {
       </Section>
 
       {/* 4. PRODUCT PREVIEW */}
-      <Section id="products" className="bg-secondary/10 py-32 overflow-hidden relative">
-        <div className="text-center mb-20 relative z-20">
-          <h2 className="text-[10px] font-bold text-primary uppercase tracking-[0.5em] mb-4">Export Showcase</h2>
-          <h3 className="text-4xl md:text-7xl font-bold text-foreground tracking-tight uppercase">
-            Browse <span className="font-serif italic font-light opacity-80">Products</span>
-          </h3>
+      <Section id="products" className="bg-secondary/30 py-24 overflow-hidden">
+        <div className="text-center mb-16">
+          <h3 className="text-4xl md:text-6xl font-bold text-foreground tracking-tight uppercase">Browse <span className="font-serif italic font-light opacity-80">Products</span></h3>
         </div>
 
-        <div className="relative max-w-7xl mx-auto px-6">
-          <div className="relative aspect-[16/10] md:aspect-[21/9] rounded-3xl overflow-hidden shadow-2xl ring-1 ring-primary/10">
-            {/* Immersive Backdrop Image */}
-            <img
-              src="/Users/priyanshuchaudhary/.gemini/antigravity/brain/a8e6987b-dea8-430d-b05b-d11bdb3783b9/luxury_container_front_open_1767464429315.png"
-              alt="Industrial Container"
-              className="absolute inset-0 w-full h-full object-cover"
-            />
-            {/* Interior Darkening Overlay */}
-            <div className="absolute inset-0 bg-black/50" />
-
-            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[60%] h-[60%] bg-primary/20 blur-[120px] rounded-full opacity-40"></div>
-
-            <div className="absolute inset-0 flex items-center justify-center p-4 md:p-12 z-20">
-              <div className="w-full max-w-4xl">
-                <Carousel
-                  opts={{
-                    align: "center",
-                    loop: true,
-                  }}
-                  plugins={[
-                    Autoplay({
-                      delay: 5000,
-                      stopOnInteraction: false,
-                    }),
-                  ]}
-                  className="w-full"
-                >
-                  <CarouselContent>
-                    {productsList.map((item, i) => (
-                      <CarouselItem key={i} className="basis-full">
-                        <Link href="/products" className="group block relative px-4">
-                          <motion.div
-                            className="relative aspect-[16/9] overflow-hidden rounded-xl shadow-2xl ring-1 ring-white/10"
-                            whileHover={{ scale: 1.02 }}
-                            transition={{ duration: 0.5 }}
-                          >
-                            <img
-                              src={item.img}
-                              alt={item.title}
-                              className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105"
-                            />
-
-                            <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent flex flex-col justify-end p-8 md:p-12">
-                              <motion.div
-                                initial={{ opacity: 0, y: 30 }}
-                                whileInView={{ opacity: 1, y: 0 }}
-                                transition={{ duration: 0.6 }}
-                              >
-                                <div className="mb-4">
-                                  <span className="text-[10px] font-bold text-primary bg-primary/10 border border-primary/20 px-3 py-1 rounded-full uppercase tracking-[0.2em]">Verified Export</span>
-                                </div>
-                                <h4 className="text-3xl md:text-5xl font-bold text-white mb-6 uppercase tracking-tighter leading-none">{item.title}</h4>
-                                <span className="inline-flex items-center gap-3 text-[10px] font-bold text-white/50 uppercase tracking-[0.4em] group-hover:text-primary group-hover:gap-6 transition-all">
-                                  Inspect Quality <ArrowRight className="w-4 h-4" />
-                                </span>
-                              </motion.div>
-                            </div>
-                          </motion.div>
-                        </Link>
-                      </CarouselItem>
-                    ))}
-                  </CarouselContent>
-
-                  <div className="hidden md:block">
-                    <CarouselPrevious className="absolute -left-12 lg:-left-20 top-1/2 -translate-y-1/2 h-14 w-14 border-none bg-white/5 hover:bg-white/10 backdrop-blur-xl text-white shadow-2xl transition-all" />
-                    <CarouselNext className="absolute -right-12 lg:-right-20 top-1/2 -translate-y-1/2 h-14 w-14 border-none bg-white/5 hover:bg-white/10 backdrop-blur-xl text-white shadow-2xl transition-all" />
-                  </div>
-                </Carousel>
-              </div>
+        <div className="relative max-w-5xl mx-auto px-4 md:px-0">
+          <Carousel
+            opts={{
+              align: "center",
+              loop: true,
+            }}
+            plugins={[
+              Autoplay({
+                delay: 4000,
+                stopOnInteraction: false,
+              }),
+            ]}
+            className="w-full"
+          >
+            <CarouselContent className="">
+              {productsList.map((item, i) => (
+                <CarouselItem key={i} className="basis-full">
+                  <Link href="/products" className="group block relative">
+                    <div className="aspect-[16/9] overflow-hidden bg-card rounded-2xl shadow-2xl relative ring-1 ring-primary/10">
+                      <img
+                        src={item.img}
+                        alt={item.title}
+                        className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent flex flex-col justify-end p-8 md:p-12">
+                        <motion.div
+                          initial={{ opacity: 0, y: 20 }}
+                          whileInView={{ opacity: 1, y: 0 }}
+                          transition={{ delay: 0.2 }}
+                        >
+                          <h4 className="text-2xl md:text-4xl font-bold text-white mb-4 uppercase tracking-tighter">{item.title}</h4>
+                          <span className="inline-flex items-center gap-2 text-[10px] font-bold text-white/60 uppercase tracking-[0.3em] group-hover:text-white transition-colors">
+                            Explore Collection <ArrowRight className="w-4 h-4" />
+                          </span>
+                        </motion.div>
+                      </div>
+                    </div>
+                  </Link>
+                </CarouselItem>
+              ))}
+            </CarouselContent>
+            <div className="absolute -left-4 md:-left-20 top-1/2 -translate-y-1/2">
+              <CarouselPrevious className="h-12 w-12 border-primary/10 hover:bg-primary hover:text-white transition-all shadow-xl bg-background" />
             </div>
-          </div>
-
-          <div className="absolute -bottom-12 left-1/2 -translate-x-1/2 w-[90%] h-12 bg-black/30 blur-3xl rounded-full"></div>
+            <div className="absolute -right-4 md:-right-20 top-1/2 -translate-y-1/2">
+              <CarouselNext className="h-12 w-12 border-primary/10 hover:bg-primary hover:text-white transition-all shadow-xl bg-background" />
+            </div>
+          </Carousel>
         </div>
 
-        <div className="mt-32 text-center relative z-20">
-          <Link href="/products" className="inline-flex items-center gap-6 text-foreground font-black text-[12px] uppercase tracking-[0.5em] hover:text-primary transition-all group">
-            <span className="border-b-2 border-primary/20 pb-3 group-hover:border-primary transition-all">Explore Entire Manifest</span>
-            <ArrowRight className="w-5 h-5 mb-2 opacity-50 group-hover:opacity-100 -translate-x-4 group-hover:translate-x-0 transition-all" />
+        <div className="mt-12 text-center">
+          <Link href="/products" className="inline-flex items-center gap-4 text-foreground font-black text-[11px] uppercase tracking-[0.4em] hover:text-primary transition-all border-b-2 border-primary/20 pb-2">
+            View Complete Inventory
           </Link>
         </div>
       </Section>
