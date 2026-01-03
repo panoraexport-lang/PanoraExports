@@ -34,12 +34,12 @@ export default function Navigation() {
     ];
 
     return (
-        <nav 
+        <nav
             className={cn(
                 "fixed top-0 left-0 right-0 z-50 transition-all duration-300 border-b",
-                isScrolled 
-                    ? "bg-background/95 backdrop-blur-md border-border py-4" 
-                    : "bg-background/40 backdrop-blur-sm border-transparent py-5 hover:bg-background/90 hover:backdrop-blur-md hover:border-border"
+                isScrolled
+                    ? "bg-background/95 backdrop-blur-md border-border py-4"
+                    : "bg-background/5 backdrop-blur-xs border-transparent py-5 hover:bg-background/90 hover:backdrop-blur-md hover:border-border"
             )}
         >
             <div className="max-w-[1600px] mx-auto px-6 md:px-10 flex items-center justify-between">
