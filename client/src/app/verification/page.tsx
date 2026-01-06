@@ -82,6 +82,154 @@ const faqs = [
     },
 ];
 
+type CountryConfig = {
+    code: string;
+    name: string;
+    idLabel: string;
+    idPlaceholder: string;
+    idRegex: RegExp;
+    phoneCode: string;
+    phoneRegex: RegExp;
+};
+
+const TRADING_PARTNERS: CountryConfig[] = [
+    {
+        code: 'INDIA',
+        name: 'India',
+        idLabel: 'GST Registration Number',
+        idPlaceholder: '22AAAAA0000A1Z5',
+        idRegex: /^[0-9]{2}[A-Z]{5}[0-9]{4}[A-Z]{1}[1-9A-Z]{1}Z[0-9A-Z]{1}$/,
+        phoneCode: '+91',
+        phoneRegex: /^[6-9]\d{9}$/
+    },
+    {
+        code: 'USA',
+        name: 'United States',
+        idLabel: 'EIN (Employer Identification Number)',
+        idPlaceholder: '12-3456789',
+        idRegex: /^\d{2}-?\d{7}$|^\d{9}$/,
+        phoneCode: '+1',
+        phoneRegex: /^\d{10}$/
+    },
+    {
+        code: 'UAE',
+        name: 'United Arab Emirates',
+        idLabel: 'Trade License Number',
+        idPlaceholder: 'CN-123456',
+        idRegex: /^[A-Z0-9-]{5,}$/,
+        phoneCode: '+971',
+        phoneRegex: /^(50|51|52|54|55|56|58)\d{7}$/
+    },
+    {
+        code: 'CHINA',
+        name: 'China',
+        idLabel: 'Unified Social Credit Code',
+        idPlaceholder: '91350100M000100Y43',
+        idRegex: /^[0-9A-Z]{18}$/,
+        phoneCode: '+86',
+        phoneRegex: /^1[3-9]\d{9}$/
+    },
+    {
+        code: 'UK',
+        name: 'United Kingdom',
+        idLabel: 'Company Registration Number',
+        idPlaceholder: '12345678',
+        idRegex: /^([0-9]{8}|[A-Z]{2}[0-9]{6})$/,
+        phoneCode: '+44',
+        phoneRegex: /^7\d{9}$/
+    },
+    {
+        code: 'SINGAPORE',
+        name: 'Singapore',
+        idLabel: 'UEN (Unique Entity Number)',
+        idPlaceholder: '200812345M',
+        idRegex: /^[0-9A-Z]{9,10}$/,
+        phoneCode: '+65',
+        phoneRegex: /^[89]\d{7}$/
+    },
+    {
+        code: 'SAUDI_ARABIA',
+        name: 'Saudi Arabia',
+        idLabel: 'VAT / CR Number',
+        idPlaceholder: '1010000000',
+        idRegex: /^[0-9]{10,15}$/,
+        phoneCode: '+966',
+        phoneRegex: /^5\d{8}$/
+    },
+    {
+        code: 'GERMANY',
+        name: 'Germany',
+        idLabel: 'Handelsregister / VAT ID',
+        idPlaceholder: 'HRB 12345',
+        idRegex: /^[A-Z0-9\s-]{5,}$/,
+        phoneCode: '+49',
+        phoneRegex: /^1\d{1,13}$/
+    },
+    {
+        code: 'JAPAN',
+        name: 'Japan',
+        idLabel: 'Corporate Number',
+        idPlaceholder: '1234567890123',
+        idRegex: /^\d{13}$/,
+        phoneCode: '+81',
+        phoneRegex: /^[0-9]{10}$/
+    },
+    {
+        code: 'AUSTRALIA',
+        name: 'Australia',
+        idLabel: 'ABN / ACN',
+        idPlaceholder: '51 824 753 556',
+        idRegex: /^\d{11}|\d{9}$/,
+        phoneCode: '+61',
+        phoneRegex: /^4\d{8}$/
+    },
+    {
+        code: 'RUSSIA',
+        name: 'Russia',
+        idLabel: 'INN',
+        idPlaceholder: '7707083893',
+        idRegex: /^\d{10}|\d{12}$/,
+        phoneCode: '+7',
+        phoneRegex: /^[0-9]{10}$/
+    },
+    {
+        code: 'FRANCE',
+        name: 'France',
+        idLabel: 'SIREN / SIRET',
+        idPlaceholder: '123 456 789',
+        idRegex: /^\d{9}|\d{14}$/,
+        phoneCode: '+33',
+        phoneRegex: /^[0-9]{9}$/
+    },
+    {
+        code: 'ITALY',
+        name: 'Italy',
+        idLabel: 'Partita IVA (VAT)',
+        idPlaceholder: '12345678901',
+        idRegex: /^\d{11}$/,
+        phoneCode: '+39',
+        phoneRegex: /^[0-9]{10}$/
+    },
+    {
+        code: 'INDONESIA',
+        name: 'Indonesia',
+        idLabel: 'NIB (Business ID)',
+        idPlaceholder: '1234567890123',
+        idRegex: /^\d{13}$/,
+        phoneCode: '+62',
+        phoneRegex: /^8\d{9,11}$/
+    },
+    {
+        code: 'VIETNAM',
+        name: 'Vietnam',
+        idLabel: 'Enterprise Reg. No.',
+        idPlaceholder: '0101234567',
+        idRegex: /^\d{10}|\d{13}$/,
+        phoneCode: '+84',
+        phoneRegex: /^[0-9]{9}$/
+    }
+];
+
 export default function VerificationPage() {
     const [openFaq, setOpenFaq] = useState<number | null>(null);
     const [isVerifying, setIsVerifying] = useState(false);
@@ -99,8 +247,61 @@ export default function VerificationPage() {
         businessId: '',
     });
 
+    const [formErrors, setFormErrors] = useState<{ [key: string]: string }>({});
+
+    const validateInput = (): boolean => {
+        const errors: { [key: string]: string } = {};
+        const selectedCountry = TRADING_PARTNERS.find(c => c.code === formData.country);
+
+        if (!selectedCountry) {
+            // Fallback for custom logic if unexpected
+            return true;
+        }
+
+        // Validate Business ID
+        if (!selectedCountry.idRegex.test(formData.businessId.replace(/[^a-zA-Z0-9]/g, ''))) {
+            errors.businessId = `Invalid ${selectedCountry.idLabel} format for ${selectedCountry.name}`;
+        }
+
+        // Validate Phone Number
+        let phoneDigits = formData.phone.replace(/\D/g, '');
+        const countryCodeDigits = selectedCountry.phoneCode.replace('+', '');
+
+        // If phone starts with country code, check if the *remainder* matches the local pattern
+        // logic: if starts with cc, try stripping it. If stripped version works, use it.
+        // otherwise, test the original (in case the number just happens to start with those digits but isn't a CC prefix, though unlikely for lengths)
+        if (phoneDigits.startsWith(countryCodeDigits)) {
+            const stripped = phoneDigits.slice(countryCodeDigits.length);
+            if (selectedCountry.phoneRegex.test(stripped)) {
+                // It was a valid full number
+                phoneDigits = stripped;
+            }
+        }
+
+        if (!selectedCountry.phoneRegex.test(phoneDigits)) {
+            errors.phone = `Invalid phone number format for ${selectedCountry.name}. Expected ${selectedCountry.phoneCode} followed by local number.`;
+        }
+
+        setFormErrors(errors);
+
+        if (Object.keys(errors).length > 0) {
+            toast({
+                title: 'Validation Error',
+                description: Object.values(errors)[0],
+                variant: 'destructive',
+            });
+            return false;
+        }
+        return true;
+    };
+
     const handleVerify = async (e: React.FormEvent) => {
         e.preventDefault();
+
+        if (!validateInput()) {
+            return;
+        }
+
         setIsVerifying(true);
         setVerificationResult(null);
 
@@ -386,25 +587,50 @@ export default function VerificationPage() {
                         </div>
 
                         <div className="grid md:grid-cols-2 gap-10">
-                            {[
-                                { label: 'Full Name', type: 'text', key: 'contactName', placeholder: 'Enter name' },
-                                { label: 'Business Email', type: 'email', key: 'email', placeholder: 'name@company.com' },
-                                { label: 'Phone', type: 'tel', key: 'phone', placeholder: '+91' }
-                            ].map((field) => (
-                                <div key={field.key} className="space-y-2.5">
-                                    <label className="text-[9px] font-bold text-muted-foreground uppercase tracking-widest block">
-                                        {field.label}
-                                    </label>
-                                    <input
-                                        type={field.type}
-                                        required
-                                        value={(formData as any)[field.key]}
-                                        onChange={(e) => setFormData({ ...formData, [field.key]: e.target.value })}
-                                        className="w-full px-0 py-3 border-b border-border bg-transparent text-primary font-medium focus:outline-none focus:border-primary transition-all placeholder:text-muted-foreground/30 text-base"
-                                        placeholder={field.placeholder}
-                                    />
-                                </div>
-                            ))}
+                            <div className="space-y-2.5">
+                                <label className="text-[9px] font-bold text-muted-foreground uppercase tracking-widest block">
+                                    Full Name
+                                </label>
+                                <input
+                                    type="text"
+                                    required
+                                    value={formData.contactName}
+                                    onChange={(e) => setFormData({ ...formData, contactName: e.target.value })}
+                                    className="w-full px-0 py-3 border-b border-border bg-transparent text-primary font-medium focus:outline-none focus:border-primary transition-all placeholder:text-muted-foreground/30 text-base"
+                                    placeholder="Enter name"
+                                />
+                            </div>
+
+                            <div className="space-y-2.5">
+                                <label className="text-[9px] font-bold text-muted-foreground uppercase tracking-widest block">
+                                    Business Email
+                                </label>
+                                <input
+                                    type="email"
+                                    required
+                                    value={formData.email}
+                                    onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                                    className="w-full px-0 py-3 border-b border-border bg-transparent text-primary font-medium focus:outline-none focus:border-primary transition-all placeholder:text-muted-foreground/30 text-base"
+                                    placeholder="name@company.com"
+                                />
+                            </div>
+
+                            <div className="space-y-2.5">
+                                <label className="text-[9px] font-bold text-muted-foreground uppercase tracking-widest block">
+                                    Phone ({TRADING_PARTNERS.find(c => c.code === formData.country)?.phoneCode || '+91'})
+                                </label>
+                                <input
+                                    type="tel"
+                                    required
+                                    value={formData.phone}
+                                    onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+                                    className={`w-full px-0 py-3 border-b bg-transparent text-primary font-medium focus:outline-none transition-all placeholder:text-muted-foreground/30 text-base ${formErrors.phone ? 'border-destructive text-destructive' : 'border-border focus:border-primary'}`}
+                                    placeholder={TRADING_PARTNERS.find(c => c.code === formData.country)?.phoneCode || '+91'}
+                                />
+                                {formErrors.phone && (
+                                    <p className="text-[10px] text-destructive font-medium mt-1">{formErrors.phone}</p>
+                                )}
+                            </div>
 
                             <div className="space-y-2.5">
                                 <label className="text-[9px] font-bold text-muted-foreground uppercase tracking-widest block">
@@ -415,11 +641,15 @@ export default function VerificationPage() {
                                     value={formData.country}
                                     onChange={(e) => setFormData({ ...formData, country: e.target.value })}
                                     className="w-full px-0 py-3 border-b border-border bg-transparent text-primary font-medium focus:outline-none focus:border-primary transition-all text-base appearance-none cursor-pointer"
+                                    style={{
+                                        backgroundImage: 'none' // Remove default arrow if needed, but standard select usually fine
+                                    }}
                                 >
-                                    <option value="INDIA">India (GST)</option>
-                                    <option value="USA">USA (EIN)</option>
-                                    <option value="UK">UK (CRN)</option>
-                                    <option value="UAE">UAE (License)</option>
+                                    {TRADING_PARTNERS.map((country) => (
+                                        <option key={country.code} value={country.code}>
+                                            {country.name} ({country.idLabel.split(' ')[0]})
+                                        </option>
+                                    ))}
                                 </select>
                             </div>
                         </div>
@@ -434,16 +664,19 @@ export default function VerificationPage() {
 
                         <div className="space-y-2.5">
                             <label className="text-[9px] font-bold text-muted-foreground uppercase tracking-widest block">
-                                Registration Number (GST/EIN/VAT)
+                                {TRADING_PARTNERS.find(c => c.code === formData.country)?.idLabel || 'Registration Number'}
                             </label>
                             <input
                                 type="text"
                                 required
                                 value={formData.businessId}
                                 onChange={(e) => setFormData({ ...formData, businessId: e.target.value })}
-                                className="w-full px-0 py-4 border-b border-border bg-transparent text-primary font-bold focus:outline-none focus:border-primary transition-all placeholder:text-muted-foreground/30 text-2xl tracking-tight"
-                                placeholder="Enter business ID"
+                                className={`w-full px-0 py-4 border-b bg-transparent text-primary font-bold focus:outline-none transition-all placeholder:text-muted-foreground/30 text-2xl tracking-tight ${formErrors.businessId ? 'border-destructive text-destructive' : 'border-border focus:border-primary'}`}
+                                placeholder={TRADING_PARTNERS.find(c => c.code === formData.country)?.idPlaceholder || 'Enter business ID'}
                             />
+                            {formErrors.businessId && (
+                                <p className="text-[10px] text-destructive font-medium mt-1">{formErrors.businessId}</p>
+                            )}
                         </div>
                     </div>
 

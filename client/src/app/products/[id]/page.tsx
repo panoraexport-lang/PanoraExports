@@ -205,15 +205,14 @@ export default function ProductDetailPage() {
 
                         {/* Actions */}
                         <div className="flex flex-col gap-4 mt-auto">
-                            {/* Primary CTAs */}
                             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                                <button className="px-8 py-4 bg-primary text-primary-foreground text-[10px] font-bold uppercase tracking-widest hover:bg-primary/90 transition-all rounded-sm flex items-center justify-center gap-3 shadow-lg">
-                                    <Mail className="w-4 h-4" />
-                                    Enquire Now
+                                <button className="px-8 py-4 bg-[hsl(var(--success))] text-white text-[10px] font-black uppercase tracking-[0.3em] hover:brightness-110 transition-all rounded-sm flex items-center justify-center gap-3 shadow-[0_15px_30px_rgba(22,101,52,0.15)] group">
+                                    <Star className="w-4 h-4 fill-white" />
+                                    Confirm Selection / Start Order
                                 </button>
-                                <button className="px-8 py-4 bg-accent text-accent-foreground text-[10px] font-bold uppercase tracking-widest hover:bg-accent/90 transition-all rounded-sm flex items-center justify-center gap-3 shadow-lg">
+                                <button className="px-8 py-4 bg-primary text-primary-foreground text-[10px] font-black uppercase tracking-[0.3em] hover:bg-primary/90 transition-all rounded-sm flex items-center justify-center gap-3 shadow-lg group">
                                     <FileText className="w-4 h-4" />
-                                    Get Price Quote
+                                    Institutional Quote Request
                                 </button>
                             </div>
 

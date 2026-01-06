@@ -5,6 +5,7 @@ import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { ThemeProvider } from "next-themes";
 import { AuthProvider } from "@/contexts/AuthContext";
+import { ScreenshotProtection } from "@/components/ScreenshotProtection";
 import NotFound from "@/pages/not-found";
 import LuxuryLanding from "@/pages/LuxuryLanding";
 import ProductsPage from "@/app/products/page";
@@ -18,6 +19,7 @@ import RegisterPage from "@/app/auth/register/page";
 import AdminDashboard from "@/app/admin/page";
 import FAQPage from "@/app/faq/page";
 import ContactPage from "@/app/contact/page";
+import LicensesPage from "@/app/licenses/page";
 
 import { useEffect } from "react";
 
@@ -37,6 +39,7 @@ function Router() {
       <Route path="/admin" component={AdminDashboard} />
       <Route path="/faq" component={FAQPage} />
       <Route path="/contact" component={ContactPage} />
+      <Route path="/licenses" component={LicensesPage} />
       <Route component={NotFound} />
     </Switch>
   );

@@ -15,6 +15,7 @@ import {
 } from "lucide-react";
 import { Link } from "wouter";
 import Navigation from "@/components/Navigation";
+import { SecureDocument } from "@/components/SecureDocument";
 import Autoplay from "embla-carousel-autoplay";
 import {
   Carousel,
@@ -103,18 +104,17 @@ export default function LuxuryLanding() {
             </p>
 
             <div className="flex flex-col sm:flex-row items-center gap-4">
-              <Link href="/contact" className="w-full sm:w-auto px-10 py-4 bg-[hsl(var(--success))] text-white text-[10px] font-bold uppercase tracking-[0.2em] hover:brightness-110 transition-all flex items-center justify-center gap-2 rounded-sm shadow-lg shadow-green-900/10">
-                Confirm Order / Get Quote <ArrowRight className="w-3.5 h-3.5" />
+              <Link href="/products" className="w-full sm:w-auto px-10 py-5 bg-[hsl(var(--success))] text-white text-[10px] font-black uppercase tracking-[0.3em] hover:brightness-110 transition-all flex items-center justify-center gap-3 rounded-sm shadow-[0_20px_40px_rgba(22,101,52,0.15)] group">
+                Explore Panora's Inventory
+                <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
               </Link>
-              <a
-                href="https://wa.me/919876543210"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-full sm:w-auto px-10 py-4 bg-background text-primary text-[10px] font-bold uppercase tracking-[0.2em] hover:bg-muted transition-all border border-border flex items-center justify-center gap-2 rounded-sm"
+              <Link
+                href="/about"
+                className="w-full sm:w-auto px-10 py-5 bg-white/5 backdrop-blur-md text-primary text-[10px] font-black uppercase tracking-[0.3em] hover:bg-white/10 transition-all border border-primary/10 flex items-center justify-center gap-3 rounded-sm group"
               >
-                <MessageCircle className="w-3.5 h-3.5 text-[hsl(var(--success))]" />
-                Priority Trade Support
-              </a>
+                <div className="w-1.5 h-1.5 rounded-full bg-secondary group-hover:scale-125 transition-transform" />
+                Institutional Capabilities
+              </Link>
             </div>
 
             <div className="mt-16 flex items-center gap-12 border-t border-secondary/20 pt-8">
@@ -191,7 +191,82 @@ export default function LuxuryLanding() {
         </div>
       </Section>
 
-      {/* 4. PRODUCT PREVIEW */}
+      {/* 4. ABOUT US & CERTIFICATION */}
+      <Section id="about" className="bg-[#05070a] py-32 border-y border-white/5">
+        <div className="max-w-7xl mx-auto px-4">
+          {/* Top Level Heading Section */}
+          <div className="grid lg:grid-cols-2 gap-16 items-start mb-24">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8 }}
+            >
+              <div className="flex items-center gap-3 mb-8">
+                <div className="w-8 h-[1px] bg-secondary" />
+                <h2 className="text-[10px] font-bold text-secondary uppercase tracking-[0.4em]">Compliance Framework</h2>
+              </div>
+
+              <h3 className="text-5xl md:text-8xl font-black text-white mb-10 leading-[0.95] tracking-tighter uppercase whitespace-pre-line">
+                Verified <br />
+                <span className="font-serif italic font-light text-secondary lowercase">& authorized.</span>
+              </h3>
+
+              <p className="text-lg text-white/50 mb-10 leading-relaxed font-medium max-w-xl">
+                We operate with full licensing and government authorizations. Our FSSAI certification validates our commitment to global food safety standards and ethical agro-trade practices.
+              </p>
+
+              <Link href="/licenses">
+                <motion.button
+                  whileHover={{ scale: 1.02 }}
+                  whileTap={{ scale: 0.98 }}
+                  className="px-10 py-5 bg-secondary text-black text-[12px] font-black uppercase tracking-[0.3em] rounded-sm hover:shadow-[0_0_40px_rgba(234,179,8,0.2)] transition-all flex items-center gap-4 group"
+                >
+                  See Official Licenses
+                  <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                </motion.button>
+              </Link>
+            </motion.div>
+
+            {/* Informational Cards Grid */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              {[
+                { title: "Import Export Code", desc: "DGFT - GOVT. OF INDIA", icon: Package },
+                { title: "GST Registered", desc: "TAX & LEGAL ENTITY", icon: Shield },
+                { title: "FIEO Member", desc: "FEDERATION OF EXPORT ORG.", icon: Globe },
+                { title: "FSSAI Licensed", desc: "FOOD SAFETY AUTHORITY", icon: FileCheck },
+              ].map((item, idx) => (
+                <motion.div
+                  key={idx}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5, delay: idx * 0.1 }}
+                  className="p-6 bg-white/[0.02] border border-white/10 rounded-[4px] flex items-center gap-5 group hover:bg-white/[0.05] transition-all"
+                >
+                  <div className="w-12 h-12 rounded-full border border-secondary/20 flex items-center justify-center text-secondary group-hover:bg-secondary group-hover:text-black transition-all">
+                    <item.icon className="w-5 h-5" strokeWidth={1.5} />
+                  </div>
+                  <div>
+                    <h4 className="text-[11px] font-black text-white uppercase tracking-wider mb-1">{item.title}</h4>
+                    <p className="text-[9px] font-bold text-white/30 uppercase tracking-widest">{item.desc}</p>
+                  </div>
+                </motion.div>
+              ))}
+            </div>
+          </div>
+
+          {/* Premium Security Footer */}
+          {/* Premium Security Footer */}
+          <div className="flex flex-wrap items-center justify-center gap-x-12 gap-y-4 text-white/20 pt-16 border-t border-white/5">
+            <span className="text-[9px] font-black uppercase tracking-[0.5em]">Confidential Access</span>
+            <div className="w-12 h-px bg-white/10" />
+            <span className="text-[9px] font-black uppercase tracking-[0.5em]">Digitally Protected</span>
+            <div className="h-px w-12 bg-white/10" />
+            <span className="text-[9px] font-black uppercase tracking-[0.5em]">Institutional Merit</span>
+          </div>
+        </div>
+      </Section>
+
+      {/* 5. PRODUCT PREVIEW */}
       <Section id="products" className="bg-primary py-24 overflow-hidden border-y border-secondary/20">
         <div className="text-center mb-16">
           <h3 className="text-4xl md:text-6xl font-bold text-white tracking-tight uppercase">Premier <span className="font-serif italic font-light text-secondary">Trade Inventory</span></h3>
@@ -211,7 +286,7 @@ export default function LuxuryLanding() {
             ]}
             className="w-full"
           >
-            <CarouselContent className="">
+            <CarouselContent>
               {productsList.map((item, i) => (
                 <CarouselItem key={i} className="basis-full">
                   <Link href="/products" className="group block relative">
@@ -254,7 +329,7 @@ export default function LuxuryLanding() {
         </div>
       </Section>
 
-      {/* 5. TRUST & CREDENTIALS */}
+      {/* 6. TRUST & CREDENTIALS */}
       <Section className="bg-background border-y border-secondary/20 py-24">
         <div className="max-w-4xl mx-auto text-center">
           <div className="flex items-center justify-center gap-3 mb-16">
@@ -289,7 +364,7 @@ export default function LuxuryLanding() {
         </div>
       </Section>
 
-      {/* 6. CONTACT CTA */}
+      {/* 7. CONTACT CTA */}
       <Section className="bg-[#0b1626] text-white py-24 relative overflow-hidden">
         <div className="max-w-4xl mx-auto text-center relative z-10">
           <h2 className="text-4xl md:text-5xl font-bold mb-8 leading-tight tracking-tight">
