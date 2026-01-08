@@ -8,6 +8,9 @@ export const ScreenshotProtection: React.FC<{ children: React.ReactNode }> = ({ 
 
     useEffect(() => {
         const handleKeyDown = (e: KeyboardEvent) => {
+
+
+            
             // Block PrintScreen with PERMANENT blackout until refresh
             if (e.key === 'PrintScreen' || e.keyCode === 44 || (e.ctrlKey && e.key === 'p')) {
                 e.preventDefault();
