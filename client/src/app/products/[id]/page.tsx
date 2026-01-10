@@ -235,7 +235,7 @@ export default function ProductDetailPage() {
                                     Download Specs
                                 </button>
                                 <a
-                                    href="https://wa.me/91900523033?text=Hello%2C%20I%20am%20interested%20in%20your%20products.%20I%20would%20like%20to%20know%20more."
+                                    href="https://wa.me/919005230333?text=Hello%2C%20I%20am%20interested%20in%20your%20products.%20I%20would%20like%20to%20know%20more."
                                     target="_blank"
                                     rel="noopener noreferrer"
                                     className="px-4 py-3 bg-[#25D366] text-white hover:bg-[#20bd5a] transition-all rounded-sm flex items-center justify-center gap-2 text-[9px] font-bold uppercase tracking-widest shadow-sm"

@@ -64,7 +64,7 @@ export default function B2BLanding() {
                                     Request Product Catalogue
                                 </button>
                             </Link>
-                            <a href="https://wa.me/91900523033?text=Hello%2C%20I%20am%20interested%20in%20your%20products.%20I%20would%20like%20to%20know%20more." target="_blank" rel="noopener noreferrer">
+                            <a href="https://wa.me/919005230333?text=Hello%2C%20I%20am%20interested%20in%20your%20products.%20I%20would%20like%20to%20know%20more." target="_blank" rel="noopener noreferrer">
                                 <button className="px-10 py-4 bg-white text-primary rounded-md text-base font-medium hover:bg-gray-50 transition-all duration-300 shadow-lg hover:shadow-xl flex items-center gap-2">
                                     <MessageCircle className="w-5 h-5" />
                                     WhatsApp Us
@@ -284,10 +284,10 @@ export default function B2BLanding() {
                     </p>
 
                     <div className="flex flex-col sm:flex-row gap-6 justify-center items-center">
-                        <a href="https://wa.me/91900523033?text=Hello%2C%20I%20am%20interested%20in%20your%20products.%20I%20would%20like%20to%20know%20more." target="_blank" rel="noopener noreferrer">
+                        <a href="https://wa.me/919005230333?text=Hello%2C%20I%20am%20interested%20in%20your%20products.%20I%20would%20like%20to%20know%20more." target="_blank" rel="noopener noreferrer">
                             <button className="px-10 py-4 bg-[#25D366] text-white rounded-md text-base font-medium hover:bg-[#20bd5a] transition-all duration-300 shadow-lg hover:shadow-xl flex items-center gap-3">
                                 <MessageCircle className="w-5 h-5" />
-                                WhatsApp: +91 900523033
+                                WhatsApp: +91 9005230333
                             </button>
                         </a>
                         <a href="mailto:info@panoraexport.com">
@@ -300,7 +300,7 @@ export default function B2BLanding() {
 
                     <div className="mt-8 flex items-center justify-center gap-2 text-muted-foreground">
                         <MapPin className="w-5 h-5" />
-                        <span>Mumbai, India | Global Export Hub</span>
+                        <span>106, Tulip C, SEC-11, 819/3, Indra Nagar, Lucknow, UP 226016</span>
                     </div>
                 </div>
             </Section>
@@ -343,7 +343,7 @@ export default function B2BLanding() {
 
             {/* Floating WhatsApp Button */}
             <a
-                href="https://wa.me/91900523033?text=Hello%2C%20I%20am%20interested%20in%20your%20products.%20I%20would%20like%20to%20know%20more."
+                href="https://wa.me/919005230333?text=Hello%2C%20I%20am%20interested%20in%20your%20products.%20I%20would%20like%20to%20know%20more."
                 target="_blank"
                 rel="noopener noreferrer"
                 className="fixed bottom-8 right-8 w-16 h-16 bg-[#25D366] rounded-full flex items-center justify-center shadow-2xl hover:scale-110 transition-transform duration-300 z-50"

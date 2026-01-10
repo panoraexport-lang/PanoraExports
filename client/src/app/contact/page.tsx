@@ -86,9 +86,9 @@ export default function ContactPage() {
                             <div>
                                 <h3 className="text-[10px] font-bold text-primary uppercase tracking-widest mb-2">Global Headquarters</h3>
                                 <p className="text-primary/70 font-medium leading-relaxed">
-                                    1204, Trade Centre Towers<br />
-                                    Bandra Kurla Complex<br />
-                                    Mumbai, MH 400051, India
+                                    106, Tulip C, SEC-11, 819/3,<br />
+                                    Indra Nagar, Lucknow,<br />
+                                    LUCKNOW, UTTAR PRADESH, 226016
                                 </p>
                             </div>
                         </div>
@@ -111,7 +111,7 @@ export default function ContactPage() {
                             </div>
                             <div>
                                 <h3 className="text-[10px] font-bold text-primary uppercase tracking-widest mb-2">Call Us</h3>
-                                <p className="text-primary/70 font-medium">+91 900523033 (Mon-Fri)</p>
+                                <p className="text-primary/70 font-medium">+91 9005230333 (Mon-Fri)</p>
                                 <p className="text-primary/70 font-medium text-sm mt-1 text-muted-foreground flex items-center gap-1.5">
                                     <Clock className="w-3 h-3" /> 9:00 AM - 6:00 PM IST
                                 </p>
