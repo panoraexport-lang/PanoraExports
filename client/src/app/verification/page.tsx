@@ -4,7 +4,9 @@ import { Shield, CheckCircle2, FileText, Globe, Building2, TrendingUp, Upload, M
 import { useState } from 'react';
 import { Link } from 'wouter';
 import Navigation from '@/components/Navigation';
+import { useAuth } from '@/contexts/AuthContext';
 import { useToast } from '@/hooks/use-toast';
+import { useEffect } from 'react';
 
 const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:3001';
 
@@ -231,6 +233,7 @@ const TRADING_PARTNERS: CountryConfig[] = [
 ];
 
 export default function VerificationPage() {
+    const { user, updateProfile } = useAuth();
     const [openFaq, setOpenFaq] = useState<number | null>(null);
     const [isVerifying, setIsVerifying] = useState(false);
     const [verificationResult, setVerificationResult] = useState<VerificationResult | null>(null);
@@ -246,6 +249,20 @@ export default function VerificationPage() {
         businessType: 'SELLER',
         businessId: '',
     });
+
+    // Pre-fill form with user data if logged in
+    useEffect(() => {
+        if (user) {
+            setFormData(prev => ({
+                ...prev,
+                businessName: user.company_name || prev.businessName,
+                contactName: user.name || prev.contactName,
+                email: user.email || prev.email,
+                phone: user.phone || prev.phone,
+                country: user.country || prev.country
+            }));
+        }
+    }, [user]);
 
     const [formErrors, setFormErrors] = useState<{ [key: string]: string }>({});
 
@@ -325,6 +342,15 @@ export default function VerificationPage() {
                     title: '✅ Business Verified!',
                     description: `${result.businessName || 'Your business'} has been successfully verified.`,
                 });
+
+                // Update verification status in database if user is logged in
+                if (user) {
+                    await updateProfile({
+                        verification_status: 'VERIFIED',
+                        company_name: result.businessName || formData.businessName,
+                        registration_id: formData.businessId
+                    });
+                }
 
                 // Show verified dashboard after 2 seconds
                 setTimeout(() => {

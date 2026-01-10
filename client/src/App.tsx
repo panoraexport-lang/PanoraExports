@@ -20,6 +20,8 @@ import AdminDashboard from "@/app/admin/page";
 import FAQPage from "@/app/faq/page";
 import ContactPage from "@/app/contact/page";
 import LicensesPage from "@/app/licenses/page";
+import SampleRequestPage from "@/app/samples/request/page";
+import TradeInquiryPage from "@/app/trade-inquiry/page";
 
 import { useEffect } from "react";
 
@@ -40,6 +42,8 @@ function Router() {
       <Route path="/faq" component={FAQPage} />
       <Route path="/contact" component={ContactPage} />
       <Route path="/licenses" component={LicensesPage} />
+      <Route path="/samples/request" component={SampleRequestPage} />
+      <Route path="/trade-inquiry" component={TradeInquiryPage} />
       <Route component={NotFound} />
     </Switch>
   );

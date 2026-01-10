@@ -212,10 +212,10 @@ export default function B2BLanding() {
 
                     <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
                         {[
-                            { title: "Premium Towels", img: "/hero-plane.png" },
-                            { title: "Cotton Textiles", img: "/hero-plane.png" },
-                            { title: "Rice / Agro Products", img: "/hero-plane.png" },
-                            { title: "Packaging / Logistics", img: "/hero-plane.png" }
+                            { title: "Premium Towels", img: "https://images.unsplash.com/photo-1617811449482-31093c8cee16?q=80&w=735&auto=format&fit=crop" },
+                            { title: "Authentic Spices", img: "https://images.unsplash.com/photo-1596040033229-a9821ebd058d?q=80&w=800&auto=format&fit=crop" },
+                            { title: "Pashmina Shawls", img: "https://images.unsplash.com/photo-1542060748-10c28722263d?w=1200&h=800&fit=crop&q=90" },
+                            { title: "Rice / Agro", img: "https://plus.unsplash.com/premium_photo-1674624682288-085eff4f98da?q=80&w=687&auto=format&fit=crop" }
                         ].map((item, i) => (
                             <motion.div
                                 key={i}

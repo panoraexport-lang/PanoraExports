@@ -34,7 +34,8 @@ const productsList = [
   { title: "Industrial Goods", img: "https://images.unsplash.com/photo-1623610590744-fce60d8dd48c?q=80&w=687&auto=format&fit=crop" },
   { title: "Organic Spices", img: "https://images.unsplash.com/photo-1596040033229-a9821ebd058d?q=80&w=800&auto=format&fit=crop" },
   { title: "Leather Goods", img: "https://images.unsplash.com/photo-1547949003-9792a18a2601?q=80&w=2070&auto=format&fit=crop" },
-  { title: "Handicrafts", img: "https://images.unsplash.com/photo-1582555172866-f73bb12a2ab3?q=80&w=2070&auto=format&fit=crop" }
+  { title: "Handicrafts", img: "https://images.unsplash.com/photo-1582555172866-f73bb12a2ab3?q=80&w=2070&auto=format&fit=crop" },
+  { title: "Pashmina Shawls", img: "https://images.unsplash.com/photo-1542060748-10c28722263d?w=1200&h=800&fit=crop&q=90" }
 ];
 
 const Grain = () => (

@@ -62,17 +62,7 @@ const allProducts = [
         rating: 4.6,
         minOrder: '20 units',
     },
-    {
-        id: '6',
-        name: 'Silk Pashmina Shawl',
-        category: 'Textiles',
-        price: '$180.00/piece',
-        supplier: 'Kashmir Looms',
-        image: 'https://images.unsplash.com/photo-1542060748-10c28722263d?w=1200&h=800&fit=crop&q=90',
-        verified: true,
-        rating: 5.0,
-        minOrder: '10 pieces',
-    }
+   
 ];
 
 const categories = ['All', 'Textiles', 'Agro', 'Hardware', 'Industrial'];

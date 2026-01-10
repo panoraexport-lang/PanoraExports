@@ -40,6 +40,7 @@ export interface User {
     country: string;
     role: UserRole;
     company_name?: string;
+    registration_id?: string;
     verification_status: VerificationStatus;
     verification_documents?: string[];
     created_at: string;

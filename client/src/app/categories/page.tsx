@@ -46,7 +46,7 @@ const categories = [
         name: 'Spices',
         description: 'Authentic Indian spices and seasonings',
         count: 342,
-        image: 'https://images.unsplash.com/photo-1596040033229-a0b6df7b0fff?w=800&h=600&fit=crop&q=80',
+        image: 'https://images.unsplash.com/photo-1743445705835-4e66252e4dc6?fm=jpg&q=60&w=3000&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA==',
         icon: Package,
         subcategories: ['Whole Spices', 'Ground Spices', 'Spice Blends', 'Organic'],
     },

@@ -3,6 +3,8 @@
 import { useParams, useLocation } from 'wouter';
 import { ArrowLeft, Package, Shield, Truck, Star, Share2, Globe, FileText, Mail, BookOpen, Download, MessageCircle } from 'lucide-react';
 import Navigation from '@/components/Navigation';
+import { useAuth } from '@/contexts/AuthContext';
+import { useToast } from '@/hooks/use-toast';
 import { motion } from 'framer-motion';
 import { useState } from 'react';
 
@@ -75,8 +77,31 @@ const allProducts = [
 
 export default function ProductDetailPage() {
     const params = useParams();
+    const { user } = useAuth();
+    const { toast } = useToast();
     const [, setLocation] = useLocation();
     const [showActualImage, setShowActualImage] = useState(false);
+
+    const handleSecuredAction = (type: string) => {
+        if (!user || user.verification_status !== 'VERIFIED') {
+            toast({
+                title: "Institutional Verification Required",
+                description: "This trade action is restricted to verified business entities.",
+                variant: "destructive"
+            });
+            setLocation('/verification');
+            return;
+        }
+
+        const product = allProducts.find(p => p.id === params.id);
+        if (!product) return;
+
+        if (type === 'SAMPLE') {
+            setLocation(`/samples/request?product=${encodeURIComponent(product.name)}`);
+        } else {
+            setLocation(`/trade-inquiry?product=${encodeURIComponent(product.name)}&type=${type}`);
+        }
+    };
 
     const product = allProducts.find(p => p.id === params.id);
 
@@ -206,11 +231,17 @@ export default function ProductDetailPage() {
                         {/* Actions */}
                         <div className="flex flex-col gap-4 mt-auto">
                             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                                <button className="px-8 py-4 bg-[hsl(var(--success))] text-white text-[10px] font-black uppercase tracking-[0.3em] hover:brightness-110 transition-all rounded-sm flex items-center justify-center gap-3 shadow-[0_15px_30px_rgba(22,101,52,0.15)] group">
+                                <button
+                                    onClick={() => handleSecuredAction('ORDER')}
+                                    className="px-8 py-4 bg-[hsl(var(--success))] text-white text-[10px] font-black uppercase tracking-[0.3em] hover:brightness-110 transition-all rounded-sm flex items-center justify-center gap-3 shadow-[0_15px_30px_rgba(22,101,52,0.15)] group"
+                                >
                                     <Star className="w-4 h-4 fill-white" />
                                     Confirm Selection / Start Order
                                 </button>
-                                <button className="px-8 py-4 bg-primary text-primary-foreground text-[10px] font-black uppercase tracking-[0.3em] hover:bg-primary/90 transition-all rounded-sm flex items-center justify-center gap-3 shadow-lg group">
+                                <button
+                                    onClick={() => handleSecuredAction('QUOTE')}
+                                    className="px-8 py-4 bg-primary text-primary-foreground text-[10px] font-black uppercase tracking-[0.3em] hover:bg-primary/90 transition-all rounded-sm flex items-center justify-center gap-3 shadow-lg group"
+                                >
                                     <FileText className="w-4 h-4" />
                                     Institutional Quote Request
                                 </button>
@@ -218,11 +249,17 @@ export default function ProductDetailPage() {
 
                             {/* Secondary CTAs */}
                             <div className="grid grid-cols-2 gap-4">
-                                <button className="px-4 py-3 border border-border bg-background hover:bg-secondary transition-all rounded-sm flex items-center justify-center gap-2 text-[9px] font-bold uppercase tracking-widest text-primary">
+                                <button
+                                    onClick={() => handleSecuredAction('SAMPLE')}
+                                    className="px-4 py-3 border border-border bg-background hover:bg-secondary transition-all rounded-sm flex items-center justify-center gap-2 text-[9px] font-bold uppercase tracking-widest text-primary"
+                                >
                                     <Package className="w-3.5 h-3.5" />
                                     Ask for Samples
                                 </button>
-                                <button className="px-4 py-3 border border-border bg-background hover:bg-secondary transition-all rounded-sm flex items-center justify-center gap-2 text-[9px] font-bold uppercase tracking-widest text-primary">
+                                <button
+                                    onClick={() => handleSecuredAction('CATALOGUE')}
+                                    className="px-4 py-3 border border-border bg-background hover:bg-secondary transition-all rounded-sm flex items-center justify-center gap-2 text-[9px] font-bold uppercase tracking-widest text-primary"
+                                >
                                     <BookOpen className="w-3.5 h-3.5" />
                                     Request Catalogue
                                 </button>
@@ -234,15 +271,13 @@ export default function ProductDetailPage() {
                                     <Download className="w-3.5 h-3.5" />
                                     Download Specs
                                 </button>
-                                <a
-                                    href="https://wa.me/919005230333?text=Hello%2C%20I%20am%20interested%20in%20your%20products.%20I%20would%20like%20to%20know%20more."
-                                    target="_blank"
-                                    rel="noopener noreferrer"
+                                <button
+                                    onClick={() => handleSecuredAction('WHATSAPP')}
                                     className="px-4 py-3 bg-[#25D366] text-white hover:bg-[#20bd5a] transition-all rounded-sm flex items-center justify-center gap-2 text-[9px] font-bold uppercase tracking-widest shadow-sm"
                                 >
                                     <MessageCircle className="w-3.5 h-3.5" />
                                     WhatsApp
-                                </a>
+                                </button>
                             </div>
                         </div>
                     </div>
