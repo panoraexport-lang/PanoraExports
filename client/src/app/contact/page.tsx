@@ -99,9 +99,9 @@ export default function ContactPage() {
                             </div>
                             <div>
                                 <h3 className="text-[10px] font-bold text-primary uppercase tracking-widest mb-2">Email Us</h3>
-                                <a href="mailto:export@panora.global" className="text-primary/70 font-medium hover:text-primary transition-colors">export@panora.global</a>
+                                <a href="mailto:info@panoraexport.com" className="text-primary/70 font-medium hover:text-primary transition-colors">info@panoraexport.com</a>
                                 <br />
-                                <a href="mailto:support@panora.global" className="text-primary/70 font-medium hover:text-primary transition-colors">support@panora.global</a>
+                                <a href="mailto:info@panoraexport.com" className="text-primary/70 font-medium hover:text-primary transition-colors">info@panoraexport.com</a>
                             </div>
                         </div>
 
@@ -111,7 +111,7 @@ export default function ContactPage() {
                             </div>
                             <div>
                                 <h3 className="text-[10px] font-bold text-primary uppercase tracking-widest mb-2">Call Us</h3>
-                                <p className="text-primary/70 font-medium">+91 22 4567 8900 (Mon-Fri)</p>
+                                <p className="text-primary/70 font-medium">+91 900523033 (Mon-Fri)</p>
                                 <p className="text-primary/70 font-medium text-sm mt-1 text-muted-foreground flex items-center gap-1.5">
                                     <Clock className="w-3 h-3" /> 9:00 AM - 6:00 PM IST
                                 </p>

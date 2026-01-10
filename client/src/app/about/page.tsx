@@ -169,6 +169,23 @@ export default function AboutPage() {
                     </div>
                 </div>
             </section>
+
+            {/* Registered Office Section */}
+            <section className="py-24 bg-background border-t border-border">
+                <div className="max-w-3xl mx-auto px-6 text-center">
+                    <div className="flex flex-col items-center gap-6">
+                        <div className="w-16 h-16 bg-secondary/10 flex items-center justify-center rounded-full text-secondary mb-2">
+                            <Building2 className="w-8 h-8" strokeWidth={1.5} />
+                        </div>
+                        <div>
+                            <h2 className="text-[10px] font-bold text-secondary uppercase tracking-[0.3em] mb-6">Registered Office</h2>
+                            <p className="text-lg md:text-xl font-medium text-primary/80 leading-relaxed max-w-lg mx-auto uppercase tracking-wide">
+                                106, Tulip C, SEC-11, 819/3, Indra Nagar, Lucknow, Lucknow, LUCKNOW, UTTAR PRADESH, 226016
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </section>
         </div>
     );
 }

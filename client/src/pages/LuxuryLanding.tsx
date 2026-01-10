@@ -376,20 +376,20 @@ export default function LuxuryLanding() {
 
           <div className="grid md:grid-cols-2 gap-8 items-center mb-16">
             <a
-              href="https://wa.me/919876543210"
+              href="https://wa.me/91900523033?text=Hello%2C%20I%20am%20interested%20in%20your%20products.%20I%20would%20like%20to%20know%20more."
               className="flex flex-col items-center p-10 bg-white/5 border border-secondary/20 rounded-sm hover:bg-white/10 transition-all group"
             >
               <MessageCircle className="w-10 h-10 mb-4 text-secondary group-hover:text-[hsl(var(--success))] transition-colors" strokeWidth={1} />
               <span className="text-[10px] uppercase tracking-[0.3em] text-white/40 mb-3 font-bold">Secure Trade Canal</span>
-              <span className="text-xl font-bold tracking-tight text-white">+91 (Export Operations)</span>
+              <span className="text-xl font-bold tracking-tight text-white">+91 900523033</span>
             </a>
             <a
-              href="mailto:panoraexports@gmail.com"
+              href="mailto:info@panoraexport.com"
               className="flex flex-col items-center p-10 bg-white/5 border border-secondary/20 rounded-sm hover:bg-white/10 transition-all group"
             >
               <Mail className="w-10 h-10 mb-4 text-secondary group-hover:text-white transition-colors" strokeWidth={1} />
               <span className="text-[10px] uppercase tracking-[0.3em] text-white/40 mb-3 font-bold">Official Correspondence</span>
-              <span className="text-xl font-bold tracking-tight text-white">trade@panora.global</span>
+              <span className="text-xl font-bold tracking-tight text-white">info@panoraexport.com</span>
             </a>
           </div>
 
@@ -436,7 +436,7 @@ export default function LuxuryLanding() {
       </footer>
 
       <a
-        href="https://wa.me/919876543210"
+        href="https://wa.me/91900523033?text=Hello%2C%20I%20am%20interested%20in%20your%20products.%20I%20would%20like%20to%20know%20more."
         target="_blank"
         rel="noopener noreferrer"
         className="fixed bottom-10 right-10 w-20 h-20 bg-[hsl(var(--success))] text-white rounded-full flex items-center justify-center shadow-2xl hover:scale-110 transition-transform duration-500 z-50 group border border-white/20"
