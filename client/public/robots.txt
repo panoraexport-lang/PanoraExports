@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://panoraexports.com/sitemap.xml
