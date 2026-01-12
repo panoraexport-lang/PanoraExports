@@ -96,8 +96,8 @@ export default function LuxuryLanding() {
             </div>
 
             <h1 className="text-5xl md:text-7xl font-bold text-primary mb-8 leading-[1.1] tracking-tight">
-              Institutional <br />
-              <span className="font-serif italic font-light text-secondary">Excellence</span> in Trade.
+              Panora Exports: <br />
+              <span className="font-serif italic font-light text-secondary">Institutional Excellence</span> in Trade.
             </h1>
 
             <p className="text-lg md:text-xl text-primary/80 mb-12 font-medium max-w-lg leading-relaxed">
