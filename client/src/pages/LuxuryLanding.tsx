@@ -16,6 +16,7 @@ import {
 import { Link } from "wouter";
 import Navigation from "@/components/Navigation";
 import { SecureDocument } from "@/components/SecureDocument";
+import { ProtectedEmail } from "@/components/ProtectedEmail";
 import Autoplay from "embla-carousel-autoplay";
 import {
   Carousel,
@@ -25,7 +26,7 @@ import {
   CarouselPrevious,
 } from "@/components/ui/carousel";
 
-const heroImage = "/aeroplane.jpg";
+const heroImage = "/aeroplane.webp";
 
 const productsList = [
   { title: "Cotton Textiles", img: "https://plus.unsplash.com/premium_photo-1673125287363-b4e837f1215f?q=80&w=687&auto=format&fit=crop" },
@@ -97,11 +98,11 @@ export default function LuxuryLanding() {
 
             <h1 className="text-5xl md:text-7xl font-bold text-primary mb-8 leading-[1.1] tracking-tight">
               Panora Exports: <br />
-              <span className="font-serif italic font-light text-secondary">Institutional Excellence</span> in Trade.
+              <span className="font-serif italic font-light text-secondary">B2B Export Company</span> & Global Trade Partner.
             </h1>
 
             <p className="text-lg md:text-xl text-primary/80 mb-12 font-medium max-w-lg leading-relaxed">
-              Standardized supply chain solutions for the Middle-East and Global Markets. Specializing in high-volume Textiles, Agro-Commodities, and Industrial Sourcing.
+              Your verified export partner for standardized supply chain solutions. We specialize in institutional exports of high-volume Textiles, Agro-Commodities, and Industrial Goods from India to Global Markets.
             </p>
 
             <div className="flex flex-col sm:flex-row items-center gap-4">
@@ -159,7 +160,7 @@ export default function LuxuryLanding() {
           <div>
             <div className="flex items-center gap-3 mb-8">
               <div className="w-10 h-[1.5px] bg-secondary" />
-              <h2 className="text-[10px] font-bold text-secondary uppercase tracking-[0.3em]">Corporate Standards</h2>
+              <h2 className="text-[10px] font-bold text-secondary uppercase tracking-[0.3em]">Why Choose Us As Your Export Partner</h2>
             </div>
 
             <h3 className="text-4xl md:text-5xl font-bold text-primary mb-10 leading-tight tracking-tight">
@@ -186,7 +187,7 @@ export default function LuxuryLanding() {
           </div>
           <div className="relative">
             <div className="aspect-[4/3] overflow-hidden rounded-xl grayscale-[0.5] contrast-110 shadow-2xl">
-              <img src="https://images.unsplash.com/photo-1609143739217-01b60dad1c67?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Global Logistics" className="w-full h-full object-cover" />
+              <img src="https://images.unsplash.com/photo-1609143739217-01b60dad1c67?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Global Logistics" className="w-full h-full object-cover" loading="lazy" />
             </div>
           </div>
         </div>
@@ -295,6 +296,7 @@ export default function LuxuryLanding() {
                       <img
                         src={item.img}
                         alt={item.title}
+                        loading="lazy"
                         className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110"
                       />
                       <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent flex flex-col justify-end p-8 md:p-12">
@@ -384,14 +386,15 @@ export default function LuxuryLanding() {
               <span className="text-[10px] uppercase tracking-[0.3em] text-white/40 mb-3 font-bold">Secure Trade Canal</span>
               <span className="text-xl font-bold tracking-tight text-white">+91 9005230333</span>
             </a>
-            <a
-              href="mailto:info@panoraexport.com"
+            <ProtectedEmail
+              user="info"
+              domain="panoraexport.com"
               className="flex flex-col items-center p-10 bg-white/5 border border-secondary/20 rounded-sm hover:bg-white/10 transition-all group"
             >
               <Mail className="w-10 h-10 mb-4 text-secondary group-hover:text-white transition-colors" strokeWidth={1} />
               <span className="text-[10px] uppercase tracking-[0.3em] text-white/40 mb-3 font-bold">Official Correspondence</span>
               <span className="text-xl font-bold tracking-tight text-white">info@panoraexport.com</span>
-            </a>
+            </ProtectedEmail>
           </div>
 
           <div className="inline-flex items-center gap-3 text-white/30 text-[9px] uppercase font-bold tracking-[0.4em]">
@@ -399,7 +402,7 @@ export default function LuxuryLanding() {
             106, Tulip C, SEC-11, 819/3, Indra Nagar, Lucknow, UP 226016
           </div>
         </div>
-      </Section>
+      </Section >
 
       <footer className="py-20 bg-[#0b1626] border-t border-[#c09a40]/20 px-6 md:px-12">
         <div className="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-center gap-10">
@@ -447,6 +450,6 @@ export default function LuxuryLanding() {
           Initialize Secure Trade Channel
         </span>
       </a>
-    </div>
+    </div >
   );
 }

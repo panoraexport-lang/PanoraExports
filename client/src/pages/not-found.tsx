@@ -27,21 +27,33 @@ export default function NotFound() {
           </p>
         </div>
 
-        <div className="flex flex-col sm:flex-row items-center justify-center gap-6">
+        <div className="flex flex-col gap-4 w-full sm:w-auto">
           <Link href="/">
-            <a className="w-full sm:w-auto px-10 py-5 bg-primary text-primary-foreground text-[10px] font-black uppercase tracking-[0.3em] hover:opacity-90 transition-all shadow-2xl shadow-primary/20 flex items-center gap-3">
+            <a className="w-full px-10 py-5 bg-primary text-primary-foreground text-[10px] font-black uppercase tracking-[0.3em] hover:opacity-90 transition-all shadow-2xl shadow-primary/20 flex items-center justify-center gap-3">
               <Home className="w-4 h-4" strokeWidth={1.5} />
               Return to Terminal
             </a>
           </Link>
-          <button
-            onClick={() => window.history.back()}
-            className="w-full sm:w-auto px-10 py-5 bg-card border border-primary/10 text-primary text-[10px] font-black uppercase tracking-[0.3em] hover:bg-muted transition-all flex items-center gap-3"
-          >
-            <ArrowLeft className="w-4 h-4" strokeWidth={1.5} />
-            Reverse Routing
-          </button>
+          <div className="flex gap-4">
+            <Link href="/products">
+              <a className="flex-1 px-6 py-4 bg-secondary/10 text-secondary text-[9px] font-bold uppercase tracking-[0.2em] hover:bg-secondary/20 transition-all flex items-center justify-center border border-secondary/20">
+                View Inventory
+              </a>
+            </Link>
+            <Link href="/contact">
+              <a className="flex-1 px-6 py-4 bg-secondary/10 text-secondary text-[9px] font-bold uppercase tracking-[0.2em] hover:bg-secondary/20 transition-all flex items-center justify-center border border-secondary/20">
+                Contact Support
+              </a>
+            </Link>
+          </div>
         </div>
+        <button
+          onClick={() => window.history.back()}
+          className="w-full sm:w-auto px-10 py-5 bg-card border border-primary/10 text-primary text-[10px] font-black uppercase tracking-[0.3em] hover:bg-muted transition-all flex items-center justify-center gap-3 h-fit"
+        >
+          <ArrowLeft className="w-4 h-4" strokeWidth={1.5} />
+          Reverse Routing
+        </button>
 
         <div className="mt-24 flex items-center justify-center gap-4 text-primary/20 text-[9px] font-black uppercase tracking-[0.5em]">
           <div className="w-8 h-[1px] bg-primary/10" />

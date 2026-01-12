@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
 import Navigation from '@/components/Navigation';
+import { ProtectedEmail } from '@/components/ProtectedEmail';
 import { Mail, Phone, MapPin, Send, MessageCircle, Clock, Globe } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 import { useForm } from 'react-hook-form';
@@ -99,9 +100,8 @@ export default function ContactPage() {
                             </div>
                             <div>
                                 <h3 className="text-[10px] font-bold text-primary uppercase tracking-widest mb-2">Email Us</h3>
-                                <a href="mailto:info@panoraexport.com" className="text-primary/70 font-medium hover:text-primary transition-colors">info@panoraexport.com</a>
-                                <br />
-                                <a href="mailto:info@panoraexport.com" className="text-primary/70 font-medium hover:text-primary transition-colors">info@panoraexport.com</a>
+                                <ProtectedEmail user="info" domain="panoraexport.com" className="text-primary/70 font-medium hover:text-primary transition-colors block" />
+                                <ProtectedEmail user="support" domain="panoraexport.com" className="text-primary/70 font-medium hover:text-primary transition-colors block mt-1" />
                             </div>
                         </div>
 
