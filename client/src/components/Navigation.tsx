@@ -68,7 +68,7 @@ export default function Navigation() {
                             </span>
                         </div>
                         <span className={cn("text-[7px] uppercase tracking-[0.3em] font-bold leading-none mt-1 transition-colors", isNavyState ? "text-white/50" : "text-[#0b1626]/70")}>
-                            Institutional Trade
+                            Global Trade
                         </span>
                     </div>
                 </Link>

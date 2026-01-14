@@ -115,7 +115,7 @@ export default function LuxuryLanding() {
                 className="w-full sm:w-auto px-10 py-5 bg-white/5 backdrop-blur-md text-primary text-[10px] font-black uppercase tracking-[0.3em] hover:bg-white/10 transition-all border border-primary/10 flex items-center justify-center gap-3 rounded-sm group"
               >
                 <div className="w-1.5 h-1.5 rounded-full bg-secondary group-hover:scale-125 transition-transform" />
-                Institutional Capabilities
+                GLOBAL CAPABILITIES
               </Link>
             </div>
 
