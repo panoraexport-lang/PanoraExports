@@ -84,7 +84,7 @@ export default function LuxuryLanding() {
           <div className="absolute inset-0 bg-gradient-to-r from-background via-background/40 to-transparent z-10" />
         </div>
 
-        <div className="relative z-10 w-full px-6 md:px-12 lg:px-24">
+        <div className="relative z-10 w-full px-6 md:px-12 lg:px-24 pt-32">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
