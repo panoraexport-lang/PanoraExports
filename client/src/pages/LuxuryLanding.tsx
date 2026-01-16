@@ -102,7 +102,7 @@ export default function LuxuryLanding() {
               <span className="text-[10px] font-bold uppercase tracking-[0.2em]">Authorized Global Trade Partner</span>
             </div>
 
-            <h1 className="text-5xl md:text-7xl font-bold text-primary mb-8 leading-[1.1] tracking-tight">
+            <h1 className="text-3xl md:text-7xl font-bold text-primary mb-8 leading-[1.1] tracking-tight">
               Panora Exports: <br />
               <span className="font-serif italic font-light text-secondary">B2B Export Company</span> & Global Trade Partner.
             </h1>
