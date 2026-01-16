@@ -25,8 +25,10 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "@/components/ui/carousel";
+import { useTheme } from "next-themes";
 
-const heroImage = "/aeroplane.webp";
+const lightHeroImage = "/aeroplane.webp";
+const darkHeroImage = "/dark-hero.jpg";
 
 const productsList = [
   { title: "Cotton Textiles", img: "https://plus.unsplash.com/premium_photo-1673125287363-b4e837f1215f?q=80&w=687&auto=format&fit=crop" },
@@ -65,6 +67,9 @@ const ExportCard = ({ icon: Icon, title, desc }: { icon: any, title: string, des
 );
 
 export default function LuxuryLanding() {
+  const { theme } = useTheme();
+  const currentHeroImage = theme === "dark" ? darkHeroImage : lightHeroImage;
+
   return (
     <div className="font-sans bg-background text-foreground selection:bg-primary selection:text-primary-foreground antialiased">
       <Grain />
@@ -74,7 +79,8 @@ export default function LuxuryLanding() {
       <section className="relative h-screen flex items-center overflow-hidden bg-background">
         <div className="absolute inset-0 z-0">
           <motion.img
-            src={heroImage}
+            key={currentHeroImage}
+            src={currentHeroImage}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 1.5 }}
