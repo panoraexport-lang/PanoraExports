@@ -45,7 +45,7 @@ export default function Navigation() {
                 "fixed top-0 left-0 right-0 z-50 transition-all duration-300 border-b",
                 isScrolled ? "py-4" : "py-6",
                 (isScrolled || isHovered)
-                    ? "bg-[#0b1626] backdrop-blur-md border-[#c09a40]/20 shadow-2xl shadow-black/20"
+                    ? "bg-royal-blue/90 backdrop-blur-md border-[#c09a40]/20 shadow-2xl shadow-black/20"
                     : cn(
                         "backdrop-blur-md border-transparent",
                         isDark ? "bg-transparent" : "bg-white/10"
@@ -55,19 +55,19 @@ export default function Navigation() {
             <div className="max-w-[1600px] mx-auto px-6 md:px-10 flex items-center justify-between">
                 {/* Branding - Left */}
                 <Link href="/" className="flex items-center gap-3 group">
-                    <div className={cn("w-8 h-8 rounded-sm flex items-center justify-center flex-shrink-0 transition-colors", isNavyState ? "bg-secondary" : "bg-[#0b1626]")}>
+                    <div className={cn("w-8 h-8 rounded-sm flex items-center justify-center flex-shrink-0 transition-colors", isNavyState ? "bg-secondary" : "bg-royal-blue")}>
                         <span className={cn("font-black text-[10px] tracking-tighter transition-colors", isNavyState ? "text-primary" : "text-white")}>PE</span>
                     </div>
                     <div className="flex flex-col justify-center">
                         <div className="flex items-baseline gap-1.5">
-                            <span className={cn("font-bold text-lg tracking-tight transition-colors", isNavyState ? "text-white" : "text-[#0b1626]")}>
+                            <span className={cn("font-bold text-lg tracking-tight transition-colors", isNavyState ? "text-white" : "text-royal-blue")}>
                                 PANORA
                             </span>
-                            <span className={cn("font-serif italic text-base font-light transition-colors", isNavyState ? "text-secondary" : "text-[#0b1626]")}>
+                            <span className={cn("font-serif italic text-base font-light transition-colors", isNavyState ? "text-secondary" : "text-royal-blue")}>
                                 exports
                             </span>
                         </div>
-                        <span className={cn("text-[7px] uppercase tracking-[0.3em] font-bold leading-none mt-1 transition-colors", isNavyState ? "text-white/50" : "text-[#0b1626]/70")}>
+                        <span className={cn("text-[7px] uppercase tracking-[0.3em] font-bold leading-none mt-1 transition-colors", isNavyState ? "text-white/50" : "text-royal-blue/70")}>
                             Global Trade
                         </span>
                     </div>
@@ -111,7 +111,7 @@ export default function Navigation() {
                     {mounted && (
                         <button
                             onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-                            className={cn("w-8 h-8 items-center justify-center transition-colors flex", isNavyState ? "text-white/60 hover:text-secondary" : "text-[#0b1626]/60 hover:text-[#0b1626]")}
+                            className={cn("w-8 h-8 items-center justify-center transition-colors flex", isNavyState ? "text-white/60 hover:text-secondary" : "text-royal-blue/60 hover:text-royal-blue")}
                             aria-label="Toggle theme"
                         >
                             {theme === "dark" ? <Sun className="w-3.5 h-3.5" /> : <Moon className="w-3.5 h-3.5" />}
@@ -156,7 +156,7 @@ export default function Navigation() {
 
                     {/* Mobile Menu Toggle */}
                     <button
-                        className={cn("xl:hidden p-1", isNavyState ? "text-white" : "text-[#0b1626]")}
+                        className={cn("xl:hidden p-1", isNavyState ? "text-white" : "text-royal-blue")}
                         onClick={() => setIsMenuOpen(!isMenuOpen)}
                     >
                         {isMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}

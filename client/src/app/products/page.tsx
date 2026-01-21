@@ -62,7 +62,7 @@ const allProducts = [
         rating: 4.6,
         minOrder: '20 units',
     },
-   
+
 ];
 
 const categories = ['All', 'Textiles', 'Agro', 'Hardware', 'Industrial'];

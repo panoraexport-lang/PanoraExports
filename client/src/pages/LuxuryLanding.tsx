@@ -61,7 +61,7 @@ const ExportCard = ({ icon: Icon, title, desc }: { icon: any, title: string, des
     <div className="mb-10 p-5 rounded-sm bg-muted text-primary group-hover:bg-primary group-hover:text-primary-foreground transition-all duration-500">
       <Icon strokeWidth={1} className="w-10 h-10" />
     </div>
-    <h3 className="text-xl font-black mb-6 text-foreground uppercase tracking-tight">{title}</h3>
+    <h3 className="text-xl font-black mb-6 text-royal-blue dark:text-white uppercase tracking-tight">{title}</h3>
     <p className="text-muted-foreground leading-relaxed font-medium text-sm">{desc}</p>
   </div>
 );
@@ -76,7 +76,7 @@ export default function LuxuryLanding() {
       <Navigation />
 
       {/* 1. HERO SECTION */}
-      <section className="relative h-screen flex items-center overflow-hidden bg-background">
+      <section className="relative min-h-screen flex flex-col justify-center bg-background">
         <div className="absolute inset-0 z-0">
           <motion.img
             key={currentHeroImage}
@@ -85,54 +85,54 @@ export default function LuxuryLanding() {
             animate={{ opacity: 1 }}
             transition={{ duration: 1.5 }}
             alt="Hero Background"
-            className="absolute inset-0 w-full h-full object-cover scale-[1.01] brightness-[1.1]"
+            className="absolute inset-0 w-full h-full object-cover scale-[1.01] brightness-[0.95] md:brightness-[1.1]"
           />
-          <div className="absolute inset-0 bg-gradient-to-r from-background via-background/40 to-transparent z-10" />
+          <div className="absolute inset-0 bg-gradient-to-r from-background via-background/60 to-transparent z-10" />
         </div>
 
-        <div className="relative z-10 w-full px-6 md:px-12 lg:px-24 pt-32">
+        <div className="relative z-10 w-full px-6 md:px-12 lg:px-24 pt-24 pb-12 md:pt-32 md:pb-16">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, ease: "easeOut" }}
             className="max-w-2xl"
           >
-            <div className="inline-flex items-center gap-3 mb-8 px-4 py-1.5 bg-secondary/10 text-secondary border border-secondary/20 rounded-sm">
-              <Globe className="w-3.5 h-3.5 opacity-80" />
-              <span className="text-[10px] font-bold uppercase tracking-[0.2em]">Authorized Global Trade Partner</span>
+            <div className="inline-flex items-center gap-3 mb-4 md:mb-6 px-3 py-1.5 bg-white/40 dark:bg-black/20 backdrop-blur-md text-secondary border border-secondary/40 rounded-full shadow-sm">
+              <Globe className="w-3 h-3 text-secondary flex-shrink-0" />
+              <span className="text-[8px] sm:text-[10px] md:text-xs font-bold uppercase tracking-[0.2em] drop-shadow-sm truncate max-w-[180px] sm:max-w-none">Authorized Global Trade Partner</span>
             </div>
 
-            <h1 className="text-5xl md:text-7xl font-bold text-primary mb-8 leading-[1.1] tracking-tight">
+            <h1 className="text-3xl sm:text-4xl md:text-6xl font-bold text-royal-blue dark:text-white mb-4 md:mb-6 leading-[1.1] tracking-tight">
               Panora Exports: <br />
-              <span className="font-serif italic font-light text-secondary">B2B Export Company</span> & Global Trade Partner.
+              <span className="font-serif italic font-light bg-gradient-to-r from-[#b8860b] via-secondary to-[#b8860b] bg-clip-text text-transparent drop-shadow-sm filter contrast-125">D2B Export Company</span> & Global Trade Partner.
             </h1>
 
-            <p className="text-lg md:text-xl text-primary/80 mb-12 font-medium max-w-lg leading-relaxed">
-              Your verified export partner for standardized supply chain solutions. We specialize in institutional exports of high-volume Textiles, Agro-Commodities, and Industrial Goods from India to Global Markets.
+            <p className="text-base md:text-lg text-royal-blue md:text-royal-blue/80 dark:text-white/90 mb-8 md:mb-10 font-medium max-w-lg leading-relaxed">
+              Your verified export partner for standardized supply chain solutions. We specialize in institutional exports of high-volume Textiles, Agro-Commodities, and Industrial Goods.
             </p>
 
-            <div className="flex flex-col sm:flex-row items-center gap-4">
-              <Link href="/products" className="w-full sm:w-auto px-10 py-5 bg-[hsl(var(--success))] text-white text-[10px] font-black uppercase tracking-[0.3em] hover:brightness-110 transition-all flex items-center justify-center gap-3 rounded-sm shadow-[0_20px_40px_rgba(22,101,52,0.15)] group">
-                Explore Panora's Inventory
-                <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+            <div className="flex flex-col sm:flex-row items-center gap-3">
+              <Link href="/products" className="w-full sm:w-auto px-8 py-4 bg-[hsl(var(--success))] text-white text-[9px] font-black uppercase tracking-[0.2em] hover:brightness-110 transition-all flex items-center justify-center gap-2.5 rounded-sm shadow-[0_15px_30px_rgba(22,101,52,0.15)] group">
+                Explore Inventory
+                <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
               </Link>
               <Link
                 href="/about"
-                className="w-full sm:w-auto px-10 py-5 bg-white/5 backdrop-blur-md text-primary text-[10px] font-black uppercase tracking-[0.3em] hover:bg-white/10 transition-all border border-primary/10 flex items-center justify-center gap-3 rounded-sm group"
+                className="w-full sm:w-auto px-8 py-4 bg-white/5 backdrop-blur-md text-primary dark:text-white text-[9px] font-black uppercase tracking-[0.2em] hover:bg-white/10 transition-all border border-primary/10 flex items-center justify-center gap-2.5 rounded-sm group"
               >
                 <div className="w-1.5 h-1.5 rounded-full bg-secondary group-hover:scale-125 transition-transform" />
-                GLOBAL CAPABILITIES
+                CAPABILITIES
               </Link>
             </div>
 
-            <div className="mt-16 flex items-center gap-12 border-t border-secondary/20 pt-8">
+            <div className="mt-10 md:mt-12 flex items-center gap-10 border-t border-secondary/20 pt-6">
               <div>
                 <div className="text-2xl font-bold text-secondary tracking-tight">100%</div>
-                <div className="text-[9px] uppercase tracking-[0.1em] font-bold text-primary/60 mt-1">QC Standardized</div>
+                <div className="text-[9px] uppercase tracking-[0.1em] font-bold text-royal-blue/60 dark:text-white/60 mt-1">QC Standardized</div>
               </div>
               <div>
                 <div className="text-2xl font-bold text-secondary tracking-tight">Tier-1</div>
-                <div className="text-[9px] uppercase tracking-[0.1em] font-bold text-primary/60 mt-1">Logistics Framework</div>
+                <div className="text-[9px] uppercase tracking-[0.1em] font-bold text-royal-blue/60 dark:text-white/60 mt-1">Logistics Framework</div>
               </div>
             </div>
           </motion.div>
@@ -169,7 +169,7 @@ export default function LuxuryLanding() {
               <h2 className="text-[10px] font-bold text-secondary uppercase tracking-[0.3em]">Why Choose Us As Your Export Partner</h2>
             </div>
 
-            <h3 className="text-4xl md:text-5xl font-bold text-primary mb-10 leading-tight tracking-tight">
+            <h3 className="text-4xl md:text-5xl font-bold text-royal-blue dark:text-white mb-10 leading-tight tracking-tight">
               Institutional <span className="font-serif italic font-light text-secondary">Integrity</span> & Precision.
             </h3>
 
@@ -186,7 +186,7 @@ export default function LuxuryLanding() {
                   <div className="flex-shrink-0 w-6 h-6 rounded-sm bg-secondary/10 flex items-center justify-center text-secondary group-hover:bg-secondary group-hover:text-white transition-all">
                     <CheckCircle2 strokeWidth={2} className="w-3.5 h-3.5 text-[hsl(var(--success))]" />
                   </div>
-                  <span className="text-base text-primary/80 font-medium tracking-tight group-hover:text-secondary transition-colors">{item}</span>
+                  <span className="text-base text-royal-blue/80 dark:text-white/80 font-medium tracking-tight group-hover:text-secondary transition-colors">{item}</span>
                 </div>
               ))}
             </div>
@@ -200,7 +200,7 @@ export default function LuxuryLanding() {
       </Section>
 
       {/* 4. ABOUT US & CERTIFICATION */}
-      <Section id="about" className="bg-[#05070a] py-32 border-y border-white/5">
+      <Section id="about" className="bg-royal-blue-dark/20 backdrop-blur-sm py-32 border-y border-white/5">
         <div className="max-w-7xl mx-auto px-4">
           {/* Top Level Heading Section */}
           <div className="grid lg:grid-cols-2 gap-16 items-start mb-24">
@@ -367,14 +367,14 @@ export default function LuxuryLanding() {
               <span className="font-bold uppercase tracking-[0.1em] text-[9px] text-secondary">MENA Operations</span>
             </div>
           </div>
-          <p className="text-xl text-primary/80 leading-relaxed max-w-2xl mx-auto font-medium font-serif italic border-t border-secondary/20 pt-10">
+          <p className="text-xl text-royal-blue/80 dark:text-white/80 leading-relaxed max-w-2xl mx-auto font-medium font-serif italic border-t border-secondary/20 pt-10">
             Provisioning Tier-I buyers across UAE, Oman, Qatar, and the European Continent with institutional-grade sourcing and ethical compliance.
           </p>
         </div>
       </Section>
 
       {/* 7. CONTACT CTA */}
-      <Section className="bg-[#0b1626] text-white py-24 relative overflow-hidden">
+      <Section className="bg-royal-blue text-white py-24 relative overflow-hidden">
         <div className="max-w-4xl mx-auto text-center relative z-10">
           <h2 className="text-4xl md:text-5xl font-bold mb-8 leading-tight tracking-tight">
             Initiate Your <span className="font-serif italic font-light text-[#c09a40]">Export Directive.</span>
@@ -410,7 +410,7 @@ export default function LuxuryLanding() {
         </div>
       </Section >
 
-      <footer className="py-20 bg-[#0b1626] border-t border-[#c09a40]/20 px-6 md:px-12">
+      <footer className="py-20 bg-royal-blue border-t border-[#c09a40]/20 px-6 md:px-12">
         <div className="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-center gap-10">
           <Link href="/" className="flex flex-col items-center md:items-start group">
             <div className="flex items-baseline gap-1.5">

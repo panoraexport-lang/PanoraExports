@@ -23,6 +23,7 @@
   --color-border: hsl(var(--border));
   --color-input: hsl(var(--input));
   --color-ring: hsl(var(--ring));
+  --color-royal-blue: hsl(var(--royal-blue));
 
   --color-sidebar: hsl(var(--sidebar));
   --color-sidebar-foreground: hsl(var(--sidebar-foreground));
@@ -46,7 +47,7 @@
   --card-foreground: 222 47% 11%;
   --popover: 0 0% 100%;
   --popover-foreground: 222 47% 11%;
-  --primary: 222 47% 11%;
+  --primary: 225 100% 16%;
   --primary-foreground: 0 0% 100%;
   --secondary: 43 50% 50%;
   --secondary-foreground: 0 0% 100%;
@@ -62,9 +63,15 @@
   --radius: 0.75rem;
   /* Smoother, less boxy */
 
+  --royal-blue-dark: 225 100% 12%;
+  --royal-blue-light: 225 100% 24%;
+
   /* High Intent Green - Darker for Buttons */
   --success: 158 50% 25%;
   --success-foreground: 0 0% 100%;
+
+  --royal-blue: 225 100% 16%;
+  /* Darker deep Royal Blue as requested */
 
   --font-sans: 'Inter', system-ui, sans-serif;
   --font-serif: 'Playfair Display', serif;
