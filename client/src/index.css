@@ -63,14 +63,14 @@
   --radius: 0.75rem;
   /* Smoother, less boxy */
 
-  --royal-blue-dark: 225 100% 12%;
+  --royal-blue-dark: 225 50% 10%;
   --royal-blue-light: 225 100% 24%;
 
   /* High Intent Green - Darker for Buttons */
   --success: 158 50% 25%;
   --success-foreground: 0 0% 100%;
 
-  --royal-blue: 225 100% 16%;
+  --royal-blue: 225 50% 15%;
   /* Darker deep Royal Blue as requested */
 
   --font-sans: 'Inter', system-ui, sans-serif;

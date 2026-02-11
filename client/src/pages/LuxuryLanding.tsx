@@ -200,7 +200,7 @@ export default function LuxuryLanding() {
       </Section>
 
       {/* 4. ABOUT US & CERTIFICATION */}
-      <Section id="about" className="bg-royal-blue-dark/20 backdrop-blur-sm py-32 border-y border-white/5">
+      <Section id="about" className="bg-royal-blue dark:bg-royal-blue-dark/20 backdrop-blur-sm py-32 border-y border-white/5">
         <div className="max-w-7xl mx-auto px-4">
           {/* Top Level Heading Section */}
           <div className="grid lg:grid-cols-2 gap-16 items-start mb-24">

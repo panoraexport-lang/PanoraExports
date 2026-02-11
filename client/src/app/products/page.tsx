@@ -72,6 +72,8 @@ export default function ProductsPage() {
     const [selectedCategory, setSelectedCategory] = useState('All');
     const [searchQuery, setSearchQuery] = useState('');
 
+    const [, setLocation] = useLocation();
+
     const filteredProducts = allProducts.filter(product => {
         const matchesCategory = selectedCategory === 'All' || product.category === selectedCategory;
         const matchesSearch = product.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
@@ -177,8 +179,9 @@ export default function ProductsPage() {
                             initial={{ opacity: 0, scale: 0.95 }}
                             animate={{ opacity: 1, scale: 1 }}
                             transition={{ duration: 0.3, delay: index * 0.05 }}
+                            onClick={() => setLocation(`/products/${product.id}`)}
                             className={cn(
-                                "group bg-background border border-border/50 hover:border-primary/30 hover:shadow-lg transition-all rounded-xl overflow-hidden flex",
+                                "group bg-background border border-border/50 hover:border-primary/30 hover:shadow-lg transition-all rounded-xl overflow-hidden flex cursor-pointer",
                                 viewMode === 'list' ? "flex-row h-48" : "flex-col"
                             )}
                         >
@@ -222,9 +225,9 @@ export default function ProductsPage() {
                                         <p className="text-[9px] text-secondary font-bold uppercase tracking-widest mb-0.5">Unit Price</p>
                                         <p className="text-xl font-bold text-primary">{product.price}</p>
                                     </div>
-                                    <Link href={`/products/${product.id}`} className="w-10 h-10 bg-[hsl(var(--success))] text-white flex items-center justify-center rounded-sm hover:brightness-110 transition-all shadow-md">
+                                    <div className="w-10 h-10 bg-[hsl(var(--success))] text-white flex items-center justify-center rounded-sm hover:brightness-110 transition-all shadow-md">
                                         <ArrowRight className="w-4 h-4" />
-                                    </Link>
+                                    </div>
                                 </div>
                                 {viewMode === 'list' && (
                                     <div className="mt-4 pt-4 border-t border-border flex gap-6 text-[10px] font-bold text-primary/60 uppercase tracking-widest">
