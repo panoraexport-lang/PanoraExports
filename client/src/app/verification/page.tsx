@@ -276,7 +276,7 @@ export default function VerificationPage() {
         }
 
         // Validate Business ID
-        if (!selectedCountry.idRegex.test(formData.businessId.replace(/[^a-zA-Z0-9]/g, ''))) {
+        if (!selectedCountry.idRegex.test(formData.businessId.replace(/[^a-zA-Z0-9]/g, '').toUpperCase())) {
             errors.businessId = `Invalid ${selectedCountry.idLabel} format for ${selectedCountry.name}`;
         }
 
@@ -330,7 +330,7 @@ export default function VerificationPage() {
                 },
                 body: JSON.stringify({
                     country: formData.country,
-                    businessId: formData.businessId,
+                    businessId: formData.businessId.trim(),
                 }),
             });
 

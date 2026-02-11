@@ -96,9 +96,11 @@ export class VerificationService {
      * Real API requires paid provider like MasterGST or GST API
      */
     private async verifyGST(gstin: string): Promise<VerificationResult> {
+        // Sanitize: Remove all non-alphanumeric, uppercase
+        const cleanGST = gstin.replace(/[^A-Z0-9]/gi, '').toUpperCase();
         const gstRegex = /^[0-9]{2}[A-Z]{5}[0-9]{4}[A-Z][1-9A-Z]Z[0-9A-Z]$/;
 
-        if (!gstRegex.test(gstin)) {
+        if (!gstRegex.test(cleanGST)) {
             return {
                 verified: false,
                 country: 'India',
@@ -112,7 +114,7 @@ export class VerificationService {
         return {
             verified: true,
             country: 'India',
-            businessName: `Business ${gstin.substring(2, 7)}`,
+            businessName: `Business ${cleanGST.substring(2, 7)}`,
             verificationType: 'GST',
             note: 'Format validated. Full verification requires GST API integration.',
         };
@@ -124,9 +126,11 @@ export class VerificationService {
      */
     private async verifyEUVAT(vat: string): Promise<VerificationResult> {
         try {
+            const cleanVAT = vat.replace(/[^A-Z0-9]/gi, '').toUpperCase();
+
             // Extract country code and number
-            const countryCode = vat.slice(0, 2).toUpperCase();
-            const number = vat.slice(2);
+            const countryCode = cleanVAT.slice(0, 2);
+            const number = cleanVAT.slice(2);
 
             // Validate EU country codes
             const validEUCodes = ['AT', 'BE', 'BG', 'CY', 'CZ', 'DE', 'DK', 'EE', 'ES', 'FI', 'FR', 'GR', 'HR', 'HU', 'IE', 'IT', 'LT', 'LU', 'LV', 'MT', 'NL', 'PL', 'PT', 'RO', 'SE', 'SI', 'SK'];
@@ -172,14 +176,16 @@ export class VerificationService {
      * Real verification requires IRS API or paid service
      */
     private verifyEIN(ein: string): Promise<VerificationResult> {
-        const einRegex = /^\d{2}-\d{7}$/;
+        // Sanitize: Digits only
+        const cleanEIN = ein.replace(/[^0-9]/g, '');
+        const isValid = cleanEIN.length === 9;
 
         return Promise.resolve({
-            verified: einRegex.test(ein),
+            verified: isValid,
             country: 'USA',
             verificationType: 'EIN',
-            note: 'Format validation only. Expected format: 12-3456789',
-            reason: !einRegex.test(ein) ? 'Invalid EIN format' : undefined,
+            note: 'Format validation only. Expected format: 9 digits',
+            reason: !isValid ? 'Invalid EIN format (must be 9 digits)' : undefined,
         });
     }
 
@@ -188,14 +194,16 @@ export class VerificationService {
      * Real verification available via Companies House API (free)
      */
     private verifyUKCompany(number: string): Promise<VerificationResult> {
+        const cleanNumber = number.replace(/[^A-Z0-9]/gi, '').toUpperCase();
+        // UK Company numbers are 8 chars (alphanumeric)
         const ukRegex = /^[A-Z0-9]{8}$/;
 
         return Promise.resolve({
-            verified: ukRegex.test(number),
+            verified: ukRegex.test(cleanNumber),
             country: 'UK',
             verificationType: 'Company Number',
             note: 'Format validation only. Expected format: 8 alphanumeric characters',
-            reason: !ukRegex.test(number) ? 'Invalid UK Company Number format' : undefined,
+            reason: !ukRegex.test(cleanNumber) ? 'Invalid UK Company Number format' : undefined,
         });
     }
 
@@ -203,7 +211,8 @@ export class VerificationService {
      * UAE – Trade License (FORMAT)
      */
     private verifyUAE(license: string): Promise<VerificationResult> {
-        const isValid = license.length >= 6 && /^[0-9]+$/.test(license);
+        const cleanLicense = license.replace(/[^0-9]/g, '');
+        const isValid = cleanLicense.length >= 6;
 
         return Promise.resolve({
             verified: isValid,
@@ -218,14 +227,15 @@ export class VerificationService {
      * CANADA – Business Number (FORMAT)
      */
     private verifyCanadaBN(bn: string): Promise<VerificationResult> {
-        const bnRegex = /^\d{9}$/;
+        const cleanBN = bn.replace(/[^0-9]/g, '');
+        const isValid = cleanBN.length === 9;
 
         return Promise.resolve({
-            verified: bnRegex.test(bn),
+            verified: isValid,
             country: 'Canada',
             verificationType: 'Business Number',
             note: 'Format validation only. Expected format: 9 digits',
-            reason: !bnRegex.test(bn) ? 'Invalid Business Number format' : undefined,
+            reason: !isValid ? 'Invalid Business Number format' : undefined,
         });
     }
 
@@ -234,7 +244,7 @@ export class VerificationService {
      */
     private verifyAustraliaABN(abn: string): Promise<VerificationResult> {
         // Remove spaces and validate format
-        const cleanABN = abn.replace(/\s/g, '');
+        const cleanABN = abn.replace(/[^0-9]/g, '');
         const abnRegex = /^\d{11}$/;
 
         if (!abnRegex.test(cleanABN)) {
