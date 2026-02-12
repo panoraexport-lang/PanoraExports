@@ -11,7 +11,11 @@ import {
   FileCheck,
   Shield,
   Globe,
-  ArrowRight
+  ArrowRight,
+  Instagram,
+  Facebook,
+  Linkedin,
+  Twitter
 } from "lucide-react";
 import { Link } from "wouter";
 import Navigation from "@/components/Navigation";
@@ -410,35 +414,91 @@ export default function LuxuryLanding() {
         </div>
       </Section >
 
-      <footer className="py-20 bg-royal-blue border-t border-[#c09a40]/20 px-6 md:px-12">
-        <div className="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-center gap-10">
-          <Link href="/" className="flex flex-col items-center md:items-start group">
-            <div className="flex items-baseline gap-1.5">
-              <span className="font-bold text-xl tracking-tight text-white">
-                PANORA
-              </span>
-              <span className="font-serif italic text-[#c09a40] text-lg font-light">
-                exports
-              </span>
-            </div>
-            <span className="text-[8px] text-white/50 uppercase tracking-[0.3em] font-bold mt-2">
-              Global Exports
-            </span>
-          </Link>
+      <footer className="bg-royal-blue pt-24 pb-12 border-t border-[#c09a40]/20 px-6 md:px-12 relative overflow-hidden">
+        <div className="absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-[#c09a40]/50 to-transparent" />
 
-          <div className="text-white/40 text-[9px] uppercase font-bold tracking-[0.2em] order-3 md:order-2">
-            © 2025 Panora Exports.
+        <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-12 lg:gap-8 mb-20">
+          {/* Brand Column - spans 4 cols */}
+          <div className="lg:col-span-4 space-y-6">
+            <Link href="/" className="inline-block group">
+              <div className="flex items-baseline gap-1.5">
+                <span className="font-bold text-2xl tracking-tight text-white">PANORA</span>
+                <span className="font-serif italic text-[#c09a40] text-xl font-light">exports</span>
+              </div>
+            </Link>
+            <p className="text-white/60 text-sm leading-relaxed max-w-xs">
+              Your verified export partner for standardized supply chain solutions. Connecting global markets with premium Indian resources.
+            </p>
+            <div className="flex items-center gap-4">
+              {/* Socials placeholder */}
+              {[
+                { icon: Instagram, href: "#" },
+                { icon: Linkedin, href: "#" },
+                { icon: Facebook, href: "#" },
+                { icon: Twitter, href: "#" }
+              ].map((item, i) => (
+                <a key={i} href={item.href} className="w-8 h-8 rounded-full bg-white/5 flex items-center justify-center text-white/60 hover:bg-[#c09a40] hover:text-white transition-all">
+                  <item.icon className="w-4 h-4" strokeWidth={1.5} />
+                </a>
+              ))}
+            </div>
           </div>
 
-          <div className="flex gap-10 order-2 md:order-3">
-            {[
-              { label: 'Products', href: '/products' },
-              { label: 'About', href: '/about' },
-              { label: 'FAQ', href: '/faq' },
-              { label: 'Contact', href: '/contact' }
-            ].map((link, i) => (
-              <Link key={i} href={link.href} className="text-[9px] uppercase tracking-[0.1em] font-bold text-white/60 hover:text-[#c09a40] transition-colors">
-                {link.label}
+          {/* Quick Links - spans 2 cols */}
+          <div className="lg:col-span-2 space-y-6">
+            <h4 className="text-[11px] font-bold text-secondary uppercase tracking-[0.2em]">Company</h4>
+            <ul className="space-y-4">
+              {['About Us', 'Our Process', 'Certifications', 'Contact', 'Careers'].map((item) => (
+                <li key={item}>
+                  <Link href={`/${item.toLowerCase().replace(' ', '-')}`} className="text-sm text-white/60 hover:text-white transition-colors flex items-center gap-2 group">
+                    <span className="w-1 h-1 rounded-full bg-[#c09a40] opacity-0 group-hover:opacity-100 transition-opacity" />
+                    {item}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Products - spans 3 cols */}
+          <div className="lg:col-span-3 space-y-6">
+            <h4 className="text-[11px] font-bold text-secondary uppercase tracking-[0.2em]">Exports</h4>
+            <ul className="space-y-4">
+              {['Cotton Textiles', 'Agro Commodities', 'Industrial Goods', 'Leather Products', 'Spices & Herbs'].map((item) => (
+                <li key={item}>
+                  <Link href="/products" className="text-sm text-white/60 hover:text-white transition-colors flex items-center gap-2 group">
+                    {item}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Contact - spans 3 cols */}
+          <div className="lg:col-span-3 space-y-6">
+            <h4 className="text-[11px] font-bold text-secondary uppercase tracking-[0.2em]">Headquarters</h4>
+            <div className="space-y-4">
+              <div className="flex items-start gap-3">
+                <MapPin className="w-5 h-5 text-[#c09a40] shrink-0 mt-0.5" strokeWidth={1.5} />
+                <p className="text-sm text-white/60 leading-relaxed">
+                  106, Tulip C, SEC-11, 819/3,<br />Indra Nagar, Lucknow,<br />UP 226016, India
+                </p>
+              </div>
+              <div className="flex items-center gap-3">
+                <Mail className="w-5 h-5 text-[#c09a40] shrink-0" strokeWidth={1.5} />
+                <a href="mailto:info@panoraexport.com" className="text-sm text-white/60 hover:text-white transition-colors">info@panoraexport.com</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div className="max-w-7xl mx-auto pt-8 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-4">
+          <p className="text-[10px] text-white/40 uppercase tracking-widest font-bold">
+            © 2025 Panora Exports. All rights reserved.
+          </p>
+          <div className="flex items-center gap-8">
+            {['Privacy Policy', 'Terms of Service', 'Sitemap'].map((item) => (
+              <Link key={item} href="#" className="text-[10px] text-white/40 uppercase tracking-widest font-bold hover:text-white transition-colors">
+                {item}
               </Link>
             ))}
           </div>
