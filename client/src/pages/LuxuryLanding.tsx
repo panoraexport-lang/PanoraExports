@@ -87,7 +87,7 @@ export default function LuxuryLanding() {
             alt="Hero Background"
             className="absolute inset-0 w-full h-full object-cover scale-[1.01] brightness-[0.95] md:brightness-[1.1]"
           />
-          <div className="absolute inset-0 bg-gradient-to-r from-background via-background/60 to-transparent z-10" />
+          <div className="absolute inset-0 bg-gradient-to-r from-background via-background/90 to-background/20 md:via-background/60 md:to-transparent z-10" />
         </div>
 
         <div className="relative z-10 w-full px-6 md:px-12 lg:px-24 pt-24 pb-12 md:pt-32 md:pb-16">
