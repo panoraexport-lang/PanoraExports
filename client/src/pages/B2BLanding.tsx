@@ -3,6 +3,7 @@ import { CheckCircle, Package, Leaf, TrendingUp, Globe, Shield, FileCheck, Dolla
 import { useRef } from "react";
 import { Link } from "wouter";
 import Navigation from "@/components/Navigation";
+import { ProtectedPhone } from "@/components/ProtectedPhone";
 
 // Simple grain texture component
 const Grain = () => (
@@ -64,12 +65,16 @@ export default function B2BLanding() {
                                     Request Product Catalogue
                                 </button>
                             </Link>
-                            <a href="https://wa.me/919005230333?text=Hello%2C%20I%20am%20interested%20in%20your%20products.%20I%20would%20like%20to%20know%20more." target="_blank" rel="noopener noreferrer">
-                                <button className="px-10 py-4 bg-white text-primary rounded-md text-base font-medium hover:bg-gray-50 transition-all duration-300 shadow-lg hover:shadow-xl flex items-center gap-2">
-                                    <MessageCircle className="w-5 h-5" />
-                                    WhatsApp Us
-                                </button>
-                            </a>
+                            <ProtectedPhone phone="+91 9005230333">
+                                {(maskedPhone, isProtected) => (
+                                    <a href={isProtected ? "/auth" : "https://wa.me/919005230333?text=Hello%2C%20I%20am%20interested%20in%20your%20products.%20I%20would%20like%20to%20know%20more."} target="_blank" rel="noopener noreferrer">
+                                        <button className="px-10 py-4 bg-white text-primary rounded-md text-base font-medium hover:bg-gray-50 transition-all duration-300 shadow-lg hover:shadow-xl flex items-center gap-2">
+                                            <MessageCircle className="w-5 h-5" />
+                                            WhatsApp Us
+                                        </button>
+                                    </a>
+                                )}
+                            </ProtectedPhone>
                         </div>
                     </motion.div>
                 </div>
@@ -284,12 +289,16 @@ export default function B2BLanding() {
                     </p>
 
                     <div className="flex flex-col sm:flex-row gap-6 justify-center items-center">
-                        <a href="https://wa.me/919005230333?text=Hello%2C%20I%20am%20interested%20in%20your%20products.%20I%20would%20like%20to%20know%20more." target="_blank" rel="noopener noreferrer">
-                            <button className="px-10 py-4 bg-[#25D366] text-white rounded-md text-base font-medium hover:bg-[#20bd5a] transition-all duration-300 shadow-lg hover:shadow-xl flex items-center gap-3">
-                                <MessageCircle className="w-5 h-5" />
-                                WhatsApp: +91 9005230333
-                            </button>
-                        </a>
+                        <ProtectedPhone phone="+91 9005230333">
+                            {(maskedPhone, isProtected) => (
+                                <a href={isProtected ? "/auth" : "https://wa.me/919005230333?text=Hello%2C%20I%20am%20interested%20in%20your%20products.%20I%20would%20like%20to%20know%20more."} target="_blank" rel="noopener noreferrer">
+                                    <button className="px-10 py-4 bg-[#25D366] text-white rounded-md text-base font-medium hover:bg-[#20bd5a] transition-all duration-300 shadow-lg hover:shadow-xl flex items-center gap-3">
+                                        <MessageCircle className="w-5 h-5" />
+                                        WhatsApp: {maskedPhone}
+                                    </button>
+                                </a>
+                            )}
+                        </ProtectedPhone>
                         <a href="mailto:info@panoraexport.com">
                             <button className="px-10 py-4 bg-white border-2 border-primary text-primary rounded-md text-base font-medium hover:bg-primary hover:text-white transition-all duration-300 flex items-center gap-3">
                                 <Mail className="w-5 h-5" />
@@ -342,14 +351,18 @@ export default function B2BLanding() {
             </footer>
 
             {/* Floating WhatsApp Button */}
-            <a
-                href="https://wa.me/919005230333?text=Hello%2C%20I%20am%20interested%20in%20your%20products.%20I%20would%20like%20to%20know%20more."
-                target="_blank"
-                rel="noopener noreferrer"
-                className="fixed bottom-8 right-8 w-16 h-16 bg-[#25D366] rounded-full flex items-center justify-center shadow-2xl hover:scale-110 transition-transform duration-300 z-50"
-            >
-                <MessageCircle className="w-8 h-8 text-white" />
-            </a>
+            <ProtectedPhone phone="+91 9005230333">
+                {(maskedPhone, isProtected) => (
+                    <a
+                        href={isProtected ? "/auth" : "https://wa.me/919005230333?text=Hello%2C%20I%20am%20interested%20in%20your%20products.%20I%20would%20like%20to%20know%20more."}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="fixed bottom-8 right-8 w-16 h-16 bg-[#25D366] rounded-full flex items-center justify-center shadow-2xl hover:scale-110 transition-transform duration-300 z-50"
+                    >
+                        <MessageCircle className="w-8 h-8 text-white" />
+                    </a>
+                )}
+            </ProtectedPhone>
         </div>
     );
 }

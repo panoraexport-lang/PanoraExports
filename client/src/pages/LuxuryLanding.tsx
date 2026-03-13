@@ -21,6 +21,7 @@ import { Link } from "wouter";
 import Navigation from "@/components/Navigation";
 import { SecureDocument } from "@/components/SecureDocument";
 import { ProtectedEmail } from "@/components/ProtectedEmail";
+import { ProtectedPhone } from "@/components/ProtectedPhone";
 import Autoplay from "embla-carousel-autoplay";
 import {
   Carousel,
@@ -73,11 +74,43 @@ export default function LuxuryLanding() {
         const response = await fetch(`${API_BASE_URL}/products`);
         if (response.ok) {
           const data = await response.json();
-          const transformed = data.slice(0, 8).map((p: any) => ({
-            title: p.name,
-            img: (typeof p.images === 'string' ? JSON.parse(p.images)[0] : p.images?.[0]) || p.image || ''
-          }));
-          setProductsList(transformed);
+          
+          // Group products by category
+          const grouped: Record<string, any[]> = {};
+          data.forEach((p: any) => {
+            const catName = p.category?.name || 'Uncategorized';
+            if (catName.toLowerCase() === 'uncategorized') return;
+            if (!grouped[catName]) grouped[catName] = [];
+            grouped[catName].push(p);
+          });
+
+          // Define category order for interleaving
+          const sortedCatNames = Object.keys(grouped).sort((a, b) => {
+            const order = ['agriculture', 'textiles'];
+            const indexA = order.indexOf(a.toLowerCase());
+            const indexB = order.indexOf(b.toLowerCase());
+            if (indexA !== -1 && indexB !== -1) return indexA - indexB;
+            if (indexA !== -1) return -1;
+            if (indexB !== -1) return 1;
+            return a.localeCompare(b);
+          });
+
+          const interleaved: any[] = [];
+          const maxCount = Math.max(...Object.values(grouped).map(arr => arr.length));
+
+          for (let i = 0; i < maxCount; i++) {
+            sortedCatNames.forEach(name => {
+              const product = grouped[name][i];
+              if (product) {
+                interleaved.push({
+                  title: product.name,
+                  img: (typeof product.images === 'string' ? JSON.parse(product.images)[0] : product.images?.[0]) || product.image || ''
+                });
+              }
+            });
+          }
+
+          setProductsList(interleaved.slice(0, 15)); // Display up to 15 items
         }
       } catch (error) {
         console.error('Error fetching products:', error);
@@ -129,7 +162,7 @@ export default function LuxuryLanding() {
 
             <div className="flex flex-col sm:flex-row items-center gap-3">
               <Link href="/products" className="w-full sm:w-auto px-8 py-4 bg-[hsl(var(--success))] text-white text-[9px] font-black uppercase tracking-[0.2em] hover:brightness-110 transition-all flex items-center justify-center gap-2.5 rounded-sm shadow-[0_15px_30px_rgba(22,101,52,0.15)] group">
-                Explore Inventory
+                Explore Catalogue
                 <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
               </Link>
               <Link
@@ -293,7 +326,7 @@ export default function LuxuryLanding() {
       {/* 5. PRODUCT PREVIEW */}
       <Section id="products" className="bg-soft-blue py-24 overflow-hidden border-y border-secondary/20">
         <div className="text-center mb-16">
-          <h3 className="text-4xl md:text-6xl font-bold text-white tracking-tight uppercase">Premier <span className="font-serif italic font-light text-secondary">Trade Inventory</span></h3>
+          <h3 className="text-4xl md:text-6xl font-bold text-white tracking-tight uppercase">Premier <span className="font-serif italic font-light text-secondary">Trade Catalogue</span></h3>
         </div>
 
         <div className="relative max-w-5xl mx-auto px-4 md:px-0">
@@ -400,14 +433,11 @@ export default function LuxuryLanding() {
           </p>
 
           <div className="grid md:grid-cols-2 gap-8 items-center mb-16">
-            <a
-              href="https://wa.me/919005230333?text=Hello%2C%20I%20am%20interested%20in%20your%20products.%20I%20would%20like%20to%20know%20more."
-              className="flex flex-col items-center p-10 bg-white/5 border border-secondary/20 rounded-sm hover:bg-white/10 transition-all group"
-            >
+            <div className="flex flex-col items-center p-10 bg-white/5 border border-secondary/20 rounded-sm hover:bg-white/10 transition-all group">
               <MessageCircle className="w-10 h-10 mb-4 text-secondary group-hover:text-[hsl(var(--success))] transition-colors" strokeWidth={1} />
               <span className="text-[10px] uppercase tracking-[0.3em] text-white/40 mb-3 font-bold">Secure Trade Canal</span>
-              <span className="text-xl font-bold tracking-tight text-white">+91 9005230333</span>
-            </a>
+              <ProtectedPhone phone="+91 9005230333" className="text-xl font-bold tracking-tight text-white" />
+            </div>
             <ProtectedEmail
               user="info"
               domain="panoraexport.com"
@@ -517,17 +547,19 @@ export default function LuxuryLanding() {
         </div>
       </footer>
 
-      <a
-        href="https://wa.me/919005230333?text=Hello%2C%20I%20am%20interested%20in%20your%20products.%20I%20would%20like%20to%20know%20more."
-        target="_blank"
-        rel="noopener noreferrer"
-        className="fixed bottom-10 right-10 w-20 h-20 bg-[hsl(var(--success))] text-white rounded-full flex items-center justify-center shadow-2xl hover:scale-110 transition-transform duration-500 z-50 group border border-white/20"
-      >
-        <MessageCircle className="w-8 h-8" strokeWidth={1} />
-        <span className="absolute right-full mr-6 bg-primary text-white py-3 px-6 rounded-sm shadow-2xl text-[10px] font-black uppercase tracking-widest opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap border border-secondary/20">
-          Initialize Secure Trade Channel
-        </span>
-      </a>
+      <ProtectedPhone phone="+91 9005230333">
+        {(maskedPhone, isProtected) => (
+          <a
+            href={isProtected ? "/auth" : "https://wa.me/919005230333?text=Hello%2C%20I%20am%20interested%20in%20your%20products.%20I%20would%20like%20to%20know%20more."}
+            className="fixed bottom-10 right-10 w-20 h-20 bg-[hsl(var(--success))] text-white rounded-full flex items-center justify-center shadow-2xl hover:scale-110 transition-transform duration-500 z-50 group border border-white/20"
+          >
+            <MessageCircle className="w-8 h-8" strokeWidth={1} />
+            <span className="absolute right-full mr-6 bg-primary text-white py-3 px-6 rounded-sm shadow-2xl text-[10px] font-black uppercase tracking-widest opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap border border-secondary/20">
+              {isProtected ? "Login to Secure Canal" : "Initialize Secure Trade Channel"}
+            </span>
+          </a>
+        )}
+      </ProtectedPhone>
     </div >
   );
 }

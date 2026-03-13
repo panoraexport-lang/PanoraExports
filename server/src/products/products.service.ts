@@ -22,6 +22,17 @@ export class ProductsService {
         });
     }
 
+    async getCategoriesWithCounts() {
+        return this.prisma.productCategory.findMany({
+            where: { isActive: true },
+            include: {
+                _count: {
+                    select: { products: true }
+                }
+            }
+        });
+    }
+
     async findOne(id: string) {
         return this.prisma.product.findUnique({
             where: { id },

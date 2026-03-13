@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { motion } from 'framer-motion';
 import Navigation from '@/components/Navigation';
 import { ProtectedEmail } from '@/components/ProtectedEmail';
+import { ProtectedPhone } from '@/components/ProtectedPhone';
 import { Mail, Phone, MapPin, Send, MessageCircle, Clock, Globe } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 import { useForm } from 'react-hook-form';
@@ -111,7 +112,9 @@ export default function ContactPage() {
                             </div>
                             <div>
                                 <h3 className="text-[10px] font-bold text-primary uppercase tracking-widest mb-2">Call Us</h3>
-                                <p className="text-primary/70 font-medium">+91 9005230333 (Mon-Fri)</p>
+                                <div className="text-primary/70 font-medium">
+                                    <ProtectedPhone phone="+91 9005230333" /> (Mon-Fri)
+                                </div>
                                 <p className="text-primary/70 font-medium text-sm mt-1 text-muted-foreground flex items-center gap-1.5">
                                     <Clock className="w-3 h-3" /> 9:00 AM - 6:00 PM IST
                                 </p>

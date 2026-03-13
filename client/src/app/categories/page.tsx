@@ -3,13 +3,15 @@
 import { ArrowRight, Package } from 'lucide-react';
 import Navigation from '@/components/Navigation';
 import { motion } from 'framer-motion';
+import { useState, useEffect } from 'react';
 
-const categories = [
+const API_BASE_URL = 'http://localhost:3001/api';
+
+const DEFAULT_CATEGORIES = [
     {
         id: 'agriculture',
         name: 'Agriculture',
         description: 'Premium graded fruits, vegetables, and organic farm produce.',
-        count: 856,
         image: 'https://images.unsplash.com/photo-1542838132-92c53300491e?w=800&h=600&fit=crop&q=80',
         icon: Package,
         subcategories: ['Fresh Fruits', 'Vegetables', 'Organic Produce', 'Graded Crops'],
@@ -18,14 +20,75 @@ const categories = [
         id: 'textiles',
         name: 'Textiles',
         description: 'Elite quality home textiles, fabrics, and linen products.',
-        count: 1247,
         image: 'https://images.unsplash.com/photo-1524678606370-a47ad25cb82a?w=800&h=600&fit=crop&q=80',
         icon: Package,
         subcategories: ['Home Textiles', 'Bedding', 'Curtains', 'Linen'],
     },
 ];
 
+interface CategoryWithCount {
+    id: string;
+    name: string;
+    _count: {
+        products: number;
+    };
+}
+
+interface Stats {
+    totalProducts: number;
+    activeProducts: number;
+    totalUsers: number;
+    verifiedBuyers: number;
+}
+
 export default function CategoriesPage() {
+    const [categories, setCategories] = useState<any[]>(DEFAULT_CATEGORIES.map(c => ({ ...c, count: 0 })));
+    const [stats, setStats] = useState<Stats | null>(null);
+
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                // Fetch categories with counts
+                const catRes = await fetch(`${API_BASE_URL}/products/categories`);
+                const rawCatData: CategoryWithCount[] = await catRes.json();
+                const catData = rawCatData.filter(c => c.name.toLowerCase() !== 'uncategorized');
+
+                // Fetch general stats
+                const statsRes = await fetch(`${API_BASE_URL}/admin/stats`);
+                const statsData: Stats = await statsRes.json();
+                setStats(statsData);
+
+                // Merge real counts into DEFAULT_CATEGORIES
+                const updatedCategories = DEFAULT_CATEGORIES.map(defCat => {
+                    const realCat = catData.find(c => c.name.toLowerCase() === defCat.name.toLowerCase());
+                    return {
+                        ...defCat,
+                        count: realCat ? realCat._count.products : 0
+                    };
+                });
+                
+                // Add any other categories from backend that aren't in DEFAULT_CATEGORIES
+                const otherCategories = catData
+                    .filter(c => !DEFAULT_CATEGORIES.some(def => def.name.toLowerCase() === c.name.toLowerCase()))
+                    .map(c => ({
+                        id: c.id,
+                        name: c.name,
+                        description: 'Explore our quality products in this category.',
+                        count: c._count.products,
+                        image: 'https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=800&h=600&fit=crop&q=80', // Default warehouse image
+                        icon: Package,
+                        subcategories: ['General', 'Imported', 'Export Quality']
+                    }));
+
+                setCategories([...updatedCategories, ...otherCategories]);
+            } catch (error) {
+                console.error('Error fetching categories data:', error);
+            }
+        };
+
+        fetchData();
+    }, []);
+
     return (
         <div className="min-h-screen bg-background pt-20 font-sans antialiased text-primary">
             <Navigation />
@@ -51,10 +114,10 @@ export default function CategoriesPage() {
                 <div className="max-w-[1600px] mx-auto px-8 md:px-12 py-10">
                     <div className="grid grid-cols-2 lg:grid-cols-4 gap-12">
                         {[
-                            { value: '02', label: 'Industry Sectors' },
-                            { value: '0', label: 'Products' },
-                            { value: '0', label: 'Verified Suppliers' },
-                            { value: '0', label: 'Countries Served' }
+                            { value: categories.length.toString().padStart(2, '0'), label: 'Industry Sectors' },
+                            { value: stats?.activeProducts.toString() || '0', label: 'Products' },
+                            { value: stats?.verifiedBuyers.toString() || '0', label: 'Verified Buyers' },
+                            { value: '03+', label: 'Countries Served' }
                         ].map((stat, i) => (
                             <div key={i} className="text-center md:text-left">
                                 <p className="text-4xl font-bold text-primary mb-1 tracking-tight">{stat.value}</p>
@@ -108,7 +171,7 @@ export default function CategoriesPage() {
 
                                 {/* Subcategories */}
                                 <div className="flex flex-wrap gap-1.5 mb-8">
-                                    {category.subcategories.slice(0, 3).map((sub) => (
+                                    {category.subcategories.slice(0, 3).map((sub: string) => (
                                         <span
                                             key={sub}
                                             className="px-3 py-1 bg-secondary border border-border text-muted-foreground text-[8px] font-bold uppercase tracking-wider rounded-sm group-hover:border-primary/20 group-hover:text-primary transition-colors"
