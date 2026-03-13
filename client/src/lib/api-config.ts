@@ -5,24 +5,40 @@
 
 const getApiBaseUrl = () => {
     const isClient = typeof window !== 'undefined';
+    if (!isClient) return 'http://localhost:3001/api';
+
+    const hostname = window.location.hostname;
+    const protocol = window.location.protocol;
     const envUrl = import.meta.env.VITE_API_URL;
-    const hostname = isClient ? window.location.hostname : 'localhost';
-    const protocol = isClient ? window.location.protocol : 'http:';
 
-    // 1. If env var is set AND it's not pointing to localhost while we are on a real device
-    // This prevents hardcoded 'localhost' in .env from breaking mobile/production access
-    if (envUrl && (!envUrl.includes('localhost') || hostname === 'localhost')) {
-        return envUrl.endsWith('/api') ? envUrl : `${envUrl}/api`;
+    // Detect if we are on a "real" device (not localhost/127.0.0.1)
+    const isRealDevice = hostname !== 'localhost' && hostname !== '127.0.0.1';
+    const isIp = /^[0-9.]+$/.test(hostname); // mobile accessing via IP
+
+    let detectedUrl = '';
+
+    // 1. If we are on a mobile/other device and have an envUrl but it's "localhost",
+    // we MUST ignore it because localhost will fail on a mobile device.
+    if (isRealDevice && envUrl && envUrl.includes('localhost')) {
+        // Fall through to dynamic detection
+    } else if (envUrl) {
+        // Use explicitly provided production/staging URL
+        detectedUrl = envUrl.endsWith('/api') ? envUrl : `${envUrl}/api`;
     }
 
-    // 2. Dynamic Fallback: Use current hostname with port 3001
-    // This is the most reliable for local network (mobile) and production subdomains
-    if (isClient) {
-        return `${protocol}//${hostname}:3001/api`;
+    if (!detectedUrl) {
+        // 2. Dynamic Detection for local network or domain-relative API
+        if (isIp || hostname === 'localhost') {
+            // Local network testing (e.g. http://192.168.1.5:3001/api)
+            detectedUrl = `${protocol}//${hostname}:3001/api`;
+        } else {
+            // 3. True Production (real domain e.g. panora.com)
+            detectedUrl = `${protocol}//${hostname}/api`;
+        }
     }
 
-    // 3. SSR fallback
-    return 'http://localhost:3001/api';
+    console.log('[API URL] Detected:', detectedUrl);
+    return detectedUrl;
 };
 
 export const API_BASE_URL = getApiBaseUrl();
