@@ -60,21 +60,40 @@ export default function AdminDashboard() {
                 fetch(`${API_BASE_URL}/admin/stats`)
             ]);
 
+            if (!productsRes.ok || !statsRes.ok) {
+                const errorText = await (!productsRes.ok ? productsRes : statsRes).text();
+                throw new Error(`Server error: ${errorText}`);
+            }
+
             const productsData = await productsRes.json();
             const statsData = await statsRes.json();
 
             // Transform backend data to frontend format
-            const transformedProducts = productsData.map((p: any) => ({
-                id: p.id,
-                name: p.name,
-                category: p.category?.name || 'Uncategorized',
-                price: `${p.currency} ${p.priceRange}`,
-                supplier: p.seller?.name || 'Direct Export',
-                image: Array.isArray(p.images) ? p.images[0] : (typeof p.images === 'string' ? JSON.parse(p.images)[0] : '/placeholder.png'),
-                isActive: p.isActive,
-                verified: true, // simplified for now
-                stock: p.minOrderQuantity * 10, // dummy stock calc from MOQ
-            }));
+            const transformedProducts = productsData.map((p: any) => {
+                let displayImage = '/placeholder.png';
+                try {
+                    if (Array.isArray(p.images) && p.images.length > 0) {
+                        displayImage = p.images[0];
+                    } else if (typeof p.images === 'string' && p.images.length > 0) {
+                        const parsed = JSON.parse(p.images);
+                        displayImage = Array.isArray(parsed) ? parsed[0] : parsed;
+                    }
+                } catch (e) {
+                    displayImage = p.image || '/placeholder.png';
+                }
+
+                return {
+                    id: p.id,
+                    name: p.name,
+                    category: p.category?.name || 'Uncategorized',
+                    price: `${p.currency || 'USD'} ${p.priceRange || 'By Quote'}`,
+                    supplier: p.seller?.name || 'Direct Export',
+                    image: displayImage,
+                    isActive: p.isActive,
+                    verified: true,
+                    stock: (p.minOrderQuantity || 0) * 10,
+                };
+            });
 
             setProducts(transformedProducts);
             setStats({

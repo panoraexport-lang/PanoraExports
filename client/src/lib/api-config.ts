@@ -4,22 +4,24 @@
  */
 
 const getApiBaseUrl = () => {
-    // 1. Check if VITE_API_URL environment variable is set
-    if (import.meta.env.VITE_API_URL) {
-        return import.meta.env.VITE_API_URL.endsWith('/api') 
-            ? import.meta.env.VITE_API_URL 
-            : `${import.meta.env.VITE_API_URL}/api`;
+    const isClient = typeof window !== 'undefined';
+    const envUrl = import.meta.env.VITE_API_URL;
+    const hostname = isClient ? window.location.hostname : 'localhost';
+    const protocol = isClient ? window.location.protocol : 'http:';
+
+    // 1. If env var is set AND it's not pointing to localhost while we are on a real device
+    // This prevents hardcoded 'localhost' in .env from breaking mobile/production access
+    if (envUrl && (!envUrl.includes('localhost') || hostname === 'localhost')) {
+        return envUrl.endsWith('/api') ? envUrl : `${envUrl}/api`;
     }
 
-    // 2. Fallback: Use current hostname with port 3001
-    // Using window.location.hostname allows access from any device in the same network
-    if (typeof window !== 'undefined') {
-        const hostname = window.location.hostname;
-        const protocol = window.location.protocol;
+    // 2. Dynamic Fallback: Use current hostname with port 3001
+    // This is the most reliable for local network (mobile) and production subdomains
+    if (isClient) {
         return `${protocol}//${hostname}:3001/api`;
     }
 
-    // 3. Last resort fallback
+    // 3. SSR fallback
     return 'http://localhost:3001/api';
 };
 
