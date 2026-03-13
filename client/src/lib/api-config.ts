@@ -32,12 +32,16 @@ const getApiBaseUrl = () => {
             // Local network testing (e.g. http://192.168.1.5:3001/api)
             detectedUrl = `${protocol}//${hostname}:3001/api`;
         } else {
-            // 3. True Production (real domain e.g. panora.com)
+            // 3. True Production (real domain e.g. panora.vercel.app)
+            // In production, we expect the API to be hosted on the same domain or proxied.
+            // If the backend is NOT hosted, this will result in a 404 or connection error.
             detectedUrl = `${protocol}//${hostname}/api`;
         }
     }
 
-    console.log('[API URL] Detected:', detectedUrl);
+    if (isRealDevice && !envUrl && !isIp) {
+        console.warn('[API URL] You are on a production domain but VITE_API_URL is not set. The app will try to call the backend at:', detectedUrl);
+    }
     return detectedUrl;
 };
 
