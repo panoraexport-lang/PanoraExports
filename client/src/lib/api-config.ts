@@ -33,8 +33,8 @@ const getApiBaseUrl = () => {
             detectedUrl = `${protocol}//${hostname}:3001/api`;
         } else {
             // 3. True Production (real domain e.g. panora.vercel.app)
-            // In production, we expect the API to be hosted on the same domain or proxied.
-            // If the backend is NOT hosted, this will result in a 404 or connection error.
+            // In production, we assume the API is either on the same domain or we fall back to domain/api
+            // IMPORTANT: Never append :3001 to a public domain
             detectedUrl = `${protocol}//${hostname}/api`;
         }
     }

@@ -19,9 +19,10 @@ async function bootstrap() {
     app.use(compression());
     app.use(cookieParser());
 
-    // CORS - Allow all origins for development
+    // CORS - Allow all origins for production and development
     app.enableCors({
         origin: true,
+        methods: 'GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS',
         credentials: true,
     });
 
