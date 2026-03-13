@@ -1,8 +1,8 @@
 import { User } from './supabase';
 
 // Admin credentials
-const ADMIN_EMAIL = 'panoraexports@gmail.com';
-const ADMIN_PASSWORD = 'panoraexport@2025';
+const ADMIN_EMAIL = 'Panoraexport@admin.com';
+const ADMIN_PASSWORD = 'RishabhPanora@2025';
 
 /**
  * Check if a user has admin privileges

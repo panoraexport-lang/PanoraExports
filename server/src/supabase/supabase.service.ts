@@ -45,7 +45,8 @@ export class SupabaseService implements OnModuleInit {
             throw new Error('Supabase client not initialized. Check SUPABASE_URL and SUPABASE_SERVICE_KEY env vars.');
         }
 
-        const fileName = `${folder}/${Date.now()}-${file.originalname}`;
+        const sanitizedName = file.originalname.replace(/[^a-zA-Z0-9.-]/g, '_');
+        const fileName = `${folder}/${Date.now()}-${sanitizedName}`;
         this.logger.log(`Uploading to bucket: "${this.bucketName}", path: "${fileName}"`);
 
         const { data, error } = await this.supabase.storage
