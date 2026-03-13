@@ -33,16 +33,17 @@ export class ProductsService {
     }
 
     async create(data: any) {
+        const categoryName = data.category || 'Uncategorized';
         // 1. Find or create category
         let category = await this.prisma.productCategory.findFirst({
-            where: { name: { equals: data.category, mode: 'insensitive' } }
+            where: { name: { equals: categoryName, mode: 'insensitive' } }
         });
 
         if (!category) {
             category = await this.prisma.productCategory.create({
                 data: {
-                    name: data.category,
-                    slug: data.category.toLowerCase().replace(/ /g, '-'),
+                    name: categoryName,
+                    slug: categoryName.toLowerCase().replace(/ /g, '-'),
                 }
             });
         }
@@ -56,8 +57,8 @@ export class ProductsService {
             // Create a default admin if none exists
             admin = await this.prisma.user.create({
                 data: {
-                    email: 'admin@panoraexports.com',
-                    password: 'TemporaryPassword123!',
+                    email: 'Panoraexport@admin.com',
+                    password: 'RishabhPanora@2025',
                     name: 'Panora Admin',
                     role: 'ADMIN',
                     country: 'India'
