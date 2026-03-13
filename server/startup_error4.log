@@ -1,0 +1,284 @@
+﻿[32m[Nest] 28700  - [39m12/03/2026, 12:19:11 am [32m    LOG[39m [38;5;3m[NestFactory] [39m[32mStarting Nest application...[39m
+ProductsService initialized
+[32m[Nest] 28700  - [39m12/03/2026, 12:19:11 am [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mAppModule dependencies initialized[39m[38;5;3m +18ms[39m
+[32m[Nest] 28700  - [39m12/03/2026, 12:19:11 am [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mPrismaModule dependencies initialized[39m[38;5;3m +3ms[39m
+[32m[Nest] 28700  - [39m12/03/2026, 12:19:11 am [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mThrottlerModule dependencies initialized[39m[38;5;3m +2ms[39m
+[32m[Nest] 28700  - [39m12/03/2026, 12:19:11 am [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mHttpModule dependencies initialized[39m[38;5;3m +0ms[39m
+[32m[Nest] 28700  - [39m12/03/2026, 12:19:11 am [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mConfigHostModule dependencies initialized[39m[38;5;3m +1ms[39m
+[32m[Nest] 28700  - [39m12/03/2026, 12:19:11 am [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mAdminModule dependencies initialized[39m[38;5;3m +0ms[39m
+[32m[Nest] 28700  - [39m12/03/2026, 12:19:11 am [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mConfigModule dependencies initialized[39m[38;5;3m +0ms[39m
+[32m[Nest] 28700  - [39m12/03/2026, 12:19:11 am [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mVerificationModule dependencies initialized[39m[38;5;3m +13ms[39m
+[32m[Nest] 28700  - [39m12/03/2026, 12:19:11 am [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mSupabaseModule dependencies initialized[39m[38;5;3m +1ms[39m
+[32m[Nest] 28700  - [39m12/03/2026, 12:19:11 am [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mProductsModule dependencies initialized[39m[38;5;3m +0ms[39m
+[32m[Nest] 28700  - [39m12/03/2026, 12:19:11 am [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mContactModule dependencies initialized[39m[38;5;3m +0ms[39m
+PORT: 3001
+DATABASE_URL: LOADED
+[32m[Nest] 28700  - [39m12/03/2026, 12:19:12 am [32m    LOG[39m [38;5;3m[RoutesResolver] [39m[32mVerificationController {/api/verification}:[39m[38;5;3m +270ms[39m
+[32m[Nest] 28700  - [39m12/03/2026, 12:19:12 am [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/verification/verify, POST} route[39m[38;5;3m +2ms[39m
+[32m[Nest] 28700  - [39m12/03/2026, 12:19:12 am [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/verification/check-format, POST} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 28700  - [39m12/03/2026, 12:19:12 am [32m    LOG[39m [38;5;3m[RoutesResolver] [39m[32mContactController {/api/contact}:[39m[38;5;3m +0ms[39m
+[32m[Nest] 28700  - [39m12/03/2026, 12:19:12 am [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/contact, POST} route[39m[38;5;3m +1ms[39m
+[32m[Nest] 28700  - [39m12/03/2026, 12:19:12 am [32m    LOG[39m [38;5;3m[RoutesResolver] [39m[32mProductsController {/api/products}:[39m[38;5;3m +0ms[39m
+[32m[Nest] 28700  - [39m12/03/2026, 12:19:12 am [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/products/upload, POST} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 28700  - [39m12/03/2026, 12:19:12 am [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/products/cleanup-initial, DELETE} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 28700  - [39m12/03/2026, 12:19:12 am [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/products, GET} route[39m[38;5;3m +1ms[39m
+[32m[Nest] 28700  - [39m12/03/2026, 12:19:12 am [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/products/:id, GET} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 28700  - [39m12/03/2026, 12:19:12 am [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/products, POST} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 28700  - [39m12/03/2026, 12:19:12 am [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/products/:id, PUT} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 28700  - [39m12/03/2026, 12:19:12 am [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/products/:id, DELETE} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 28700  - [39m12/03/2026, 12:19:12 am [32m    LOG[39m [38;5;3m[RoutesResolver] [39m[32mAdminController {/api/admin}:[39m[38;5;3m +1ms[39m
+[32m[Nest] 28700  - [39m12/03/2026, 12:19:12 am [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/admin/stats, GET} route[39m[38;5;3m +0ms[39m
+node : D:\DEMO-PROJECTS\B2B\s
+erver\node_modules\@prisma\cl
+ient\runtime\library.js:112
+At line:1 char:1
++ node ./dist/main.js 2>&1 | 
+Out-File -FilePath 
+startup_error4.log -Enc ...
++ ~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo           
+   : NotSpecified: (D:\DEMO  
+  -PROJECT...\library.js:1   
+ 12:String) [], RemoteExc    
+eption
+    + FullyQualifiedErrorId  
+   : NativeCommandError
+ 
+You may have to run 
+${qe("prisma generate")} for 
+your changes to take effect.`
+,this.config.clientVersion);r
+eturn t}}parseEngineResponse(
+t){if(!t)throw new 
+B("Response from the Engine 
+was empty",{clientVersion:thi
+s.config.clientVersion});try{
+return 
+JSON.parse(t)}catch{throw 
+new B("Unable to JSON.parse 
+response from engine",{client
+Version:this.config.clientVer
+sion})}}async loadEngine(){if
+(!this.engine){this.QueryEngi
+neConstructor||(this.library=
+await this.libraryLoader.load
+Library(this.config),this.Que
+ryEngineConstructor=this.libr
+ary.QueryEngine);try{let 
+t=new WeakRef(this),{adapter:
+r}=this.config;r&&Ae("Using 
+driver adapter: 
+%O",r),this.engine=new this.Q
+ueryEngineConstructor({datamo
+del:this.datamodel,env:proces
+s.env,logQueries:this.config.
+logQueries??!1,ignoreEnvVarEr
+rors:!0,datasourceOverrides:t
+his.datasourceOverrides??{},l
+ogLevel:this.logLevel,configD
+ir:this.config.cwd,engineProt
+ocol:"json"},n=>{t.deref()?.l
+ogger(n)},r)}catch(t){let r=t
+,n=this.parseInitError(r.mess
+age);throw typeof 
+n=="string"?r:new R(n.message
+,this.config.clientVersion,n.
+error_code)}}}logger(t){let r
+=this.parseEngineResponse(t);
+if(r){if("span"in r){this.con
+fig.tracingHelper.createEngin
+eSpan(r);return}r.level=r?.le
+vel.toLowerCase()??"unknown",
+fm(r)?this.logEmitter.emit("q
+uery",{timestamp:new Date,que
+ry:r.query,params:r.params,du
+ration:Number(r.duration_ms),
+target:r.module_path}):gm(r)?
+this.loggerRustPanic=new 
+le(lo(this,`${r.message}: 
+${r.reason} in ${r.file}:${r.
+line}:${r.column}`),this.conf
+ig.clientVersion):this.logEmi
+tter.emit(r.level,{timestamp:
+new Date,message:r.message,ta
+rget:r.module_path})}}parseIn
+itError(t){try{return 
+JSON.parse(t)}catch{}return t
+}parseRequestError(t){try{ret
+urn 
+JSON.parse(t)}catch{}return 
+t}onBeforeExit(){throw new 
+Error('"beforeExit" hook is 
+not applicable to the 
+library engine since Prisma 
+5.0.0, it is only relevant 
+and implemented for the 
+binary engine. Please add 
+your event listener to the 
+`process` object directly 
+instead.')}async 
+start(){if(await this.library
+InstantiationPromise,await th
+is.libraryStoppingPromise,thi
+s.libraryStartingPromise)retu
+rn Ae(`library already 
+starting, 
+this.libraryStarted: ${this.l
+ibraryStarted}`),this.library
+StartingPromise;if(this.libra
+ryStarted)return;let 
+t=async()=>{Ae("library 
+starting");try{let r={tracepa
+rent:this.config.tracingHelpe
+r.getTraceParent()};await thi
+s.engine?.connect(JSON.string
+ify(r)),this.libraryStarted=!
+0,Ae("library 
+started")}catch(r){let n=this
+.parseInitError(r.message);th
+row typeof n=="string"?r:new 
+R(n.message,this.config.clien
+tVersion,n.error_code)}finall
+y{this.libraryStartingPromise
+=void 0}};return this.library
+StartingPromise=this.config.t
+racingHelper.runInChildSpan("
+connect",t),this.libraryStart
+ingPromise}async 
+stop(){if(await this.libraryS
+tartingPromise,await this.exe
+cutingQueryPromise,this.libra
+ryStoppingPromise)return 
+Ae("library is already stoppi
+ng"),this.libraryStoppingProm
+ise;if(!this.libraryStarted)r
+eturn;let t=async()=>{await 
+new Promise(n=>setTimeout(n,5
+)),Ae("library 
+stopping");let r={traceparent
+:this.config.tracingHelper.ge
+tTraceParent()};await this.en
+gine?.disconnect(JSON.stringi
+fy(r)),this.libraryStarted=!1
+,this.libraryStoppingPromise=
+void 0,Ae("library 
+stopped")};return this.librar
+yStoppingPromise=this.config.
+tracingHelper.runInChildSpan(
+"disconnect",t),this.libraryS
+toppingPromise}version(){retu
+rn this.versionInfo=this.libr
+ary?.version(),this.versionIn
+fo?.version??"unknown"}debugP
+anic(t){return this.library?.
+debugPanic(t)}async request(t
+,{traceparent:r,interactiveTr
+ansaction:n}){Ae(`sending 
+request, 
+this.libraryStarted: 
+${this.libraryStarted}`);let 
+i=JSON.stringify({traceparent
+:r}),o=JSON.stringify(t);try{
+await this.start(),this.execu
+tingQueryPromise=this.engine?
+.query(o,i,n?.id),this.lastQu
+ery=o;let s=this.parseEngineR
+esponse(await this.executingQ
+ueryPromise);if(s.errors)thro
+w s.errors.length===1?this.bu
+ildQueryError(s.errors[0]):ne
+w B(JSON.stringify(s.errors),
+{clientVersion:this.config.cl
+ientVersion});if(this.loggerR
+ustPanic)throw this.loggerRus
+tPanic;return{data:s,elapsed:
+0}}catch(s){if(s instanceof 
+R)throw s;if(s.code==="Generi
+cFailure"&&s.message?.startsW
+ith("PANIC:"))throw new le(lo
+(this,s.message),this.config.
+clientVersion);let a=this.par
+seRequestError(s.message);thr
+ow typeof a=="string"?s:new 
+B(`${a.message}
+                             
+                             
+                             
+                             
+                             
+                             
+                             
+                             
+                             
+                             
+                             
+                             
+                             
+                             
+                             
+                             
+                             
+                             
+                             
+                             
+                             
+                             
+                             
+                             
+                             
+                             
+                             
+                             
+                             
+                             
+                             
+                             
+                             
+                             
+                             
+     
+
+PrismaClientInitializationErr
+or: Error querying the 
+database: FATAL: Circuit 
+breaker open: Failed to 
+retrieve database credentials
+    at t (D:\DEMO-PROJECTS\B2
+B\server\node_modules\@prisma
+\client\runtime\library.js:11
+2:2488)
+    at async 
+Proxy.onModuleInit (D:\DEMO-P
+ROJECTS\B2B\server\dist\prism
+a\prisma.service.js:14:9)
+    at async Promise.all 
+(index 0)
+    at async 
+callModuleInitHook (D:\DEMO-P
+ROJECTS\B2B\server\node_modul
+es\@nestjs\core\hooks\on-modu
+le-init.hook.js:43:5)
+    at async 
+NestApplication.callInitHook 
+(D:\DEMO-PROJECTS\B2B\server\
+node_modules\@nestjs\core\nes
+t-application-context.js:234:
+13)
+    at async 
+NestApplication.init (D:\DEMO
+-PROJECTS\B2B\server\node_mod
+ules\@nestjs\core\nest-applic
+ation.js:100:9)
+    at async 
+NestApplication.listen (D:\DE
+MO-PROJECTS\B2B\server\node_m
+odules\@nestjs\core\nest-appl
+ication.js:170:13)
+    at async bootstrap (D:\DE
+MO-PROJECTS\B2B\server\dist\m
+ain.js:50:5) {
+  clientVersion: '5.22.0',
+  errorCode: undefined
+}
+
+Node.js v22.5.1

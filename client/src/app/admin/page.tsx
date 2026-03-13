@@ -3,11 +3,14 @@ import { motion, AnimatePresence } from 'framer-motion';
 import {
     Package, Plus, Edit, Trash2, Search, Filter, Eye, EyeOff,
     Upload, X, Save, DollarSign, Tag, Image as ImageIcon,
-    BarChart3, Users, ShoppingCart, TrendingUp, AlertCircle
+    BarChart3, Users, ShoppingCart, TrendingUp, AlertCircle, Loader2
 } from 'lucide-react';
 import Navigation from '@/components/Navigation';
 import ProtectedRoute from '@/components/ProtectedRoute';
 import { useToast } from '@/hooks/use-toast';
+import { useEffect } from 'react';
+
+const API_BASE_URL = (import.meta.env.VITE_API_URL || 'http://localhost:3001') + '/api';
 
 // Types
 interface Product {
@@ -27,47 +30,70 @@ interface Product {
 }
 
 // Sample initial products
-const initialProducts: Product[] = [
-    {
-        id: '1',
-        name: 'Organic Cotton Fabric',
-        category: 'Textiles',
-        price: '$12.50/meter',
-        supplier: 'Gujarat Textiles Ltd',
-        image: 'https://images.unsplash.com/photo-1524678606370-a47ad25cb82a?w=600&h=400&fit=crop&q=80',
-        icon: '🧵',
-        verified: true,
-        description: 'Premium organic cotton fabric, GOTS certified',
-        minOrder: '500 meters',
-        leadTime: '15-20 days',
-        stock: 10000,
-        isActive: true,
-    },
-    {
-        id: '2',
-        name: 'Basmati Rice Premium',
-        category: 'Agriculture',
-        price: '$850/ton',
-        supplier: 'Punjab Agro Exports',
-        image: 'https://images.unsplash.com/photo-1586201375761-83865001e31c?w=600&h=400&fit=crop&q=80',
-        icon: '🌾',
-        verified: true,
-        description: 'Premium aged Basmati rice with extra-long grains',
-        minOrder: '10 tons',
-        leadTime: '10-15 days',
-        stock: 500,
-        isActive: true,
-    },
-];
+const initialProducts: Product[] = [];
 
 export default function AdminDashboard() {
-    const [products, setProducts] = useState<Product[]>(initialProducts);
+    const [products, setProducts] = useState<Product[]>([]);
+    const [stats, setStats] = useState({
+        totalProducts: 0,
+        activeProducts: 0,
+        totalValue: 0,
+        verifiedProducts: 0,
+    });
     const [searchTerm, setSearchTerm] = useState('');
     const [selectedCategory, setSelectedCategory] = useState('All');
     const [isAddModalOpen, setIsAddModalOpen] = useState(false);
     const [isEditModalOpen, setIsEditModalOpen] = useState(false);
     const [currentProduct, setCurrentProduct] = useState<Product | null>(null);
+    const [isLoading, setIsLoading] = useState(true);
     const { toast } = useToast();
+
+    useEffect(() => {
+        fetchData();
+    }, []);
+
+    const fetchData = async () => {
+        setIsLoading(true);
+        try {
+            const [productsRes, statsRes] = await Promise.all([
+                fetch(`${API_BASE_URL}/products`),
+                fetch(`${API_BASE_URL}/admin/stats`)
+            ]);
+
+            const productsData = await productsRes.json();
+            const statsData = await statsRes.json();
+
+            // Transform backend data to frontend format
+            const transformedProducts = productsData.map((p: any) => ({
+                id: p.id,
+                name: p.name,
+                category: p.category?.name || 'Uncategorized',
+                price: `${p.currency} ${p.priceRange}`,
+                supplier: p.seller?.name || 'Direct Export',
+                image: Array.isArray(p.images) ? p.images[0] : (typeof p.images === 'string' ? JSON.parse(p.images)[0] : '/placeholder.png'),
+                isActive: p.isActive,
+                verified: true, // simplified for now
+                stock: p.minOrderQuantity * 10, // dummy stock calc from MOQ
+            }));
+
+            setProducts(transformedProducts);
+            setStats({
+                totalProducts: statsData.totalProducts,
+                activeProducts: statsData.activeProducts,
+                totalValue: statsData.totalRevenue, // reusing for revenue display
+                verifiedProducts: statsData.verifiedProducts,
+            });
+        } catch (error) {
+            console.error('Error fetching admin data:', error);
+            toast({
+                title: "Server Connection Error",
+                description: "Failed to load dashboard data. Please ensure the backend server is running on port 3001.",
+                variant: "destructive"
+            });
+        } finally {
+            setIsLoading(false);
+        }
+    };
 
     const categories = ['All', 'Textiles', 'Agriculture', 'Hardware', 'Handicrafts', 'Spices', 'Leather Goods', 'Ayurveda & Wellness', 'Gems & Jewelry'];
 
@@ -78,47 +104,86 @@ export default function AdminDashboard() {
         return matchesSearch && matchesCategory;
     });
 
-    // Stats
-    const stats = {
-        totalProducts: products.length,
-        activeProducts: products.filter(p => p.isActive).length,
-        totalValue: products.reduce((sum, p) => sum + (p.stock || 0), 0),
-        verifiedProducts: products.filter(p => p.verified).length,
-    };
+
 
     // Handlers
-    const handleAddProduct = (product: Omit<Product, 'id'>) => {
-        const newProduct = {
-            ...product,
-            id: Date.now().toString(),
-        };
-        setProducts([...products, newProduct]);
-        setIsAddModalOpen(false);
-        toast({
-            title: "Product Added",
-            description: `${product.name} has been added successfully`,
-        });
+    const handleAddProduct = async (productData: Omit<Product, 'id'>) => {
+        try {
+            const response = await fetch(`${API_BASE_URL}/products`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(productData),
+            });
+
+            if (!response.ok) throw new Error('Failed to add product');
+
+            setIsAddModalOpen(false);
+            fetchData(); // Refresh list and stats
+            toast({
+                title: "Product Added",
+                description: `${productData.name} has been added to database`,
+            });
+        } catch (error) {
+            console.error('Add error:', error);
+            toast({
+                title: "Error",
+                description: "Failed to save product to database.",
+                variant: "destructive"
+            });
+        }
     };
 
-    const handleEditProduct = (product: Product) => {
-        setProducts(products.map(p => p.id === product.id ? product : p));
-        setIsEditModalOpen(false);
-        setCurrentProduct(null);
-        toast({
-            title: "Product Updated",
-            description: `${product.name} has been updated successfully`,
-        });
+    const handleEditProduct = async (product: Product) => {
+        try {
+            const response = await fetch(`${API_BASE_URL}/products/${product.id}`, {
+                method: 'PUT',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(product),
+            });
+
+            if (!response.ok) throw new Error('Failed to update product');
+
+            setIsEditModalOpen(false);
+            setCurrentProduct(null);
+            fetchData();
+            toast({
+                title: "Product Updated",
+                description: `${product.name} has been updated successfully`,
+            });
+        } catch (error) {
+            console.error('Update error:', error);
+            toast({
+                title: "Error",
+                description: "Failed to update product.",
+                variant: "destructive"
+            });
+        }
     };
 
-    const handleDeleteProduct = (id: string) => {
+    const handleDeleteProduct = async (id: string) => {
         const product = products.find(p => p.id === id);
         if (window.confirm(`Are you sure you want to delete "${product?.name}"?`)) {
-            setProducts(products.filter(p => p.id !== id));
-            toast({
-                title: "Product Deleted",
-                description: "Product has been removed successfully",
-                variant: "destructive",
-            });
+            try {
+                const response = await fetch(`${API_BASE_URL}/products/${id}`, {
+                    method: 'DELETE',
+                });
+
+                if (!response.ok) throw new Error('Failed to delete product');
+
+                fetchData();
+                toast({
+                    title: "Product Deleted",
+                    description: "Product has been removed from database",
+                    variant: "destructive",
+                });
+            } catch (error) {
+                console.error('Delete error:', error);
+                toast({
+                    title: "Error",
+                    description: "Failed to delete product.",
+                    variant: "destructive"
+                });
+            }
         }
     };
 
@@ -155,6 +220,19 @@ export default function AdminDashboard() {
                                 Analytics
                             </button>
                             <button
+                                onClick={async () => {
+                                    if (confirm('Are you sure you want to clear ALL existing products from the database? This cannot be undone.')) {
+                                        try {
+                                            const res = await fetch(`${API_BASE_URL}/products/cleanup-initial`, { method: 'DELETE' });
+                                            if (res.ok) { fetchData(); }
+                                        } catch (e) { }
+                                    }
+                                }}
+                                className="px-6 py-4 bg-red-500/10 text-red-500 border border-red-500/20 font-bold text-[10px] uppercase tracking-widest hover:bg-red-500 hover:text-white transition-all rounded-sm"
+                            >
+                                Clear All Products
+                            </button>
+                            <button
                                 onClick={() => setIsAddModalOpen(true)}
                                 className="flex items-center gap-2 px-8 py-4 bg-primary text-primary-foreground font-bold text-[10px] uppercase tracking-widest hover:opacity-90 transition-all rounded-sm group"
                             >
@@ -180,9 +258,9 @@ export default function AdminDashboard() {
                         />
                         <StatCard
                             icon={ShoppingCart}
-                            label="Inventory units"
-                            value={stats.totalValue.toLocaleString()}
-                            subValue="Total stock tracked"
+                            label="Total Revenue"
+                            value={`$${stats.totalValue.toLocaleString()}`}
+                            subValue="Completed transactions"
                         />
                         <StatCard
                             icon={TrendingUp}
@@ -353,6 +431,7 @@ export default function AdminDashboard() {
                     onClose={() => setIsAddModalOpen(false)}
                     onSave={handleAddProduct}
                     title="Add New Product"
+                    toast={toast}
                 />
 
                 {currentProduct && (
@@ -365,6 +444,7 @@ export default function AdminDashboard() {
                         onSave={handleEditProduct}
                         product={currentProduct}
                         title="Edit Product"
+                        toast={toast}
                     />
                 )}
             </div>
@@ -414,18 +494,20 @@ function ProductModal({
     onClose,
     onSave,
     product,
-    title
+    title,
+    toast
 }: {
     isOpen: boolean;
     onClose: () => void;
     onSave: (product: any) => void;
     product?: Product;
     title: string;
+    toast: any;
 }) {
     const [formData, setFormData] = useState<Partial<Product>>(
         product || {
             name: '',
-            category: 'Textiles',
+            category: 'Agriculture',
             price: '',
             supplier: '',
             image: '',
@@ -438,10 +520,51 @@ function ProductModal({
             isActive: true,
         }
     );
+    const [uploading, setUploading] = useState(false);
+    const [file, setFile] = useState<File | null>(null);
 
-    const handleSubmit = (e: React.FormEvent) => {
+    const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        if (e.target.files && e.target.files[0]) {
+            setFile(e.target.files[0]);
+            // Create a preview URL
+            const url = URL.createObjectURL(e.target.files[0]);
+            setFormData(prev => ({ ...prev, image: url }));
+        }
+    };
+
+    const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
-        onSave(formData as Product);
+        setUploading(true);
+
+        try {
+            let imageUrl = formData.image;
+
+            // If a new file was selected, upload it first
+            if (file) {
+                const formDataUpload = new FormData();
+                formDataUpload.append('file', file);
+
+                const response = await fetch(`${API_BASE_URL}/products/upload`, {
+                    method: 'POST',
+                    body: formDataUpload,
+                });
+
+                if (!response.ok) throw new Error('Failed to upload image');
+                const result = await response.json();
+                imageUrl = result.url;
+            }
+
+            onSave({ ...formData, image: imageUrl });
+        } catch (error: any) {
+            console.error('Save error:', error);
+            toast({
+                title: "Upload Failed",
+                description: error.message || "Failed to process image upload",
+                variant: "destructive"
+            });
+        } finally {
+            setUploading(false);
+        }
     };
 
     if (!isOpen) return null;
@@ -559,19 +682,38 @@ function ProductModal({
                                 </div>
                             </div>
 
-                            {/* Image URL */}
-                            <div className="space-y-2.5">
+                            <div className="space-y-4">
                                 <label className="block text-[9px] font-bold text-primary/40 uppercase tracking-widest">
-                                    Image URL
+                                    Product Image
                                 </label>
-                                <input
-                                    type="url"
-                                    required
-                                    value={formData.image}
-                                    onChange={(e) => setFormData({ ...formData, image: e.target.value })}
-                                    className="w-full px-0 py-3 bg-transparent border-b border-border text-foreground font-bold text-[13px] uppercase tracking-widest focus:outline-none focus:border-primary transition-all"
-                                    placeholder="https://..."
-                                />
+                                <div className="flex items-center gap-6">
+                                    <div className="w-24 h-24 rounded-sm border border-border bg-secondary flex items-center justify-center overflow-hidden">
+                                        {formData.image ? (
+                                            <img src={formData.image} alt="Preview" className="w-full h-full object-cover" />
+                                        ) : (
+                                            <ImageIcon className="w-8 h-8 text-primary/20" />
+                                        )}
+                                    </div>
+                                    <div className="flex-1">
+                                        <input
+                                            type="file"
+                                            accept="image/*"
+                                            onChange={handleFileChange}
+                                            className="hidden"
+                                            id="product-image-upload"
+                                        />
+                                        <label
+                                            htmlFor="product-image-upload"
+                                            className="inline-flex items-center gap-2 px-6 py-3 bg-secondary text-primary text-[10px] font-bold uppercase tracking-widest cursor-pointer hover:bg-primary hover:text-primary-foreground transition-all rounded-sm"
+                                        >
+                                            <Upload className="w-3.5 h-3.5" />
+                                            {formData.image ? 'Change Photo' : 'Upload Photo'}
+                                        </label>
+                                        <p className="mt-2 text-[8px] text-muted-foreground uppercase font-bold tracking-widest">
+                                            Recommended: 800x800px or larger
+                                        </p>
+                                    </div>
+                                </div>
                             </div>
 
                             {/* Description */}
@@ -628,9 +770,11 @@ function ProductModal({
                                 </button>
                                 <button
                                     type="submit"
-                                    className="flex-[1.5] px-8 py-4 bg-primary text-primary-foreground text-[10px] font-bold uppercase tracking-widest hover:opacity-90 transition-all rounded-sm shadow-md"
+                                    disabled={uploading}
+                                    className="flex-[1.5] px-8 py-4 bg-primary text-primary-foreground text-[10px] font-bold uppercase tracking-widest hover:opacity-90 transition-all rounded-sm shadow-md disabled:opacity-50 flex items-center justify-center gap-2"
                                 >
-                                    Save Product
+                                    {uploading && <Loader2 className="w-4 h-4 animate-spin" />}
+                                    {uploading ? 'Uploading...' : 'Save Product'}
                                 </button>
                             </div>
                         </form>

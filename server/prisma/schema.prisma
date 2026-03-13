@@ -1,0 +1,367 @@
+// This is your Prisma schema file
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// Enums
+enum UserRole {
+  BUYER
+  SELLER
+  ADMIN
+}
+
+enum VerificationStatus {
+  PENDING
+  VERIFIED
+  REJECTED
+}
+
+enum BusinessType {
+  PROPRIETORSHIP
+  PARTNERSHIP
+  PRIVATE_LIMITED
+  PUBLIC_LIMITED
+  LLP
+  OTHER
+}
+
+enum RFQStatus {
+  PENDING
+  QUOTED
+  NEGOTIATING
+  ACCEPTED
+  REJECTED
+  CLOSED
+}
+
+enum OrderStatus {
+  PENDING
+  CONFIRMED
+  PROCESSING
+  SHIPPED
+  DELIVERED
+  CANCELLED
+}
+
+enum PaymentStatus {
+  PENDING
+  PAID
+  FAILED
+  REFUNDED
+}
+
+enum DocumentType {
+  BUSINESS_REGISTRATION
+  TAX_CERTIFICATE
+  TRADE_LICENSE
+  BANK_STATEMENT
+  ID_PROOF
+  INVOICE
+  SHIPPING_DOCUMENT
+  CERTIFICATE_OF_ORIGIN
+  OTHER
+}
+
+// Models
+
+model User {
+  id                String              @id @default(uuid())
+  email             String              @unique
+  password          String
+  role              UserRole            @default(BUYER)
+  name              String
+  phone             String?
+  country           String
+  isVerified        Boolean             @default(false)
+  isActive          Boolean             @default(true)
+  createdAt         DateTime            @default(now())
+  updatedAt         DateTime            @updatedAt
+  
+  // Relations
+  buyerVerification BuyerVerification?
+  sellerProfile     SellerProfile?
+  products          Product[]
+  rfqsCreated       RFQ[]               @relation("BuyerRFQs")
+  quotesSubmitted   RFQQuote[]
+  ordersAsBuyer     Order[]             @relation("BuyerOrders")
+  ordersAsSeller    Order[]             @relation("SellerOrders")
+  documents         Document[]
+  refreshTokens     RefreshToken[]
+  
+  @@index([email])
+  @@index([role])
+  @@map("users")
+}
+
+model RefreshToken {
+  id        String   @id @default(uuid())
+  token     String   @unique
+  userId    String
+  expiresAt DateTime
+  createdAt DateTime @default(now())
+  
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  
+  @@index([userId])
+  @@map("refresh_tokens")
+}
+
+model BuyerVerification {
+  id                 String             @id @default(uuid())
+  userId             String             @unique
+  country            String
+  verificationType   String             // GST, EIN, VAT, ABN, etc.
+  
+  // Indian GST Fields
+  gstNumber          String?
+  legalName          String?
+  tradeName          String?
+  gstStatus          String?
+  registrationDate   DateTime?
+  businessType       BusinessType?
+  principalPlace     Json?              // Address details
+  
+  // International Fields
+  businessIdentifier String?            // EIN, VAT, ABN, BN, CRN, EORI, DUNS, USCC, Trade License
+  companyName        String?
+  registeredAddress  Json?
+  
+  // Verification
+  verificationStatus VerificationStatus @default(PENDING)
+  verifiedAt         DateTime?
+  verifiedBy         String?            // Admin ID
+  rejectionReason    String?
+  
+  // Documents
+  documents          Json?              // Array of document URLs
+  
+  createdAt          DateTime           @default(now())
+  updatedAt          DateTime           @updatedAt
+  
+  user               User               @relation(fields: [userId], references: [id], onDelete: Cascade)
+  
+  @@index([userId])
+  @@index([verificationStatus])
+  @@map("buyer_verifications")
+}
+
+model SellerProfile {
+  id              String             @id @default(uuid())
+  userId          String             @unique
+  companyName     String
+  businessType    BusinessType
+  exportLicense   String?
+  iecCode         String?            // Import Export Code (India)
+  yearsInBusiness Int?
+  description     String?
+  website         String?
+  
+  // Verification
+  isVerified      Boolean            @default(false)
+  verifiedAt      DateTime?
+  
+  createdAt       DateTime           @default(now())
+  updatedAt       DateTime           @updatedAt
+  
+  user            User               @relation(fields: [userId], references: [id], onDelete: Cascade)
+  
+  @@index([userId])
+  @@map("seller_profiles")
+}
+
+model ProductCategory {
+  id          String            @id @default(uuid())
+  name        String
+  slug        String            @unique
+  description String?
+  imageUrl    String?
+  parentId    String?
+  isActive    Boolean           @default(true)
+  order       Int               @default(0)
+  createdAt   DateTime          @default(now())
+  updatedAt   DateTime          @updatedAt
+  
+  parent      ProductCategory?  @relation("CategoryHierarchy", fields: [parentId], references: [id])
+  children    ProductCategory[] @relation("CategoryHierarchy")
+  products    Product[]
+  
+  @@index([slug])
+  @@index([parentId])
+  @@map("product_categories")
+}
+
+model Product {
+  id                String          @id @default(uuid())
+  sellerId          String
+  categoryId        String
+  name              String
+  description       String
+  specifications    Json?           // {weight, dimensions, material, etc}
+  images            Json            // Array of image URLs
+  minOrderQuantity  Int
+  priceRange        String          // e.g., "$100-$500"
+  currency          String          @default("USD")
+  originCountry     String
+  certifications    Json?           // Array of certification names/URLs
+  hsCode            String?         // Harmonized System Code
+  
+  isActive          Boolean         @default(true)
+  views             Int             @default(0)
+  
+  createdAt         DateTime        @default(now())
+  updatedAt         DateTime        @updatedAt
+  
+  seller            User            @relation(fields: [sellerId], references: [id], onDelete: Cascade)
+  category          ProductCategory @relation(fields: [categoryId], references: [id])
+  rfqs              RFQ[]
+  
+  @@index([sellerId])
+  @@index([categoryId])
+  @@index([isActive])
+  @@map("products")
+}
+
+model RFQ {
+  id                String     @id @default(uuid())
+  buyerId           String
+  productId         String?    // Optional: can be generic RFQ
+  productName       String     // If productId is null
+  productCategory   String?
+  
+  quantity          Int
+  targetPrice       Decimal?   @db.Decimal(10, 2)
+  currency          String     @default("USD")
+  
+  deliveryLocation  String
+  deliveryDate      DateTime?
+  requirements      String?    // Additional requirements
+  
+  status            RFQStatus  @default(PENDING)
+  
+  createdAt         DateTime   @default(now())
+  updatedAt         DateTime   @updatedAt
+  expiresAt         DateTime?
+  
+  buyer             User       @relation("BuyerRFQs", fields: [buyerId], references: [id], onDelete: Cascade)
+  product           Product?   @relation(fields: [productId], references: [id])
+  quotes            RFQQuote[]
+  order             Order?
+  
+  @@index([buyerId])
+  @@index([productId])
+  @@index([status])
+  @@map("rfqs")
+}
+
+model RFQQuote {
+  id             String    @id @default(uuid())
+  rfqId          String
+  sellerId       String
+  
+  price          Decimal   @db.Decimal(10, 2)
+  currency       String    @default("USD")
+  deliveryTerms  String?   // FOB, CIF, etc.
+  paymentTerms   String?   // LC, TT, etc.
+  validityDate   DateTime
+  notes          String?
+  
+  isAccepted     Boolean   @default(false)
+  
+  createdAt      DateTime  @default(now())
+  updatedAt      DateTime  @updatedAt
+  
+  rfq            RFQ       @relation(fields: [rfqId], references: [id], onDelete: Cascade)
+  seller         User      @relation(fields: [sellerId], references: [id], onDelete: Cascade)
+  
+  @@index([rfqId])
+  @@index([sellerId])
+  @@map("rfq_quotes")
+}
+
+model Order {
+  id              String        @id @default(uuid())
+  orderNumber     String        @unique
+  rfqId           String?       @unique
+  buyerId         String
+  sellerId        String
+  
+  totalAmount     Decimal       @db.Decimal(12, 2)
+  currency        String        @default("USD")
+  
+  // Product Details
+  productDetails  Json          // Snapshot of product info
+  quantity        Int
+  
+  // Delivery
+  shippingAddress Json
+  deliveryTerms   String?
+  estimatedDelivery DateTime?
+  
+  // Payment
+  paymentTerms    String?
+  paymentStatus   PaymentStatus @default(PENDING)
+  paymentDate     DateTime?
+  
+  // Tracking
+  status          OrderStatus   @default(PENDING)
+  trackingInfo    Json?         // Carrier, tracking number, etc.
+  
+  // Documents
+  documents       Document[]
+  
+  createdAt       DateTime      @default(now())
+  updatedAt       DateTime      @updatedAt
+  
+  rfq             RFQ?          @relation(fields: [rfqId], references: [id])
+  buyer           User          @relation("BuyerOrders", fields: [buyerId], references: [id])
+  seller          User          @relation("SellerOrders", fields: [sellerId], references: [id])
+  
+  @@index([orderNumber])
+  @@index([buyerId])
+  @@index([sellerId])
+  @@index([status])
+  @@map("orders")
+}
+
+model Document {
+  id         String       @id @default(uuid())
+  userId     String
+  orderId    String?
+  type       DocumentType
+  fileName   String
+  fileUrl    String
+  fileSize   Int
+  uploadedAt DateTime     @default(now())
+  
+  user       User         @relation(fields: [userId], references: [id], onDelete: Cascade)
+  order      Order?       @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  
+  @@index([userId])
+  @@index([orderId])
+  @@map("documents")
+}
+
+// Analytics & Logs
+
+model ActivityLog {
+  id        String   @id @default(uuid())
+  userId    String?
+  action    String
+  entity    String   // User, Product, Order, etc.
+  entityId  String?
+  details   Json?
+  ipAddress String?
+  userAgent String?
+  createdAt DateTime @default(now())
+  
+  @@index([userId])
+  @@index([createdAt])
+  @@map("activity_logs")
+}

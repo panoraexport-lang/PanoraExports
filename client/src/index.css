@@ -24,6 +24,7 @@
   --color-input: hsl(var(--input));
   --color-ring: hsl(var(--ring));
   --color-royal-blue: hsl(var(--royal-blue));
+  --color-soft-blue: hsl(var(--soft-blue));
 
   --color-sidebar: hsl(var(--sidebar));
   --color-sidebar-foreground: hsl(var(--sidebar-foreground));
@@ -70,6 +71,7 @@
   --success: 158 50% 25%;
   --success-foreground: 0 0% 100%;
 
+  --soft-blue: 225 45% 18%;
   --royal-blue: 225 50% 15%;
   /* Darker deep Royal Blue as requested */
 

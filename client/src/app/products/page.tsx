@@ -1,80 +1,91 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Link, useLocation } from 'wouter';
 import Navigation from '@/components/Navigation';
 import { Package, Filter, LayoutGrid, List, Search, ArrowRight, Star } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
-// Sample Product Data (matching what we expect in the detail page)
-const allProducts = [
-    {
-        id: '1',
-        name: 'Organic Cotton Fabric',
-        category: 'Textiles',
-        price: '$12.50/meter',
-        supplier: 'Gujarat Textiles Ltd',
-        image: 'https://images.unsplash.com/photo-1524678606370-a47ad25cb82a?w=1200&h=800&fit=crop&q=90',
-        verified: true,
-        rating: 4.8,
-        minOrder: '500 meters',
-    },
-    {
-        id: '2',
-        name: 'Basmati Rice Premium',
-        category: 'Agro',
-        price: '$850/ton',
-        supplier: 'Punjab Agro Exports',
-        image: 'https://images.unsplash.com/photo-1586201375761-83865001e31c?w=1200&h=800&fit=crop&q=90',
-        verified: true,
-        rating: 4.9,
-        minOrder: '10 tons',
-    },
-    {
-        id: '3',
-        name: 'Brass Door Handles',
-        category: 'Hardware',
-        price: '$24.99/piece',
-        supplier: 'Jaipur Hardware Co',
-        image: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=1200&h=800&fit=crop&q=90',
-        verified: true,
-        rating: 4.7,
-        minOrder: '100 pieces',
-    },
-    {
-        id: '4',
-        name: 'Spices Selection Box',
-        category: 'Agro',
-        price: '$45.00/box',
-        supplier: 'Kerala Spice Route',
-        image: 'https://images.unsplash.com/photo-1596040033229-a9821ebd058d?w=1200&h=800&fit=crop&q=90',
-        verified: true,
-        rating: 4.9,
-        minOrder: '50 boxes',
-    },
-    {
-        id: '5',
-        name: 'Industrial Valve Set',
-        category: 'Industrial',
-        price: '$120.00/unit',
-        supplier: 'Mumbai Engineering',
-        image: 'https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=1200&h=800&fit=crop&q=90',
-        verified: true,
-        rating: 4.6,
-        minOrder: '20 units',
-    },
+const API_BASE_URL = 'http://localhost:3001/api';
 
-];
+const categories = ['All', 'Agriculture', 'Textiles'];
 
-const categories = ['All', 'Textiles', 'Agro', 'Hardware', 'Industrial'];
+interface Product {
+    id: string;
+    name: string;
+    category: string;
+    price: string;
+    supplier: string;
+    image: string;
+    verified: boolean;
+    rating: number;
+    minOrder: string;
+}
 
 export default function ProductsPage() {
+    const [products, setProducts] = useState<Product[]>([]);
+    const [loading, setLoading] = useState(true);
     const [viewMode, setViewMode] = useState<'grid' | 'list'>('grid');
     const [selectedCategory, setSelectedCategory] = useState('All');
     const [searchQuery, setSearchQuery] = useState('');
 
-    const [, setLocation] = useLocation();
+    const [location, setLocation] = useLocation();
 
-    const filteredProducts = allProducts.filter(product => {
+    // Fetch Products from Backend
+    const fetchProducts = async () => {
+        try {
+            setLoading(true);
+            const response = await fetch(`${API_BASE_URL}/products`);
+            if (!response.ok) throw new Error('Network response was not ok');
+            const data = await response.json();
+
+            // Transform data to match UI expectations
+            const transformed = data.map((p: any) => {
+                let imageUrl = p.image || '';
+                try {
+                    // Handle case where image might be a JSON string from backend
+                    if (p.images) {
+                        const parsed = typeof p.images === 'string' ? JSON.parse(p.images) : p.images;
+                        imageUrl = Array.isArray(parsed) ? parsed[0] : parsed;
+                    }
+                } catch (e) {
+                    imageUrl = p.images;
+                }
+
+                return {
+                    id: p.id,
+                    name: p.name,
+                    category: p.category?.name || p.category || 'General',
+                    price: p.priceRange || p.price || 'By Quote',
+                    supplier: p.seller?.name || 'Verified Supplier',
+                    image: imageUrl,
+                    verified: p.isActive,
+                    rating: 4.5 + (Math.random() * 0.5), // Simulated rating for UI
+                    minOrder: p.minOrderQuantity ? `${p.minOrderQuantity} units` : 'Contact for MOQ',
+                };
+            });
+            setProducts(transformed);
+        } catch (error) {
+            console.error('Error fetching products:', error);
+        } finally {
+            setLoading(false);
+        }
+    };
+
+    useEffect(() => {
+        fetchProducts();
+    }, []);
+
+    // Handle Category from URL
+    useEffect(() => {
+        const params = new URLSearchParams(window.location.search);
+        const catParam = params.get('category');
+        if (catParam) {
+            if (catParam.toLowerCase() === 'agriculture') setSelectedCategory('Agriculture');
+            else if (catParam.toLowerCase() === 'textiles') setSelectedCategory('Textiles');
+        }
+    }, [window.location.search]);
+
+    const filteredProducts = products.filter(product => {
         const matchesCategory = selectedCategory === 'All' || product.category === selectedCategory;
         const matchesSearch = product.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
             product.supplier.toLowerCase().includes(searchQuery.toLowerCase());

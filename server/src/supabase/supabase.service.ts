@@ -1,9 +1,9 @@
-import { Injectable, Logger } from '@nestjs/common';
+import { Injectable, Logger, OnModuleInit } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { createClient, SupabaseClient } from '@supabase/supabase-js';
 
 @Injectable()
-export class SupabaseService {
+export class SupabaseService implements OnModuleInit {
     private supabase: SupabaseClient;
     private readonly logger = new Logger(SupabaseService.name);
     private readonly bucketName: string;
@@ -14,10 +14,24 @@ export class SupabaseService {
         this.bucketName = this.configService.get<string>('SUPABASE_STORAGE_BUCKET', 'panora-documents');
 
         if (!supabaseUrl || !supabaseKey) {
-            this.logger.warn('Supabase credentials not configured');
+            this.logger.error('Supabase credentials not configured! Application may crash if storage is used.');
+            return;
         }
 
-        this.supabase = createClient(supabaseUrl, supabaseKey);
+        try {
+            this.supabase = createClient(supabaseUrl, supabaseKey);
+        } catch (e) {
+            this.logger.error('Failed to initialize Supabase client', e.stack);
+        }
+    }
+
+    async onModuleInit() {
+        if (this.supabase) {
+            // Run non-blocking - don't crash startup if bucket creation fails
+            this.initializeBucket().catch(e =>
+                this.logger.warn(`Bucket init skipped: ${e.message}`)
+            );
+        }
     }
 
     /**
@@ -27,17 +41,22 @@ export class SupabaseService {
         file: Express.Multer.File,
         folder: string = 'documents',
     ): Promise<{ url: string; path: string }> {
+        if (!this.supabase) {
+            throw new Error('Supabase client not initialized. Check SUPABASE_URL and SUPABASE_SERVICE_KEY env vars.');
+        }
+
         const fileName = `${folder}/${Date.now()}-${file.originalname}`;
+        this.logger.log(`Uploading to bucket: "${this.bucketName}", path: "${fileName}"`);
 
         const { data, error } = await this.supabase.storage
             .from(this.bucketName)
             .upload(fileName, file.buffer, {
                 contentType: file.mimetype,
-                upsert: false,
+                upsert: true,
             });
 
         if (error) {
-            this.logger.error(`File upload failed: ${error.message}`);
+            this.logger.error(`File upload failed [bucket: ${this.bucketName}]: ${error.message}`);
             throw new Error(`File upload failed: ${error.message}`);
         }
 
@@ -46,6 +65,7 @@ export class SupabaseService {
             .from(this.bucketName)
             .getPublicUrl(data.path);
 
+        this.logger.log(`Upload success: ${urlData.publicUrl}`);
         return {
             url: urlData.publicUrl,
             path: data.path,

@@ -5,6 +5,8 @@ import { VerificationModule } from './verification/verification.module';
 import { ContactModule } from './contact/contact.module';
 import { PrismaModule } from './prisma/prisma.module';
 import { SupabaseModule } from './supabase/supabase.module';
+import { ProductsModule } from './products/products.module';
+import { AdminModule } from './admin/admin.module';
 
 @Module({
     imports: [
@@ -16,18 +18,18 @@ import { SupabaseModule } from './supabase/supabase.module';
 
         // Rate Limiting
         ThrottlerModule.forRoot([{
-            ttl: 60000, // 1 minute
-            limit: 10,  // 10 requests per minute
+            ttl: 60, // 60 seconds
+            limit: 10,
         }]),
 
-        // Core Database & Storage
         PrismaModule,
         SupabaseModule,
 
         // Feature Modules
         VerificationModule,
         ContactModule,
+        ProductsModule,
+        AdminModule,
     ],
 })
 export class AppModule { }
-

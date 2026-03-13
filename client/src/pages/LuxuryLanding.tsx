@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { ReactNode } from "react";
+import { ReactNode, useState, useEffect } from "react";
 import {
   CheckCircle2,
   MessageCircle,
@@ -33,17 +33,9 @@ import { useTheme } from "next-themes";
 
 const lightHeroImage = "/aeroplane.webp";
 const darkHeroImage = "/dark-hero.jpg";
+const API_BASE_URL = 'http://localhost:3001/api';
 
-const productsList = [
-  { title: "Cotton Textiles", img: "https://plus.unsplash.com/premium_photo-1673125287363-b4e837f1215f?q=80&w=687&auto=format&fit=crop" },
-  { title: "Towels & Fabrics", img: "https://images.unsplash.com/photo-1617811449482-31093c8cee16?q=80&w=735&auto=format&fit=crop" },
-  { title: "Agro Commodities", img: "https://plus.unsplash.com/premium_photo-1674624682288-085eff4f98da?q=80&w=687&auto=format&fit=crop" },
-  { title: "Industrial Goods", img: "https://images.unsplash.com/photo-1623610590744-fce60d8dd48c?q=80&w=687&auto=format&fit=crop" },
-  { title: "Organic Spices", img: "https://images.unsplash.com/photo-1596040033229-a9821ebd058d?q=80&w=800&auto=format&fit=crop" },
-  { title: "Leather Goods", img: "https://images.unsplash.com/photo-1547949003-9792a18a2601?q=80&w=2070&auto=format&fit=crop" },
-  { title: "Handicrafts", img: "https://images.unsplash.com/photo-1582555172866-f73bb12a2ab3?q=80&w=2070&auto=format&fit=crop" },
-  { title: "Pashmina Shawls", img: "https://images.unsplash.com/photo-1542060748-10c28722263d?w=1200&h=800&fit=crop&q=90" }
-];
+
 
 const Grain = () => (
   <div className="fixed inset-0 pointer-events-none opacity-[0.03] z-[9999] mix-blend-overlay"
@@ -73,6 +65,26 @@ const ExportCard = ({ icon: Icon, title, desc }: { icon: any, title: string, des
 export default function LuxuryLanding() {
   const { theme } = useTheme();
   const currentHeroImage = theme === "dark" ? darkHeroImage : lightHeroImage;
+  const [productsList, setProductsList] = useState<any[]>([]);
+
+  useEffect(() => {
+    const fetchProducts = async () => {
+      try {
+        const response = await fetch(`${API_BASE_URL}/products`);
+        if (response.ok) {
+          const data = await response.json();
+          const transformed = data.slice(0, 8).map((p: any) => ({
+            title: p.name,
+            img: (typeof p.images === 'string' ? JSON.parse(p.images)[0] : p.images?.[0]) || p.image || ''
+          }));
+          setProductsList(transformed);
+        }
+      } catch (error) {
+        console.error('Error fetching products:', error);
+      }
+    };
+    fetchProducts();
+  }, []);
 
   return (
     <div className="font-sans bg-background text-foreground selection:bg-primary selection:text-primary-foreground antialiased">
@@ -148,18 +160,18 @@ export default function LuxuryLanding() {
         <div className="grid md:grid-cols-3 gap-6">
           <ExportCard
             icon={Package}
-            title="Textiles"
-            desc="Premium cotton textiles and high-quality towels from certified Indian mills."
+            title="Agriculture"
+            desc="Fresh, graded produce including Garlic, Pomegranate, and Banana sourced from verified farms."
           />
           <ExportCard
             icon={Leaf}
-            title="Agro Goods"
-            desc="Global export of Basmati rice and premium spices with strict quality control."
+            title="Textiles"
+            desc="Elite quality bedding, curtains, and high-GSM towels from certified Indian textile mills."
           />
           <ExportCard
             icon={Search}
-            title="Sourcing"
-            desc="Dedicated merchant export services tailored to your specific product needs."
+            title="Global Sourcing"
+            desc="Specialized trade desk to identify and source specific requirements across our focus sectors."
           />
         </div>
       </Section>
@@ -279,7 +291,7 @@ export default function LuxuryLanding() {
       </Section>
 
       {/* 5. PRODUCT PREVIEW */}
-      <Section id="products" className="bg-primary py-24 overflow-hidden border-y border-secondary/20">
+      <Section id="products" className="bg-soft-blue py-24 overflow-hidden border-y border-secondary/20">
         <div className="text-center mb-16">
           <h3 className="text-4xl md:text-6xl font-bold text-white tracking-tight uppercase">Premier <span className="font-serif italic font-light text-secondary">Trade Inventory</span></h3>
         </div>
@@ -463,7 +475,7 @@ export default function LuxuryLanding() {
           <div className="lg:col-span-3 space-y-6">
             <h4 className="text-[11px] font-bold text-secondary uppercase tracking-[0.2em]">Exports</h4>
             <ul className="space-y-4">
-              {['Cotton Textiles', 'Agro Commodities', 'Industrial Goods', 'Leather Products', 'Spices & Herbs'].map((item) => (
+              {['Textiles', 'Agriculture', 'Home Linen', 'Graded Produce', 'Hand-Picked Fruits'].map((item) => (
                 <li key={item}>
                   <Link href="/products" className="text-sm text-white/60 hover:text-white transition-colors flex items-center gap-2 group">
                     {item}

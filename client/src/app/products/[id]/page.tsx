@@ -6,81 +6,85 @@ import Navigation from '@/components/Navigation';
 import { useAuth } from '@/contexts/AuthContext';
 import { useToast } from '@/hooks/use-toast';
 import { motion } from 'framer-motion';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
-// Sample product data (in real app, this would come from API)
-const allProducts = [
-    {
-        id: '1',
-        name: 'Organic Cotton Fabric',
-        category: 'Textiles',
-        price: '$12.50/meter',
-        supplier: 'Gujarat Textiles Ltd',
-        image: 'https://images.unsplash.com/photo-1524678606370-a47ad25cb82a?w=1200&h=800&fit=crop&q=90',
-        icon: Package,
-        verified: true,
-        description: 'Elite-grade organic cotton fabric, GOTS certified and ethically sourced. Engineered for high-end luxury apparel and sustainable textile applications. Boasting exceptional tensile strength and superior dye absorption.',
-        minOrder: '500 meters',
-        leadTime: '15-20 days',
-        rating: 4.8,
-        reviews: 124,
-        specs: [
-            { label: 'Composition', value: '100% Organic Cotton' },
-            { label: 'Weight', value: '180 GSM' },
-            { label: 'Certification', value: 'GOTS, OEKO-TEX' },
-            { label: 'Origin', value: 'Gujarat, India' }
-        ]
-    },
-    {
-        id: '2',
-        name: 'Basmati Rice Premium',
-        category: 'Agriculture',
-        price: '$850/ton',
-        supplier: 'Punjab Agro Exports',
-        image: 'https://images.unsplash.com/photo-1586201375761-83865001e31c?w=1200&h=800&fit=crop&q=90',
-        icon: Package,
-        verified: true,
-        description: 'Traditional long-grain aged Basmati rice. Sourced from the foothills of the Himalayas, this variety offers an unparalleled aroma and non-sticky texture. Aged for 24 months to ensure peak flavor profile.',
-        minOrder: '10 tons',
-        leadTime: '10-15 days',
-        rating: 4.9,
-        reviews: 89,
-        specs: [
-            { label: 'Grain Length', value: '8.35mm+' },
-            { label: 'Aging', value: '24 Months' },
-            { label: 'Broken Grain', value: '< 2%' },
-            { label: 'Moisture', value: '< 12%' }
-        ]
-    },
-    {
-        id: '3',
-        name: 'Brass Door Handles',
-        category: 'Hardware',
-        price: '$24.99/piece',
-        supplier: 'Jaipur Hardware Co',
-        image: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=1200&h=800&fit=crop&q=90',
-        icon: Package,
-        verified: true,
-        description: 'Artisanal brass hardware featuring an antique hand-applied finish. Designed for architectural significance and durability in high-traffic commercial or residential environments.',
-        minOrder: '100 pieces',
-        leadTime: '20-25 days',
-        rating: 4.7,
-        reviews: 56,
-        specs: [
-            { label: 'Material', value: 'High-Grade Brass' },
-            { label: 'Finish', value: 'Antique Bronze' },
-            { label: 'Durability', value: 'Rust Resistant' },
-            { label: 'Mounting', value: 'Universal' }
-        ]
-    },
-];
+const API_BASE_URL = 'http://localhost:3001/api';
 
 export default function ProductDetailPage() {
     const params = useParams();
     const { user } = useAuth();
     const { toast } = useToast();
     const [, setLocation] = useLocation();
-    const [showActualImage, setShowActualImage] = useState(false);
+    const [product, setProduct] = useState<any>(null);
+    const [relatedProducts, setRelatedProducts] = useState<any[]>([]);
+    const [loading, setLoading] = useState(true);
+
+    const fetchProductDetails = async () => {
+        if (!params.id) return;
+        try {
+            setLoading(true);
+            const response = await fetch(`${API_BASE_URL}/products/${params.id}`);
+            if (!response.ok) throw new Error('Product not found');
+            const data = await response.json();
+
+            // Transform data
+            let imageUrl = data.image || '';
+            try {
+                if (data.images) {
+                    const parsed = typeof data.images === 'string' ? JSON.parse(data.images) : data.images;
+                    imageUrl = Array.isArray(parsed) ? parsed[0] : parsed;
+                }
+            } catch (e) { }
+
+            const transformedProduct = {
+                id: data.id,
+                name: data.name,
+                category: data.category?.name || 'General',
+                price: data.priceRange || 'By Quote',
+                supplier: data.seller?.name || 'Verified Supplier',
+                image: imageUrl,
+                verified: data.isActive,
+                description: data.description || 'No description provided.',
+                minOrder: data.minOrderQuantity ? `${data.minOrderQuantity} units` : 'Contact for MOQ',
+                leadTime: '15-20 days', // Fallback or from DB if added
+                rating: 4.8,
+                reviews: 45,
+                specs: [
+                    { label: 'Origin', value: data.originCountry || 'India' },
+                    { label: 'HS Code', value: data.hsCode || 'Available on request' },
+                    { label: 'Currency', value: data.currency || 'USD' },
+                    { label: 'Stock Status', value: data.isActive ? 'In Stock' : 'On Request' }
+                ]
+            };
+
+            setProduct(transformedProduct);
+
+            // Fetch related products (same category)
+            const allRes = await fetch(`${API_BASE_URL}/products`);
+            if (allRes.ok) {
+                const allData = await allRes.json();
+                const filtered = allData
+                    .filter((p: any) => p.categoryId === data.categoryId && p.id !== data.id)
+                    .slice(0, 4)
+                    .map((p: any) => ({
+                        id: p.id,
+                        name: p.name,
+                        price: p.priceRange || 'By Quote',
+                        image: (typeof p.images === 'string' ? JSON.parse(p.images)[0] : p.images?.[0]) || p.image || ''
+                    }));
+                setRelatedProducts(filtered);
+            }
+
+        } catch (error) {
+            console.error('Error:', error);
+        } finally {
+            setLoading(false);
+        }
+    };
+
+    useEffect(() => {
+        fetchProductDetails();
+    }, [params.id]);
 
     const handleSecuredAction = (type: string) => {
         if (!user || user.verification_status !== 'VERIFIED') {
@@ -93,7 +97,6 @@ export default function ProductDetailPage() {
             return;
         }
 
-        const product = allProducts.find(p => p.id === params.id);
         if (!product) return;
 
         if (type === 'SAMPLE') {
@@ -103,7 +106,17 @@ export default function ProductDetailPage() {
         }
     };
 
-    const product = allProducts.find(p => p.id === params.id);
+    if (loading) {
+        return (
+            <div className="min-h-screen bg-background pt-20 flex items-center justify-center">
+                <Navigation />
+                <div className="flex flex-col items-center gap-4">
+                    <Package className="w-12 h-12 text-primary animate-pulse" />
+                    <p className="text-[10px] font-bold uppercase tracking-[0.3em] text-primary/40">Loading Specifications...</p>
+                </div>
+            </div>
+        );
+    }
 
     if (!product) {
         return (
@@ -121,8 +134,6 @@ export default function ProductDetailPage() {
             </div>
         );
     }
-
-    const relatedProducts = allProducts.filter(p => p.category === product.category && p.id !== product.id);
 
     return (
         <div className="min-h-screen bg-background pt-20 font-sans antialiased text-primary">
@@ -202,7 +213,7 @@ export default function ProductDetailPage() {
 
                             {/* Info Grid */}
                             <div className="grid grid-cols-2 gap-px bg-border border border-border rounded-sm overflow-hidden">
-                                {product.specs?.map((spec, i) => (
+                                {product.specs?.map((spec: any, i: number) => (
                                     <div key={i} className="bg-background p-5">
                                         <p className="text-[8px] font-bold uppercase tracking-widest text-muted-foreground mb-1">{spec.label}</p>
                                         <p className="text-[13px] font-bold text-primary uppercase">{spec.value}</p>

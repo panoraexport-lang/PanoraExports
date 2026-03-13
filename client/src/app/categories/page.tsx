@@ -6,76 +6,22 @@ import { motion } from 'framer-motion';
 
 const categories = [
     {
+        id: 'agriculture',
+        name: 'Agriculture',
+        description: 'Premium graded fruits, vegetables, and organic farm produce.',
+        count: 856,
+        image: 'https://images.unsplash.com/photo-1542838132-92c53300491e?w=800&h=600&fit=crop&q=80',
+        icon: Package,
+        subcategories: ['Fresh Fruits', 'Vegetables', 'Organic Produce', 'Graded Crops'],
+    },
+    {
         id: 'textiles',
         name: 'Textiles',
-        description: 'Premium fabrics, garments, and textile products',
+        description: 'Elite quality home textiles, fabrics, and linen products.',
         count: 1247,
         image: 'https://images.unsplash.com/photo-1524678606370-a47ad25cb82a?w=800&h=600&fit=crop&q=80',
         icon: Package,
-        subcategories: ['Cotton Fabrics', 'Silk', 'Synthetic', 'Home Textiles'],
-    },
-    {
-        id: 'agriculture',
-        name: 'Agriculture',
-        description: 'Organic produce, grains, and agricultural products',
-        count: 856,
-        image: 'https://images.unsplash.com/photo-1574323347407-f5e1ad6d020b?w=800&h=600&fit=crop&q=80',
-        icon: Package,
-        subcategories: ['Rice', 'Wheat', 'Pulses', 'Fresh Produce'],
-    },
-    {
-        id: 'hardware',
-        name: 'Hardware',
-        description: 'Construction materials, tools, and metal products',
-        count: 623,
-        image: 'https://images.unsplash.com/photo-1504148455328-c376907d081c?w=800&h=600&fit=crop&q=80',
-        icon: Package,
-        subcategories: ['Building Materials', 'Tools', 'Fasteners', 'Metal Products'],
-    },
-    {
-        id: 'handicrafts',
-        name: 'Handicrafts',
-        description: 'Traditional Indian handicrafts and artisan products',
-        count: 1534,
-        image: 'https://images.unsplash.com/photo-1610030469983-98e550d6193c?w=800&h=600&fit=crop&q=80',
-        icon: Package,
-        subcategories: ['Textiles', 'Pottery', 'Woodwork', 'Metalcraft'],
-    },
-    {
-        id: 'spices',
-        name: 'Spices',
-        description: 'Authentic Indian spices and seasonings',
-        count: 342,
-        image: 'https://images.unsplash.com/photo-1743445705835-4e66252e4dc6?fm=jpg&q=60&w=3000&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA==',
-        icon: Package,
-        subcategories: ['Whole Spices', 'Ground Spices', 'Spice Blends', 'Organic'],
-    },
-    {
-        id: 'leather-goods',
-        name: 'Leather Goods',
-        description: 'Premium leather products and accessories',
-        count: 478,
-        image: 'https://images.unsplash.com/photo-1590874103328-eac38a683ce7?w=800&h=600&fit=crop&q=80',
-        icon: Package,
-        subcategories: ['Bags', 'Shoes', 'Accessories', 'Garments'],
-    },
-    {
-        id: 'gems-jewelry',
-        name: 'Gems & Jewelry',
-        description: 'Fine jewelry and precious stones',
-        count: 729,
-        image: 'https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?w=800&h=600&fit=crop&q=80',
-        icon: Package,
-        subcategories: ['Gold Jewelry', 'Silver', 'Precious Stones', 'Fashion Jewelry'],
-    },
-    {
-        id: 'ayurveda-wellness',
-        name: 'Ayurveda & Wellness',
-        description: 'Natural health and wellness products',
-        count: 412,
-        image: 'https://images.unsplash.com/photo-1608571423902-eed4a5ad8108?w=800&h=600&fit=crop&q=80',
-        icon: Package,
-        subcategories: ['Herbs', 'Oils', 'Supplements', 'Cosmetics'],
+        subcategories: ['Home Textiles', 'Bedding', 'Curtains', 'Linen'],
     },
 ];
 
@@ -105,10 +51,10 @@ export default function CategoriesPage() {
                 <div className="max-w-[1600px] mx-auto px-8 md:px-12 py-10">
                     <div className="grid grid-cols-2 lg:grid-cols-4 gap-12">
                         {[
-                            { value: '08+', label: 'Industry Sectors' },
-                            { value: '6K+', label: 'Products' },
-                            { value: '500+', label: 'Verified Suppliers' },
-                            { value: '25+', label: 'Countries Served' }
+                            { value: '02', label: 'Industry Sectors' },
+                            { value: '0', label: 'Products' },
+                            { value: '0', label: 'Verified Suppliers' },
+                            { value: '0', label: 'Countries Served' }
                         ].map((stat, i) => (
                             <div key={i} className="text-center md:text-left">
                                 <p className="text-4xl font-bold text-primary mb-1 tracking-tight">{stat.value}</p>

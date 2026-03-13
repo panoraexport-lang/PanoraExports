@@ -1,0 +1,69 @@
+﻿[32m[Nest] 2008  - [39m11/03/2026, 11:54:33 pm [32m    LOG[39m [38;5;3m[NestFactory] [39m[32mStarting Nest application...[39m
+node : [31m[Nest] 2008  - 
+[39m11/03/2026, 11:54:33 pm 
+[31m  ERROR[39m 
+[38;5;3m[ExceptionHandler] 
+[39m[31m@prisma/client did 
+not initialize yet. Please 
+run "prisma generate" and 
+try to import it again.[39m
+At line:1 char:1
++ node ./dist/main.js 2>&1 | 
+Out-File -FilePath 
+startup_error2.log -Enc ...
++ ~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo           
+   : NotSpecified: ([31m[N  
+  est] 200... it again.[3   
+ 9m:String) [], RemoteExc    
+eption
+    + FullyQualifiedErrorId  
+   : NativeCommandError
+ 
+Error: @prisma/client did 
+not initialize yet. Please 
+run "prisma generate" and 
+try to import it again.
+    at new PrismaClient (D:\D
+EMO-PROJECTS\B2B\server\node_
+modules\.prisma\client\defaul
+t.js:43:11)
+    at new PrismaService (D:\
+DEMO-PROJECTS\B2B\server\dist
+\prisma\prisma.service.js:12:
+21)
+    at 
+Injector.instantiateClass (D:
+\DEMO-PROJECTS\B2B\server\nod
+e_modules\@nestjs\core\inject
+or\injector.js:373:19)
+    at callback (D:\DEMO-PROJ
+ECTS\B2B\server\node_modules\
+@nestjs\core\injector\injecto
+r.js:65:45)
+    at async Injector.resolve
+ConstructorParams (D:\DEMO-PR
+OJECTS\B2B\server\node_module
+s\@nestjs\core\injector\injec
+tor.js:145:24)
+    at async 
+Injector.loadInstance (D:\DEM
+O-PROJECTS\B2B\server\node_mo
+dules\@nestjs\core\injector\i
+njector.js:70:13)
+    at async 
+Injector.loadProvider (D:\DEM
+O-PROJECTS\B2B\server\node_mo
+dules\@nestjs\core\injector\i
+njector.js:98:9)
+    at async D:\DEMO-PROJECTS
+\B2B\server\node_modules\@nes
+tjs\core\injector\instance-lo
+ader.js:56:13
+    at async Promise.all 
+(index 3)
+    at async InstanceLoader.c
+reateInstancesOfProviders (D:
+\DEMO-PROJECTS\B2B\server\nod
+e_modules\@nestjs\core\inject
+or\instance-loader.js:55:9)
