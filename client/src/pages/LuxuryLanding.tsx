@@ -149,7 +149,7 @@ export default function LuxuryLanding() {
           >
             <div className="inline-flex items-center gap-3 mb-4 md:mb-6 px-3 py-1.5 bg-white/40 dark:bg-black/20 backdrop-blur-md text-secondary border border-secondary/40 rounded-full shadow-sm">
               <Globe className="w-3 h-3 text-secondary flex-shrink-0" />
-              <span className="text-[8px] sm:text-[10px] md:text-xs font-bold uppercase tracking-[0.2em] drop-shadow-sm truncate max-w-[180px] sm:max-w-none">Authorized Global Trade Partner</span>
+              <span className="text-[8px] sm:text-[10px] md:text-xs font-bold uppercase tracking-[0.2em] drop-shadow-sm whitespace-nowrap">Authorized Global Trade Partner</span>
             </div>
 
             <h1 className="text-3xl sm:text-4xl md:text-6xl font-bold text-royal-blue dark:text-white mb-4 md:mb-6 leading-[1.1] tracking-tight">
@@ -372,11 +372,11 @@ export default function LuxuryLanding() {
                 </CarouselItem>
               ))}
             </CarouselContent>
-            <div className="absolute -left-4 md:-left-20 top-1/2 -translate-y-1/2">
-              <CarouselPrevious className="h-12 w-12 border-primary/10 hover:bg-primary hover:text-white transition-all shadow-xl bg-background" />
+            <div className="absolute left-2 md:-left-20 top-1/2 -translate-y-1/2 z-20">
+              <CarouselPrevious className="h-10 w-10 md:h-12 md:w-12 border-primary/10 hover:bg-primary hover:text-white transition-all shadow-xl bg-background/80 backdrop-blur-sm" />
             </div>
-            <div className="absolute -right-4 md:-right-20 top-1/2 -translate-y-1/2">
-              <CarouselNext className="h-12 w-12 border-primary/10 hover:bg-primary hover:text-white transition-all shadow-xl bg-background" />
+            <div className="absolute right-2 md:-right-20 top-1/2 -translate-y-1/2 z-20">
+              <CarouselNext className="h-10 w-10 md:h-12 md:w-12 border-primary/10 hover:bg-primary hover:text-white transition-all shadow-xl bg-background/80 backdrop-blur-sm" />
             </div>
           </Carousel>
         </div>

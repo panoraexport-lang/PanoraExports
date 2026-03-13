@@ -123,28 +123,28 @@ export default function ProductsPage() {
                 <div className="max-w-[1600px] mx-auto px-6 py-4 flex flex-col md:flex-row gap-4 justify-between items-center">
 
                     {/* Search & Filter */}
-                    <div className="flex items-center gap-4 w-full md:w-auto overflow-x-auto scrollbar-hide">
-                        <div className="relative group">
+                    <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 w-full md:w-auto">
+                        <div className="relative group flex-grow sm:flex-grow-0">
                             <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-primary/40 group-focus-within:text-primary transition-colors" />
                             <input
                                 type="text"
                                 placeholder="Search products..."
                                 value={searchQuery}
                                 onChange={(e) => setSearchQuery(e.target.value)}
-                                className="pl-10 pr-4 py-2 bg-secondary/10 border border-transparent focus:border-primary/20 rounded-full text-sm font-medium w-64 outline-none transition-all placeholder:text-primary/30 text-primary"
+                                className="pl-10 pr-4 py-2.5 bg-secondary/10 border border-secondary/20 focus:border-primary/20 rounded-sm text-sm font-medium w-full sm:w-64 outline-none transition-all placeholder:text-primary/30 text-primary"
                             />
                         </div>
-                        <div className="h-8 w-[1px] bg-border mx-2" />
-                        <div className="flex items-center gap-2">
+                        
+                        <div className="flex items-center gap-2 overflow-x-auto scrollbar-hide py-1">
                             {categories.map(cat => (
                                 <button
                                     key={cat}
                                     onClick={() => setSelectedCategory(cat)}
                                     className={cn(
-                                        "px-4 py-2 text-[10px] font-bold uppercase tracking-widest rounded-sm transition-all border border-transparent whitespace-nowrap",
+                                        "px-5 py-2.5 text-[10px] font-bold uppercase tracking-widest rounded-sm transition-all border whitespace-nowrap",
                                         selectedCategory === cat
-                                            ? "bg-secondary text-primary"
-                                            : "bg-primary/5 text-primary/70 hover:text-primary hover:border-secondary/20"
+                                            ? "bg-secondary text-primary border-secondary shadow-md"
+                                            : "bg-background text-primary/70 border-border hover:text-primary hover:border-secondary/20"
                                     )}
                                 >
                                     {cat}
