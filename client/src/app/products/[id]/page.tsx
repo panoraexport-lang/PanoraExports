@@ -8,7 +8,7 @@ import { useToast } from '@/hooks/use-toast';
 import { motion } from 'framer-motion';
 import { useState, useEffect } from 'react';
 
-const API_BASE_URL = 'http://localhost:3001/api';
+import { API_BASE_URL } from '@/lib/api-config';
 
 export default function ProductDetailPage() {
     const params = useParams();

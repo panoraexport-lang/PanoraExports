@@ -32,9 +32,10 @@ import {
 } from "@/components/ui/carousel";
 import { useTheme } from "next-themes";
 
+import { API_BASE_URL } from "@/lib/api-config";
+
 const lightHeroImage = "/aeroplane.webp";
 const darkHeroImage = "/dark-hero.jpg";
-const API_BASE_URL = 'http://localhost:3001/api';
 
 
 

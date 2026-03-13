@@ -6,6 +6,7 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { ThemeProvider } from "next-themes";
 import { AuthProvider } from "@/contexts/AuthContext";
 import { ScreenshotProtection } from "@/components/ScreenshotProtection";
+import { ScrollToTop } from "@/components/ScrollToTop";
 import NotFound from "@/pages/not-found";
 import LuxuryLanding from "@/pages/LuxuryLanding";
 import ProductsPage from "@/app/products/page";
@@ -55,6 +56,7 @@ function App() {
       <QueryClientProvider client={queryClient}>
         <AuthProvider>
           <TooltipProvider>
+            <ScrollToTop />
             <Toaster />
             <Router />
           </TooltipProvider>

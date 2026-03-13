@@ -8,7 +8,7 @@ import { useAuth } from '@/contexts/AuthContext';
 import { useToast } from '@/hooks/use-toast';
 import { useEffect } from 'react';
 
-const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:3001';
+import { API_BASE_URL } from '@/lib/api-config';
 
 interface VerificationResult {
     verified: boolean;
@@ -323,7 +323,7 @@ export default function VerificationPage() {
         setVerificationResult(null);
 
         try {
-            const response = await fetch(`${API_URL}/verification/verify`, {
+            const response = await fetch(`${API_BASE_URL}/verification/verify`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

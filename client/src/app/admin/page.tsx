@@ -10,7 +10,7 @@ import ProtectedRoute from '@/components/ProtectedRoute';
 import { useToast } from '@/hooks/use-toast';
 import { useEffect } from 'react';
 
-const API_BASE_URL = (import.meta.env.VITE_API_URL || 'http://localhost:3001') + '/api';
+import { API_BASE_URL } from '@/lib/api-config';
 
 // Types
 interface Product {

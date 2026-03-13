@@ -5,7 +5,7 @@ import Navigation from '@/components/Navigation';
 import { motion } from 'framer-motion';
 import { useState, useEffect } from 'react';
 
-const API_BASE_URL = 'http://localhost:3001/api';
+import { API_BASE_URL } from '@/lib/api-config';
 
 const DEFAULT_CATEGORIES = [
     {
