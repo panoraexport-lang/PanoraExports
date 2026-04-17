@@ -2,12 +2,19 @@ import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Link, useLocation } from 'wouter';
 import Navigation from '@/components/Navigation';
-import { Package, Filter, LayoutGrid, List, Search, ArrowRight, Star } from 'lucide-react';
+import { Package, Filter, LayoutGrid, List, Search, ArrowRight, Star, Ruler, Tag } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
 import { API_BASE_URL } from '@/lib/api-config';
 
 const categories = ['All', 'Agriculture', 'Textiles'];
+
+interface ProductVariant {
+    size: string;
+    price: string;
+    unit: string;
+    description?: string;
+}
 
 interface Product {
     id: string;
@@ -19,6 +26,8 @@ interface Product {
     verified: boolean;
     rating: number;
     minOrder: string;
+    originState?: string;
+    variants?: ProductVariant[];
 }
 
 export default function ProductsPage() {
@@ -61,6 +70,8 @@ export default function ProductsPage() {
                     verified: p.isActive,
                     rating: 4.5 + (Math.random() * 0.5), // Simulated rating for UI
                     minOrder: p.minOrderQuantity ? `${p.minOrderQuantity} units` : 'Contact for MOQ',
+                    originState: p.originState,
+                    variants: p.variants ? (typeof p.variants === 'string' ? JSON.parse(p.variants) : p.variants) : [],
                 };
             });
             setProducts(transformed);
@@ -231,10 +242,43 @@ export default function ProductsPage() {
                                     {product.supplier}
                                 </p>
 
+                                {/* Origin State Badge */}
+                                {product.originState && (
+                                    <div className="flex items-center gap-1 mb-3 text-[9px] font-bold text-secondary uppercase tracking-widest bg-secondary/10 px-2 py-1.5 rounded-sm w-fit">
+                                        <Tag className="w-3 h-3" />
+                                        From the State of {product.originState}
+                                    </div>
+                                )}
+
+                                {/* Size/Grading Variants */}
+                                {product.variants && product.variants.length > 0 && (
+                                    <div className="mb-4">
+                                        <div className="flex items-center gap-1 mb-2 text-[8px] font-bold text-primary/60 uppercase tracking-widest">
+                                            <Ruler className="w-3 h-3" />
+                                            Consolidated Size Grades
+                                        </div>
+                                        <div className="flex flex-wrap gap-1.5">
+                                            {product.variants.map((variant: ProductVariant, idx: number) => (
+                                                <div
+                                                    key={idx}
+                                                    className="bg-secondary/10 border border-secondary/20 px-2 py-1.5 rounded-sm hover:bg-secondary/20 hover:border-primary/30 transition-all cursor-pointer group"
+                                                >
+                                                    <div className="text-[8px] font-bold text-primary/70 uppercase tracking-wider">
+                                                        {variant.size}
+                                                    </div>
+                                                </div>
+                                            ))}
+                                        </div>
+                                        <p className="mt-3 text-[8px] font-bold text-secondary uppercase tracking-[0.1em] italic">
+                                            + Custom Specifications Available
+                                        </p>
+                                    </div>
+                                )}
+
                                 <div className={cn("mt-auto flex items-end justify-between", viewMode === 'list' && "pb-2")}>
                                     <div>
-                                        <p className="text-[9px] text-secondary font-bold uppercase tracking-widest mb-0.5">Unit Price</p>
-                                        <p className="text-xl font-bold text-primary">{product.price}</p>
+                                        <p className="text-[9px] text-secondary font-bold uppercase tracking-widest mb-0.5">Commercial Status</p>
+                                        <p className="text-sm font-bold text-primary uppercase">Price via Meeting</p>
                                     </div>
                                     <div className="w-10 h-10 bg-[hsl(var(--success))] text-white flex items-center justify-center rounded-sm hover:brightness-110 transition-all shadow-md">
                                         <ArrowRight className="w-4 h-4" />

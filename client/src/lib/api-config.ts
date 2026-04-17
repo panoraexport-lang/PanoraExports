@@ -29,8 +29,8 @@ const getApiBaseUrl = () => {
     if (!detectedUrl) {
         // 2. Dynamic Detection for local network or domain-relative API
         if (isIp || hostname === 'localhost') {
-            // Local network testing (e.g. http://192.168.1.5:3001/api)
-            detectedUrl = `${protocol}//${hostname}:3001/api`;
+            // Local network testing (e.g. http://192.168.1.5:3002/api)
+            detectedUrl = `${protocol}//${hostname}:3002/api`;
         } else {
             // 3. True Production (real domain e.g. panora.vercel.app)
             // In production, we assume the API is either on the same domain or we fall back to domain/api

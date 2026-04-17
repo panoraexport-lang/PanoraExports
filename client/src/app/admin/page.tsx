@@ -27,6 +27,7 @@ interface Product {
     leadTime?: string;
     stock?: number;
     isActive: boolean;
+    originState?: string;
 }
 
 // Sample initial products
@@ -37,7 +38,6 @@ export default function AdminDashboard() {
     const [stats, setStats] = useState({
         totalProducts: 0,
         activeProducts: 0,
-        totalValue: 0,
         verifiedProducts: 0,
     });
     const [searchTerm, setSearchTerm] = useState('');
@@ -92,6 +92,7 @@ export default function AdminDashboard() {
                     isActive: p.isActive,
                     verified: true,
                     stock: (p.minOrderQuantity || 0) * 10,
+                    minOrder: p.minOrderQuantity?.toString() || '0',
                 };
             });
 
@@ -99,7 +100,6 @@ export default function AdminDashboard() {
             setStats({
                 totalProducts: statsData.totalProducts,
                 activeProducts: statsData.activeProducts,
-                totalValue: statsData.totalRevenue, // reusing for revenue display
                 verifiedProducts: statsData.verifiedProducts,
             });
         } catch (error) {
@@ -238,19 +238,46 @@ export default function AdminDashboard() {
                                 <BarChart3 className="w-3.5 h-3.5" />
                                 Analytics
                             </button>
-                            <button
-                                onClick={async () => {
-                                    if (confirm('Are you sure you want to clear ALL existing products from the database? This cannot be undone.')) {
-                                        try {
-                                            const res = await fetch(`${API_BASE_URL}/products/cleanup-initial`, { method: 'DELETE' });
-                                            if (res.ok) { fetchData(); }
-                                        } catch (e) { }
-                                    }
-                                }}
-                                className="px-6 py-4 bg-red-500/10 text-red-500 border border-red-500/20 font-bold text-[10px] uppercase tracking-widest hover:bg-red-500 hover:text-white transition-all rounded-sm"
-                            >
-                                Clear All Products
-                            </button>
+                            <div className="flex items-center gap-2">
+                                {products.length > 0 && (
+                                    <div className="flex items-center gap-2">
+                                        <button
+                                            id="clear-all-btn"
+                                            onClick={(e) => {
+                                                const btn = e.currentTarget;
+                                                if (btn.innerText === "CLEAR ALL PRODUCTS") {
+                                                    btn.innerText = "CONFIRM DELETE ALL?";
+                                                    btn.className = "px-6 py-4 bg-red-600 text-white border border-red-700 font-black text-[10px] uppercase tracking-widest transition-all rounded-sm shadow-xl animate-pulse";
+                                                    setTimeout(() => {
+                                                        if (btn) {
+                                                            btn.innerText = "CLEAR ALL PRODUCTS";
+                                                            btn.className = "px-6 py-4 bg-red-500/10 text-red-500 border border-red-500/20 font-bold text-[10px] uppercase tracking-widest hover:bg-red-500 hover:text-white transition-all rounded-sm";
+                                                        }
+                                                    }, 5000);
+                                                } else {
+                                                    const clearData = async () => {
+                                                        try {
+                                                            const res = await fetch(`${API_BASE_URL}/products/cleanup-initial`, { method: 'DELETE' });
+                                                            if (res.ok) { 
+                                                                fetchData(); 
+                                                                toast({
+                                                                    title: "Inventory Cleared",
+                                                                    description: "All products have been removed from the database.",
+                                                                    variant: "destructive"
+                                                                });
+                                                            }
+                                                        } catch (e) { }
+                                                    };
+                                                    clearData();
+                                                }
+                                            }}
+                                            className="px-6 py-4 bg-red-500/10 text-red-500 border border-red-500/20 font-bold text-[10px] uppercase tracking-widest hover:bg-red-500 hover:text-white transition-all rounded-sm"
+                                        >
+                                            CLEAR ALL PRODUCTS
+                                        </button>
+                                    </div>
+                                )}
+                            </div>
                             <button
                                 onClick={() => setIsAddModalOpen(true)}
                                 className="flex items-center gap-2 px-8 py-4 bg-primary text-primary-foreground font-bold text-[10px] uppercase tracking-widest hover:opacity-90 transition-all rounded-sm group"
@@ -274,12 +301,6 @@ export default function AdminDashboard() {
                             label="Active Items"
                             value={stats.activeProducts}
                             subValue="Visible to customers"
-                        />
-                        <StatCard
-                            icon={ShoppingCart}
-                            label="Total Revenue"
-                            value={`$${stats.totalValue.toLocaleString()}`}
-                            subValue="Completed transactions"
                         />
                         <StatCard
                             icon={TrendingUp}
@@ -537,6 +558,7 @@ function ProductModal({
             leadTime: '',
             stock: 0,
             isActive: true,
+            originState: '',
         }
     );
     const [uploading, setUploading] = useState(false);
@@ -635,8 +657,8 @@ function ProductModal({
                                 />
                             </div>
 
-                            {/* Category & Supplier */}
-                            <div className="grid md:grid-cols-2 gap-10">
+                            {/* Category, Supplier & Origin */}
+                            <div className="grid md:grid-cols-3 gap-8">
                                 <div className="space-y-2.5">
                                     <label className="block text-[9px] font-bold text-primary/40 uppercase tracking-widest">
                                         Category
@@ -670,13 +692,25 @@ function ProductModal({
                                         placeholder="Supplier ID"
                                     />
                                 </div>
-                            </div>
-
-                            {/* Price & Stock */}
-                            <div className="grid md:grid-cols-2 gap-10">
                                 <div className="space-y-2.5">
                                     <label className="block text-[9px] font-bold text-primary/40 uppercase tracking-widest">
-                                        Price per Unit
+                                        Origin State (e.g. Tamil Nadu)
+                                    </label>
+                                    <input
+                                        type="text"
+                                        value={formData.originState}
+                                        onChange={(e) => setFormData({ ...formData, originState: e.target.value })}
+                                        className="w-full px-0 py-3 bg-transparent border-b border-border text-foreground font-bold text-[13px] uppercase tracking-widest focus:outline-none focus:border-primary transition-all"
+                                        placeholder="Enter state"
+                                    />
+                                </div>
+                            </div>
+
+                            {/* Price & Stock & MOQ */}
+                            <div className="grid md:grid-cols-3 gap-8">
+                                <div className="space-y-2.5">
+                                    <label className="block text-[9px] font-bold text-primary/40 uppercase tracking-widest">
+                                        Price (e.g. 150-200)
                                     </label>
                                     <input
                                         type="text"
@@ -697,6 +731,18 @@ function ProductModal({
                                         onChange={(e) => setFormData({ ...formData, stock: parseInt(e.target.value) })}
                                         className="w-full px-0 py-3 bg-transparent border-b border-border text-foreground font-bold text-[13px] uppercase tracking-widest focus:outline-none focus:border-primary transition-all"
                                         placeholder="0"
+                                    />
+                                </div>
+                                <div className="space-y-2.5">
+                                    <label className="block text-[9px] font-bold text-primary/40 uppercase tracking-widest text-[#f59e0b]">
+                                        Minimum Order (MOQ)
+                                    </label>
+                                    <input
+                                        type="text"
+                                        value={formData.minOrder}
+                                        onChange={(e) => setFormData({ ...formData, minOrder: e.target.value })}
+                                        className="w-full px-0 py-3 bg-transparent border-b border-[#f59e0b]/30 text-foreground font-bold text-[13px] uppercase tracking-widest focus:outline-none focus:border-[#f59e0b] transition-all"
+                                        placeholder="100"
                                     />
                                 </div>
                             </div>

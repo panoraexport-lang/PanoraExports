@@ -22,7 +22,8 @@
         "prisma:generate": "prisma generate",
         "prisma:migrate": "prisma migrate dev",
         "prisma:studio": "prisma studio",
-        "prisma:seed": "ts-node prisma/seed.ts"
+        "prisma:seed": "ts-node prisma/seed.ts",
+"update-products": "ts-node src/scripts/update-products.ts"
     },
     "dependencies": {
         "@nestjs/axios": "^3.0.1",

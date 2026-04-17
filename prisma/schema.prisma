@@ -209,6 +209,8 @@ model Product {
   priceRange        String          // e.g., "$100-$500"
   currency          String          @default("USD")
   originCountry     String
+  originState       String?
+  variants          Json?           // Array of variants [{size, price, unit, description}]
   certifications    Json?           // Array of certification names/URLs
   hsCode            String?         // Harmonized System Code
   

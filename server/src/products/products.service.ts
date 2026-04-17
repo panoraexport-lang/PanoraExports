@@ -85,6 +85,8 @@ export class ProductsService {
                 priceRange: data.price || data.priceRange || 'Contact for price',
                 minOrderQuantity: data.stock !== undefined ? parseInt(data.stock) : (parseInt(data.minOrder) || 1),
                 originCountry: 'India',
+                originState: data.originState,
+                variants: data.variants,
                 images: JSON.stringify([data.image]),
                 categoryId: category.id,
                 sellerId: admin.id,
@@ -127,6 +129,8 @@ export class ProductsService {
                 minOrderQuantity: data.minOrder ? parseInt(data.minOrder) : undefined,
                 images: data.image ? JSON.stringify([data.image]) : undefined,
                 categoryId: categoryId,
+                originState: data.originState,
+                variants: data.variants,
                 isActive: data.isActive,
             }
         });

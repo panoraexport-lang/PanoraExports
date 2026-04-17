@@ -46,14 +46,16 @@ export default function ProductDetailPage() {
                 verified: data.isActive,
                 description: data.description || 'No description provided.',
                 minOrder: data.minOrderQuantity ? `${data.minOrderQuantity} units` : 'Contact for MOQ',
-                leadTime: '15-20 days', // Fallback or from DB if added
+                leadTime: '15-20 days',
                 rating: 4.8,
                 reviews: 45,
+                originState: data.originState,
+                variants: data.variants ? (typeof data.variants === 'string' ? JSON.parse(data.variants) : data.variants) : [],
                 specs: [
-                    { label: 'Origin', value: data.originCountry || 'India' },
+                    { label: 'Market Origin', value: data.originState ? `State of ${data.originState}, India` : (data.originCountry || 'India') },
                     { label: 'HS Code', value: data.hsCode || 'Available on request' },
                     { label: 'Currency', value: data.currency || 'USD' },
-                    { label: 'Stock Status', value: data.isActive ? 'In Stock' : 'On Request' }
+                    { label: 'Processing', value: 'Graded & Quality Checked' }
                 ]
             };
 
@@ -89,9 +91,8 @@ export default function ProductDetailPage() {
     const handleSecuredAction = (type: string) => {
         if (!user || user.verification_status !== 'VERIFIED') {
             toast({
-                title: "Institutional Verification Required",
-                description: "This trade action is restricted to verified business entities.",
-                variant: "destructive"
+                title: "Institutional Partnership Awaits",
+                description: "Complete your business verification to unlock global trade features.",
             });
             setLocation('/verification');
             return;
@@ -101,6 +102,8 @@ export default function ProductDetailPage() {
 
         if (type === 'SAMPLE') {
             setLocation(`/samples/request?product=${encodeURIComponent(product.name)}`);
+        } else if (type === 'CUSTOM_SIZE') {
+            setLocation(`/trade-inquiry?product=${encodeURIComponent(product.name)}&type=CUSTOM_SPECIFICATION`);
         } else {
             setLocation(`/trade-inquiry?product=${encodeURIComponent(product.name)}&type=${type}`);
         }
@@ -179,15 +182,31 @@ export default function ProductDetailPage() {
                     {/* Details */}
                     <div className="flex flex-col">
                         <div className="mb-10">
-                            <span className="text-primary text-[9px] font-bold uppercase tracking-widest mb-4 block px-3 py-1 bg-secondary w-fit rounded-sm">
-                                {product.category}
-                            </span>
-                            <h1 className="text-4xl md:text-5xl font-bold text-primary mb-6 leading-[1.1] tracking-tight">
+                            <div className="flex items-center gap-3 mb-4">
+                                <span className="text-primary text-[9px] font-bold uppercase tracking-widest block px-3 py-1 bg-secondary w-fit rounded-sm">
+                                    {product.category}
+                                </span>
+                                {product.originState && (
+                                    <span className="text-secondary text-[9px] font-bold uppercase tracking-widest block px-3 py-1 bg-secondary/10 w-fit rounded-sm border border-secondary/20">
+                                        Source: {product.originState}
+                                    </span>
+                                )}
+                            </div>
+                            <h1 className="text-4xl md:text-5xl font-bold text-primary mb-2 leading-[1.1] tracking-tight uppercase">
                                 {product.name}
                             </h1>
+                            {product.originState && (
+                                <p className="text-[11px] font-bold text-secondary uppercase tracking-[0.2em] mb-6">
+                                    Direct from the State of {product.originState}
+                                </p>
+                            )}
+
                             <div className="flex items-center gap-6 mb-8 pb-8 border-b border-border">
-                                <p className="text-3xl font-bold text-primary">{product.price}</p>
-                                <div className="h-6 w-[1.5px] bg-border" />
+                                <div>
+                                    <p className="text-[9px] font-bold text-muted-foreground uppercase tracking-widest mb-1">Commercial Status</p>
+                                    <p className="text-2xl font-bold text-primary italic">Price via Meeting</p>
+                                </div>
+                                <div className="h-10 w-[1px] bg-border" />
                                 <div className="flex items-center gap-2">
                                     <div className="flex items-center gap-1">
                                         {[...Array(5)].map((_, i) => (
@@ -198,8 +217,56 @@ export default function ProductDetailPage() {
                                         ))}
                                     </div>
                                     <span className="text-[9px] font-bold text-muted-foreground uppercase tracking-widest">
-                                        Rating: {product.rating}
+                                        {product.rating} (45 Reviews)
                                     </span>
+                                </div>
+                            </div>
+
+                            {/* Size Grading System */}
+                            {product.variants && product.variants.length > 0 && (
+                                <div className="mb-8">
+                                    <h3 className="text-[11px] font-bold text-primary uppercase tracking-[0.2em] mb-4 flex items-center gap-2">
+                                        <Package className="w-4 h-4" />
+                                        Advanced Size Grading System
+                                    </h3>
+                                    <div className="grid gap-3">
+                                        {product.variants.map((v: any, i: number) => (
+                                            <div key={i} className="flex items-center justify-between p-4 bg-secondary/20 border border-border hover:border-primary/30 transition-all rounded-sm group">
+                                                <div className="flex flex-col">
+                                                    <span className="text-[10px] font-black uppercase tracking-widest text-primary">{v.size}</span>
+                                                    <span className="text-[11px] font-medium text-primary/60">{v.description}</span>
+                                                </div>
+                                                <div className="text-right">
+                                                    <span className="text-[10px] font-bold text-muted-foreground uppercase tracking-widest block mb-0.5">Commercial Status</span>
+                                                    <span className="text-sm font-black text-primary uppercase">Quote via Meeting</span>
+                                                </div>
+                                            </div>
+                                        ))}
+                                    </div>
+                                    <p className="mt-4 text-[10px] italic text-primary/40 font-medium">
+                                        * Final commercial terms and logistics pricing will be established during the institutional meeting.
+                                    </p>
+                                </div>
+                            )}
+
+                            {/* Custom Size Option */}
+                            <div className="mt-8 p-6 bg-primary/5 border border-dashed border-primary/20 rounded-sm">
+                                <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6">
+                                    <div className="flex-1">
+                                        <h4 className="text-[11px] font-black uppercase tracking-[0.2em] text-primary mb-2 flex items-center gap-2">
+                                            <Globe className="w-3.5 h-3.5" />
+                                            Bespoke Requirements?
+                                        </h4>
+                                        <p className="text-[12px] text-primary/60 font-medium leading-relaxed">
+                                            We provide customized grading and precision size specifications tailored for unique institutional or manufacturing requirements.
+                                        </p>
+                                    </div>
+                                    <button 
+                                        onClick={() => handleSecuredAction('CUSTOM_SIZE')}
+                                        className="w-full sm:w-auto shrink-0 px-6 py-3 bg-secondary text-primary text-[10px] font-black uppercase tracking-widest rounded-sm hover:bg-secondary/80 transition-all border border-secondary/30"
+                                    >
+                                        Apply for Custom Size
+                                    </button>
                                 </div>
                             </div>
                         </div>

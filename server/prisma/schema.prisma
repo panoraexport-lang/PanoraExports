@@ -209,19 +209,21 @@ model Product {
   priceRange        String          // e.g., "$100-$500"
   currency          String          @default("USD")
   originCountry     String
+  originState       String?         // Indian state of origin
   certifications    Json?           // Array of certification names/URLs
   hsCode            String?         // Harmonized System Code
-  
+  variants          Json?           // Size/grading variants: [{size: "40mm", price: "120", unit: "kg"}]
+
   isActive          Boolean         @default(true)
   views             Int             @default(0)
-  
+
   createdAt         DateTime        @default(now())
   updatedAt         DateTime        @updatedAt
-  
+
   seller            User            @relation(fields: [sellerId], references: [id], onDelete: Cascade)
   category          ProductCategory @relation(fields: [categoryId], references: [id])
   rfqs              RFQ[]
-  
+
   @@index([sellerId])
   @@index([categoryId])
   @@index([isActive])

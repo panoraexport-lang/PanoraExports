@@ -10,7 +10,7 @@ const faqs = [
         questions: [
             {
                 q: "What payment methods do you accept?",
-                a: "We accept variety of secure payment methods including Letter of Credit (LC), T/T (Bank Transfer), and major credit cards for sample orders. All transactions are securely processed and verified."
+                a: "We accept a variety of secure payment methods including Letter of Credit (LC), T/T (Bank Transfer), B/L (Bill of Lading), and major credit cards for sample orders. All transactions are securely processed and verified."
             },
             {
                 q: "Is there a minimum order quantity (MOQ)?",
@@ -35,7 +35,7 @@ const faqs = [
             },
             {
                 q: "How long does shipping take?",
-                a: "Air freight typically takes 5-7 business days, while sea freight can take 20-45 days depending on the destination. We provide tracking details once the shipment is dispatched."
+                a: "Shipping speed is optimized for global trade: delivery takes just a few hours via aeroplane (Air Freight) once cleared, and approximately 7-10 days via ship (Sea Freight) depending on the destination. We provide tracking details once the shipment is dispatched."
             }
         ]
     },
@@ -44,11 +44,11 @@ const faqs = [
         questions: [
             {
                 q: "Are the suppliers verified?",
-                a: "Yes, 100% of our suppliers undergo a rigorous verification process including business registration checks, factory visits, and quality audits before listing on Panora Exports."
+                a: "Yes, 100% of our suppliers undergo a rigorous verification process. They hold valid respective certifications such as OEKO-TECH and HALAL CERTIFICATION, and undergo factory visits and quality audits before listing on Panora Exports."
             },
             {
                 q: "What if the product quality doesn't match?",
-                a: "We have a strict quality assurance policy. If products received differ significantly from the agreed specifications or samples, our specialized dispute resolution team will assist in securing a refund or replacement."
+                a: "We have a strict quality assurance policy. If the validation against the allegation of goods damaged or quality mismatched is confirmed, a portion of discount can be offered to compensate, or a specialized dispute resolution team will assist in securing a refund or replacement."
             }
         ]
     }
