@@ -157,10 +157,6 @@ export default function LuxuryLanding() {
               <span className="font-serif italic font-light bg-gradient-to-r from-[#b8860b] via-secondary to-[#b8860b] bg-clip-text text-transparent drop-shadow-sm filter contrast-125">D2B Export Company</span> & Global Trade Partner.
             </h1>
 
-            <p className="text-base md:text-lg text-royal-blue md:text-royal-blue/80 dark:text-white/90 mb-8 md:mb-10 font-medium max-w-lg leading-relaxed">
-              Your verified export partner for standardized supply chain solutions. We specialize in institutional exports of high-volume Textiles, Agro-Commodities, and Industrial Goods.
-            </p>
-
             <div className="flex flex-col sm:flex-row items-center gap-3">
               <Link href="/products" className="w-full sm:w-auto px-8 py-4 bg-[hsl(var(--success))] text-white text-[9px] font-black uppercase tracking-[0.2em] hover:brightness-110 transition-all flex items-center justify-center gap-2.5 rounded-sm shadow-[0_15px_30px_rgba(22,101,52,0.15)] group">
                 Explore Catalogue
