@@ -1,4 +1,4 @@
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { ReactNode, useState, useEffect } from "react";
 import {
   CheckCircle2,
@@ -34,8 +34,13 @@ import { useTheme } from "next-themes";
 
 import { API_BASE_URL } from "@/lib/api-config";
 
-const lightHeroImage = "/aeroplane.webp";
-const darkHeroImage = "/dark-hero.jpg";
+const backgroundImages = [
+  "/bg1.jpg",
+  "/bg2.jpg",
+  "/bg3.jpg",
+  "/bg5.jpg",
+  "/bg6.jpg"
+];
 
 
 
@@ -66,8 +71,22 @@ const ExportCard = ({ icon: Icon, title, desc }: { icon: any, title: string, des
 
 export default function LuxuryLanding() {
   const { theme } = useTheme();
-  const currentHeroImage = theme === "dark" ? darkHeroImage : lightHeroImage;
+  const [bgIndex, setBgIndex] = useState(0);
   const [productsList, setProductsList] = useState<any[]>([]);
+
+  useEffect(() => {
+    // Preload background images
+    backgroundImages.forEach((src) => {
+      const img = new Image();
+      img.src = src;
+    });
+
+    const interval = setInterval(() => {
+      setBgIndex((prev) => (prev + 1) % backgroundImages.length);
+    }, 3000);
+
+    return () => clearInterval(interval);
+  }, []);
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -127,16 +146,19 @@ export default function LuxuryLanding() {
 
       {/* 1. HERO SECTION */}
       <section className="relative min-h-screen flex flex-col justify-center bg-background">
-        <div className="absolute inset-0 z-0">
-          <motion.img
-            key={currentHeroImage}
-            src={currentHeroImage}
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 1.5 }}
-            alt="Hero Background"
-            className="absolute inset-0 w-full h-full object-cover scale-[1.01] brightness-[0.95] md:brightness-[1.1]"
-          />
+        <div className="absolute inset-0 z-0 overflow-hidden">
+          <AnimatePresence mode="popLayout">
+            <motion.img
+              key={backgroundImages[bgIndex]}
+              src={backgroundImages[bgIndex]}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 1.0, ease: "easeInOut" }}
+              alt="Hero Background"
+              className="absolute inset-0 w-full h-full object-cover scale-[1.01] brightness-[0.95] md:brightness-[1.1]"
+            />
+          </AnimatePresence>
           <div className="absolute inset-0 bg-gradient-to-r from-background via-background/90 to-background/20 md:via-background/60 md:to-transparent z-10" />
         </div>
 
